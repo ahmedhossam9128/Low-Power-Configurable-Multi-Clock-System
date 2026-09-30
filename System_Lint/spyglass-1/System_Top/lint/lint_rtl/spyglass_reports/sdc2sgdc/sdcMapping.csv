@@ -1,0 +1,17 @@
+# Purpose:
+# This file contains the information about the sdc2sgdc commands Mapping.n##Sheet_Prop: coltooltip: 1##SDC command defined in the sdc file 2##Line num and SDC file name 3##Translated SGDC command
+SDC Command, SDC FileName:LineNumber, Mapped SGDC Command
+
+create_clock,./System.sdc:16,clock
+create_clock,./System.sdc:22,clock
+create_clock,./System.sdc:28,clock
+create_clock,./System.sdc:29,clock
+create_clock,./System.sdc:30,clock
+set_input_delay,./System.sdc:36,abstract_port
+set_output_delay,./System.sdc:37,output
+set_clock_group -logically_exclusive,./System.sdc:38,cdc_false_path
+set_clock_group -logically_exclusive,./System.sdc:38,cdc_false_path
+set_clock_group -logically_exclusive,./System.sdc:38,cdc_false_path
+set_clock_group -logically_exclusive,./System.sdc:38,cdc_false_path
+set_clock_group -logically_exclusive,./System.sdc:38,cdc_false_path
+set_clock_group -logically_exclusive,./System.sdc:38,cdc_false_path

@@ -1,0 +1,4 @@
+
+clock@@name@@System_Top.REF_CLK@@domain@@d0@@period@@10@@tag@@REF_Clock@@
+clock@@name@@System_Top.UART_CLK@@domain@@d1@@period@@271.266998@@tag@@UART_Clock@@
+reset@@name@@RST@@value@@0@@async@@

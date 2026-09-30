@@ -1,0 +1,6 @@
+SCHEMA@@PName@@HierName
+VALUE@@REF_CLK@@System_Top
+VALUE@@UART_CLK@@System_Top
+VALUE@@RX_IN@@System_Top
+VALUE@@TX_OUT@@System_Top
+VALUE@@RX_D_VALID@@System_Top

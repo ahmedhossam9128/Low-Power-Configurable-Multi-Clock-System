@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<goal_summary xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:noNamespaceSchemaLocation="file://Dashboard/goal_xml.xsd">
+<!-- This file schema is internal to Atrenta DashBoard and subject to change in future without notice --> 
+<goal name="cdc/cdc_setup_check"/>
+<top name="System_Top"/>
+<dir name="/mnt/hgfs/Shared_Folder/System/System_Lint/spyglass-1/consolidated_reports/System_Top_cdc_cdc_setup_check/"/>
+<log name="/mnt/hgfs/Shared_Folder/System/System_Lint/spyglass-1/System_Top/cdc/cdc_setup_check/spyglass.log" link="data_files/System_Top_cdc-cdc_setup_check_spyglass.log"/>
+  <std_reports> 
+  </std_reports> 
+<tech_reports> 
+   <technology name="CDC( Advance CDC  Setup Check )"> 
+   </technology> 
+</tech_reports> 
+<statistics fatal="0" error="0" warning="0" info="13" waived_error="1" waived_warning="0" waived_info="1" /> 
+<tech_summary> 
+   <technology name="CDC( Advance CDC  Setup Check )"> 
+   </technology> 
+</tech_summary> 
+</goal_summary> 

@@ -1,0 +1,57 @@
+Info:  Net Ref:/WORK/System_Top/SO[3] is undriven.
+Info:  Net Ref:/WORK/System_Top/SO[2] is undriven.
+Info:  Net Ref:/WORK/System_Top/SO[1] is undriven.
+Info:  Net Ref:/WORK/System_Top/SO[0] is undriven.
+Info:  SVF Operation 69 (Line: 361) - ungroup.  Status: accepted
+Info:  SVF Operation 70 (Line: 365) - ungroup.  Status: accepted
+Info:  SVF Operation 71 (Line: 369) - ungroup.  Status: accepted
+Info:  SVF Operation 72 (Line: 373) - ungroup.  Status: accepted
+Info:  SVF Operation 73 (Line: 377) - ungroup.  Status: accepted
+Info:  SVF Operation 74 (Line: 381) - ungroup.  Status: accepted
+Info:  SVF Operation 75 (Line: 385) - ungroup.  Status: accepted
+Info:  SVF Operation 76 (Line: 389) - ungroup.  Status: accepted
+Info:  SVF Operation 77 (Line: 393) - ungroup.  Status: accepted
+Info:  SVF Operation 78 (Line: 397) - ungroup.  Status: accepted
+Info:  SVF Operation 79 (Line: 401) - ungroup.  Status: accepted
+Info:  SVF Operation 80 (Line: 405) - ungroup.  Status: accepted
+Info:  SVF Operation 81 (Line: 409) - ungroup.  Status: accepted
+Info:  SVF Operation 82 (Line: 413) - ungroup.  Status: accepted
+Info:  SVF Operation 83 (Line: 417) - ungroup.  Status: accepted
+Info:  SVF Operation 84 (Line: 421) - ungroup.  Status: accepted
+Info:  SVF Operation 85 (Line: 425) - ungroup.  Status: accepted
+Info:  SVF Operation 86 (Line: 429) - ungroup.  Status: accepted
+Info:  SVF Operation 87 (Line: 433) - ungroup.  Status: accepted
+Info:  SVF Operation 88 (Line: 437) - ungroup.  Status: accepted
+Info:  SVF Operation 89 (Line: 441) - ungroup.  Status: accepted
+Info:  SVF Operation 90 (Line: 445) - ungroup.  Status: accepted
+Info:  SVF Operation 91 (Line: 449) - ungroup.  Status: accepted
+Info:  SVF Operation 92 (Line: 453) - ungroup.  Status: accepted
+Info:  SVF Operation 93 (Line: 457) - ungroup.  Status: accepted
+Info:  SVF Operation 94 (Line: 461) - ungroup.  Status: accepted
+Info:  SVF Operation 95 (Line: 465) - ungroup.  Status: accepted
+Info:  SVF Operation 96 (Line: 469) - ungroup.  Status: accepted
+Info:  SVF Operation 97 (Line: 473) - ungroup.  Status: accepted
+Info:  SVF Operation 98 (Line: 477) - ungroup.  Status: accepted
+Info:  SVF Operation 99 (Line: 481) - ungroup.  Status: accepted
+Info:  SVF Operation 100 (Line: 485) - ungroup.  Status: accepted
+Info:  SVF Operation 107 (Line: 536) - merge.  Status: rejected
+
+Info:  SVF Operation 108 (Line: 547) - merge.  Status: rejected
+
+Info:  guide_uniquify 129 (Line: 643)  Cannot find object "DP_OP_146J1_123_490" in design 'System_Top'.
+Info:  SVF Operation 129 (Line: 643) - uniquify.  Status: rejected
+Info:  guide_uniquify 130 (Line: 647)  Cannot find object "DP_OP_145J1_122_9264" in design 'System_Top'.
+Info:  SVF Operation 130 (Line: 647) - uniquify.  Status: rejected
+Info:  guide_datapath 144 (Line: 807) Cannot find reference cell for instance 'DP_OP_146J1_123_490' in design 'System_Top'.
+Info:  SVF Operation 144 (Line: 807) - datapath.  Status: rejected
+
+Info:  guide_datapath 145 (Line: 812) Cannot find reference cell for instance 'DP_OP_145J1_122_9264' in design 'System_Top'.
+Info:  SVF Operation 145 (Line: 812) - datapath.  Status: rejected
+
+Info:  Pre-verification of Ref:/WORK/System_Top/div_2 SUCCEEDED.
+Info:  Pre-verification of Ref:/WORK/System_Top/mult_x_1 SUCCEEDED.
+Info:  Pre-verification of Ref:/WORK/I_CLK_DIV_DIV_RATIO_WIDTH8/DP_OP_16J1_127_9653 SUCCEEDED.
+Info:  Pre-verification of Ref:/WORK/I_CLK_DIV_DIV_RATIO_WIDTH8/DP_OP_17J1_128_3919 SUCCEEDED.
+Info:  Pre-verification of Ref:/WORK/I_CLK_DIV_DIV_RATIO_WIDTH3/DP_OP_16J1_129_6033 SUCCEEDED.
+Info:  Pre-verification of Ref:/WORK/I_CLK_DIV_DIV_RATIO_WIDTH3/DP_OP_17J1_130_1260 SUCCEEDED.
+Info:  Pre-verification of Ref:/WORK/System_Top_RSOP_144/DP_OP_150J1_124_8441 SUCCEEDED.

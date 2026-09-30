@@ -1,0 +1,2 @@
+waive -msg {Port coverage for top design unit 'System_Top' is: '1' (25.00 %) port(s) not fully constrained}  -rule {  {Setup_port01}  }  -comment {Created by ICer on 28-Sep-2026 01:56:59 async RST handled within RST Synchronizers}  -exact 
+waive -msg {Port coverage for top design unit 'System_Top' is: '1' (25.00 %) port(s) not fully constrained}  -rule {  {Setup_port01}  }  -comment {Created by ICer on 28-Sep-2026 01:56:59 async RST handled within RST Synchronizers}  -exact 

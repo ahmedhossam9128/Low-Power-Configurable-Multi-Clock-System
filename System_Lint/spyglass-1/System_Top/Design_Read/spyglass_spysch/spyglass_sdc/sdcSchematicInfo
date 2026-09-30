@@ -1,0 +1,16 @@
+
+##File_ID::1
+##File_Name::./System.sdc@@Design_Unit::System_Top
+##Line_no::9@@design@@System_Top
+##Line_no::13@@port@@RX_IN
+##Line_no::15@@port@@TX_OUT
+##Line_no::16@@port@@REF_CLK
+##Line_no::22@@port@@UART_CLK
+##Line_no::28@@pin@@u_CLK_GATE/GATED_CLK@@clock@@REF_Clock{##port##REF_CLK}
+##Line_no::29@@pin@@u_RX_CLK_DIV/o_div_clk@@clock@@UART_Clock{##port##UART_CLK}
+##Line_no::30@@pin@@u_TX_CLK_DIV/o_div_clk@@clock@@UART_Clock{##port##UART_CLK}
+##Line_no::31@@port@@REF_CLK@@port@@UART_CLK@@port@@RST@@port@@RX_IN@@port@@TX_OUT@@port@@RX_D_VALID
+##Line_no::33@@port@@REF_CLK@@port@@UART_CLK@@port@@RST@@port@@RX_IN
+##Line_no::35@@port@@TX_OUT@@port@@RX_D_VALID
+##Line_no::36@@clock@@UART_Clock{##port##UART_CLK}@@port@@RX_IN
+##Line_no::37@@clock@@UART_Clock{##port##UART_CLK}@@port@@TX_OUT

@@ -1,0 +1,132 @@
+##This file is genrated to have command line decompiled Info even in Console
+##(To generate SIGN_OFF report having command line decompiled)
+Run Setup Info
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+===============================================================================
+Option          Value             Origin  File                           LineNo
+===============================================================================
+--goal_info     rdc/rdc_verify_struct@ CmdLine -                              -
+--strict_sgdc_check <ON>              Config  $SPYGLASS_HOME/.spyglass.setup 39
+-awl            ./spyglass-1/System_Top/rdc/rdc_verify_struct/spyglass-1_waiver_file.awl CmdLine -                              -
+-batch          <ON>              CmdLine -                              -
+-dbdir          ./spyglass-1/System_Top/.SG_SaveRestoreDB CmdLine -                              -
+-default_waiver_file ./spyglass-1/System_Top/rdc/rdc_verify_struct/spyglass-1_waiver_file.awl CmdLine -                              -
+-enableSV       <ON>              CmdLine -                              -
+-enable_const_prop_thru_seq <ON>              CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 37
+-enable_save_restore <ON>              CmdLine -                              -
+-enable_save_restore_builtin true              CmdLine -                              -
+-inferblackbox  <ON>              Config  $SPYGLASS_HOME/.spyglass.setup 29
+-lib            WORK=>./spyglass-1/System_Top/WORK CmdLine -                              -
+                SYNOPSYS=>$SPYGLASS_HOME/vhdl_libs/Linux4/SYNOPSYS Config  $SPYGLASS_HOME/.spyglass.setup 25
+-mixed          <ON>              CmdLine -                              -
+-nl             <ON>              CmdLine -                              -
+-overloadrules  Clock_info03a+severity=Error CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 59
+                Clock_info05+severity=Error CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 62
+                Reset_info09a+severity=Error CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 65
+                Clock_info05b+severity=Error CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 68
+                Clock_info03c+severity=Error CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 73
+-policy         clock-reset       CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 30
+-projectwdir    ./spyglass-1      CmdLine -                              -
+-report         moresimple        Config  $SPYGLASS_HOME/.spyglass.setup 17
+-report_incr_messages <ON>              CmdLine -                              -
+-rules          Clock_info03a     CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 58
+                Clock_info05      CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 61
+                Reset_info09a     CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 64
+                Clock_info05b     CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 67
+                Clock_info03b     CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 70
+                Clock_info03c     CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 72
+                Setup_port01      CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 75
+                Setup_blackbox01  CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 77
+                Clock_info02      CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 79
+                Reset_info02      CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 81
+                Clock_info15      CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 83
+                Info_Case_Analysis CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 85
+                Ar_resetcross01   CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 87
+                Ar_resetcross_matrix01 CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 89
+-sdc2sgdc       <ON>              CmdLine -                              -
+-sgdc           system.sgdc       CmdLine -                              -
+-sortmethod     du                Config  $SPYGLASS_HOME/.spyglass.setup 27
+-template       rdc/rdc_verify_struct CmdLine -                              -
+-templatedir    /home/synopsys/SpyGlass-L2016.06/SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff CmdLine -                              -
+-top            System_Top        CmdLine -                              -
+-wdir           ./spyglass-1/System_Top/rdc/rdc_verify_struct CmdLine -                              -
+<design_files>  /home/ICer/Shared_Folder/System/RTL/ALU/ALU.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/ASYNC_FIFO/DF_SYNC.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/ASYNC_FIFO/FIFO_MEM.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/ASYNC_FIFO/FIFO_RD.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/ASYNC_FIFO/FIFO_TOP.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/ASYNC_FIFO/FIFO_WR.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/CLK_GATE/CLK_GATE.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/Data_Bus_Sync/Data_Bus_Sync.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/I_CLK_DIV/I_CLK_DIV.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/Pulse_Gen/pulse_gen.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/REG_FILE/Reg_File.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/RST_Synchronizer/RST_Sync.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/RX_CLK_DIV_MUX/RX_CLK_DIV_MUX.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/Sys_Ctrl/Sys_Ctrl.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/System_Top/System_Top.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/UART_RX/Deserializer.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/UART_RX/Edge_Bit_Counter.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/UART_RX/Parity_Checker.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/UART_RX/Sampler.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/UART_RX/Start_Checker.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/UART_RX/Stop_Checker.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/UART_RX/UART_RX.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/UART_RX/UART_RX_FSM.sv APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/UART_TX/MUX_2x1.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/UART_TX/MUX_4x1.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/UART_TX/UART_Parity.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/UART_TX/UART_Serializer.v APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/UART_TX/UART_TX_FSM.sv APICall -                              -
+                /home/ICer/Shared_Folder/System/RTL/UART_TX/UART_TX_TOP.v APICall -                              -
+
+
+Rules Parameter
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+===============================================================================
+Parameter       Origin  File                           LineNo
+===============================================================================
+-enable_and_sync CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 44
+VALUE -- yes
+(KNOWN_PARAM)
+-enable_debug_data CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 45
+VALUE -- yes
+(KNOWN_PARAM)
+-enable_mux_sync CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 43
+VALUE -- all
+(KNOWN_PARAM)
+-enable_sim_check_rdc CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 49
+VALUE -- yes
+(KNOWN_PARAM)
+-enable_sync_check_rdc CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 48
+VALUE -- yes
+(KNOWN_PARAM)
+-hier_wild_card CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 46
+VALUE -- no
+(KNOWN_PARAM)
+-pt             CmdLine -                              -
+VALUE -- yes
+(KNOWN_PARAM)
+-report_all_reset_cross CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 52
+VALUE -- no
+(KNOWN_PARAM)
+-report_for_single_busbit CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 51
+VALUE -- no
+(KNOWN_PARAM)
+-report_sync_rdc CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 50
+VALUE -- all
+(KNOWN_PARAM)
+-strict_sync_check CmdFile $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff/rdc/rdc_verify_struct.spq 47
+VALUE -- yes
+(KNOWN_PARAM)
+
+
+Policy Info
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+===============================================================================
+NameOfPolicy    VersionNumber   Path (from where policy loaded)
+===============================================================================
+spyglass        SpyGlass_vL-2016.06 $SPYGLASS_HOME/policies/spyglass
+clock-reset     SpyGlass_vL-2016.06 $SPYGLASS_HOME/policies/clock
+
+

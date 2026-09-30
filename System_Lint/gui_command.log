@@ -1,0 +1,552 @@
+read_file -type sourcelist ../SIM/files.f
+read_file -type sgdc system.sgdc
+read_file -type gateslib ../std_cells/scmetro_tsmc_cl013g_rvt_tt_1p2v_25c.lib
+set_option report_incr_messages yes
+set_option sdc2sgdc yes
+set_option enableSV yes
+
+
+
+current_goal Design_Read -alltop
+
+
+set_option designread_enable_synthesis yes
+compile_design -force
+
+compile_design -force
+
+set_option top System_Top
+compile_design -force
+
+
+
+current_goal lint/lint_rtl -top System_Top
+run_goal
+current_goal cdc/cdc_setup_check -top System_Top
+run_goal
+current_goal cdc/clock_reset_integrity -top System_Top
+run_goal
+current_goal cdc/cdc_verify_struct -top System_Top
+run_goal
+current_goal cdc/cdc_verify -top System_Top
+run_goal
+current_goal cdc/cdc_abstract -top System_Top
+run_goal
+current_goal cdc/cdc_verify_jitter -top System_Top
+run_goal
+current_goal rdc/rdc_verify_struct -top System_Top
+run_goal
+current_goal lint/lint_rtl -top System_Top
+
+
+
+
+
+
+
+
+
+
+
+current_goal cdc/cdc_setup_check -top System_Top
+
+
+gui_select_message -rule Setup_port01 -msg {Port coverage for top design unit 'System_Top' is: '1' (25.00 %) port(s) not fully constrained}
+read_file -type awl ./spyglass-1/System_Top/cdc/cdc_setup_check/spyglass-1_waiver_file.awl
+set_goal_option default_waiver_file ./spyglass-1/System_Top/cdc/cdc_setup_check/spyglass-1_waiver_file.awl
+read_file -type awl ./spyglass-1/System_Top/cdc/cdc_setup_check/spyglass-1_waiver_file.awl
+set_goal_option default_waiver_file ./spyglass-1/System_Top/cdc/cdc_setup_check/spyglass-1_waiver_file.awl
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]
+waive -rule Setup_port01 -msg {Port coverage for top design unit 'System_Top' is: '1' (25.00 %) port(s) not fully constrained} -comment {Created by ICer on 27-Sep-2026 21:42:43}
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]; set_goal_option default_waiver_file {./spyglass-1/System_Top/cdc/cdc_setup_check/spyglass-1_waiver_file.awl}
+remove_waiver -id 0
+waive -rule Setup_port01 -msg {Port coverage for top design unit 'System_Top' is: '1' (25.00 %) port(s) not fully constrained} -comment {Created by ICer on 27-Sep-2026 21:42:43 async RST covered with RST_Synchronizers} -id 0
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]
+waive -rule Setup_port01 -msg {Abstracted sgdc file for input ports of block 'System_Top' is generated} -comment {Created by ICer on 27-Sep-2026 21:43:43}
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]; set_goal_option default_waiver_file {./spyglass-1/System_Top/cdc/cdc_setup_check/spyglass-1_waiver_file.awl}
+remove_waiver -id 0
+waive -rule Setup_port01 -msg {Port coverage for top design unit 'System_Top' is: '1' (25.00 %) port(s) not fully constrained} -comment {Created by ICer on 27-Sep-2026 21:42:43 async RST covered with RST_Synchronizers partially constrained async RST covered in RST synchronizers } -id 0
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+gui_select_message -rule SyncCellSetup -msg {'sync_cell' constraint is not used to synchronize any crossing in the current design 'System_Top'}
+gui_select_message -rule SyncCellSetup -msg {'sync_cell' constraint is not used to synchronize any crossing in the current design 'System_Top'}
+gui_open_schematic -ms
+gui_select_message -rule SyncCellSetup -msg {'sync_cell' constraint is not used to synchronize any crossing in the current design 'System_Top'}
+gui_select_message -rule SyncCellSetup -msg {'sync_cell' constraint is not used to synchronize any crossing in the current design 'System_Top'}
+gui_open_schematic -ms
+gui_load_schematic -ms System_Top.u_BUS_SYNC
+gui_select_message -rule SyncCellSetup -msg {'sync_cell' constraint is not used to synchronize any crossing in the current design 'System_Top'}
+gui_open_schematic -ms
+gui_open_schematic -ms
+gui_load_schematic -ms {{System_Top.u_BUS_SYNC.\Sync_bus_reg[0] }}
+gui_open_schematic -ms
+run_goal
+
+run_goal
+
+current_goal cdc/clock_reset_integrity -top System_Top
+
+
+run_goal
+
+gui_select_message -rule Clock_glitch04 -msg {Flop System_Top.u_RX_CLK_DIV.DIVIDED_CLK and Flop System_Top.u_RegFile.RegFile[2][2] are converging through combinational logic to clock of Flop System_Top.u_UART_RX.u_Sampler.first_sample}
+run_goal
+
+run_goal
+
+run_goal
+
+gui_select_message -rule Clock_glitch04 -msg {Flop System_Top.u_TX_CLK_DIV.DIVIDED_CLK and Flop System_Top.u_RegFile.RegFile[3][1] are converging through combinational logic to clock of Flop r_ptr[0]}
+gui_select_message -rule Clock_glitch04 -msg {Flop System_Top.u_RX_CLK_DIV.DIVIDED_CLK and Flop System_Top.u_RegFile.RegFile[2][2] are converging through combinational logic to clock of Flop System_Top.u_UART_RX.u_Sampler.first_sample}
+gui_open_schematic -is
+run_goal
+
+read_file -type awl ./spyglass-1/System_Top/cdc/clock_reset_integrity/spyglass-1_waiver_file.awl
+set_goal_option default_waiver_file ./spyglass-1/System_Top/cdc/clock_reset_integrity/spyglass-1_waiver_file.awl
+read_file -type awl ./spyglass-1/System_Top/cdc/clock_reset_integrity/spyglass-1_waiver_file.awl
+set_goal_option default_waiver_file ./spyglass-1/System_Top/cdc/clock_reset_integrity/spyglass-1_waiver_file.awl
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]
+waive -rule Clock_glitch04 -msg {Flop System_Top.u_RX_CLK_DIV.DIVIDED_CLK and Flop System_Top.u_RegFile.RegFile[2][2] are converging through combinational logic to clock of Flop System_Top.u_UART_RX.u_Sampler.first_sample} -comment {Created by ICer on 27-Sep-2026 22:20:35}
+waive -rule Clock_glitch04 -msg {Flop System_Top.u_TX_CLK_DIV.DIVIDED_CLK and Flop System_Top.u_RegFile.RegFile[3][1] are converging through combinational logic to clock of Flop r_ptr[0]} -comment {Created by ICer on 27-Sep-2026 22:20:35}
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+remove_waiver -id 4
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]; set_goal_option default_waiver_file {./spyglass-1/System_Top/cdc/clock_reset_integrity/spyglass-1_waiver_file.awl}
+remove_waiver -id 5
+waive -rule Clock_glitch04 -msg {Flop System_Top.u_TX_CLK_DIV.DIVIDED_CLK and Flop System_Top.u_RegFile.RegFile[3][1] are converging through combinational logic to clock of Flop r_ptr[0]} -comment {Created by ICer on 27-Sep-2026 22:20:35 Conerging } -id 5
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+remove_waiver -id 5
+
+
+
+gui_select_message -rule Clock_glitch04 -msg {Flop System_Top.u_RX_CLK_DIV.DIVIDED_CLK and Flop System_Top.u_RegFile.RegFile[2][2] are converging through combinational logic to clock of Flop System_Top.u_UART_RX.u_Sampler.first_sample}
+gui_open_schematic -is
+gui_expand_schematic {net RX_CLK}
+gui_expand_schematic {net u_RX_CLK_DIV.o_div_clk}
+run_goal
+
+run_goal
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]
+waive -rule Clock_glitch04 -msg {Flop System_Top.u_RX_CLK_DIV.DIVIDED_CLK and Flop System_Top.u_RegFile.RegFile[2][2] are converging through combinational logic to clock of Flop System_Top.u_UART_RX.u_Sampler.first_sample} -comment {Created by ICer on 27-Sep-2026 22:30:52}
+waive -rule Clock_glitch04 -msg {Flop System_Top.u_TX_CLK_DIV.DIVIDED_CLK and Flop System_Top.u_RegFile.RegFile[3][1] are converging through combinational logic to clock of Flop r_ptr[0]} -comment {Created by ICer on 27-Sep-2026 22:30:52}
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]; set_goal_option default_waiver_file {./spyglass-1/System_Top/cdc/clock_reset_integrity/spyglass-1_waiver_file.awl}
+remove_waiver -id 8
+waive -rule Clock_glitch04 -msg {Flop System_Top.u_TX_CLK_DIV.DIVIDED_CLK and Flop System_Top.u_RegFile.RegFile[3][1] are converging through combinational logic to clock of Flop r_ptr[0]} -comment {Created by ICer on 27-Sep-2026 22:30:52 Converging Signals do not toggle simultaneously and are unrelated} -id 8
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+run_goal
+
+current_goal cdc/cdc_verify_struct -top System_Top
+
+
+run_goal
+
+gui_select_message -rule Setup_port01 -msg {Port coverage for top design unit 'System_Top' is: '1' (25.00 %) port(s) not fully constrained}
+read_file -type awl ./spyglass-1/System_Top/cdc/cdc_verify_struct/spyglass-1_waiver_file.awl
+set_goal_option default_waiver_file ./spyglass-1/System_Top/cdc/cdc_verify_struct/spyglass-1_waiver_file.awl
+read_file -type awl ./spyglass-1/System_Top/cdc/cdc_verify_struct/spyglass-1_waiver_file.awl
+set_goal_option default_waiver_file ./spyglass-1/System_Top/cdc/cdc_verify_struct/spyglass-1_waiver_file.awl
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]
+waive -rule Setup_port01 -msg {Port coverage for top design unit 'System_Top' is: '1' (25.00 %) port(s) not fully constrained} -comment {Created by ICer on 27-Sep-2026 22:33:43}
+waive -rule Setup_port01 -msg {Abstracted sgdc file for input ports of block 'System_Top' is generated} -comment {Created by ICer on 27-Sep-2026 22:33:43}
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]; set_goal_option default_waiver_file {./spyglass-1/System_Top/cdc/cdc_verify_struct/spyglass-1_waiver_file.awl}
+remove_waiver -id 11
+waive -rule Setup_port01 -msg {Abstracted sgdc file for input ports of block 'System_Top' is generated} -comment {Created by ICer on 27-Sep-2026 22:33:43 Unconstrained Async RST handeled within RST Synchronizers} -id 11
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+run_goal
+
+run_goal
+
+run_goal
+
+run_goal
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]
+waive -rule Ac_coherency06 -msg {Source flop \"System_Top.u_FIFO.u_fifo_rd.r_ptr[1]\" is synchronized twice (at \"System_Top.u_FIFO.u_sync_r2w.sync_reg[0][1:0]\") in same destination domain} -comment {Created by ICer on 27-Sep-2026 22:46:17}
+waive -rule Ac_coherency06 -msg {Source flop \"System_Top.u_FIFO.u_fifo_rd.r_ptr[2]\" is synchronized twice (at \"System_Top.u_FIFO.u_sync_r2w.sync_reg[0][2:1]\") in same destination domain} -comment {Created by ICer on 27-Sep-2026 22:46:17}
+waive -rule Ac_coherency06 -msg {Source flop \"System_Top.u_FIFO.u_fifo_rd.r_ptr[3]\" is synchronized twice (at \"System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:2]\") in same destination domain} -comment {Created by ICer on 27-Sep-2026 22:46:17}
+waive -rule Ac_coherency06 -msg {Source flop \"System_Top.u_FIFO.u_fifo_wr.w_ptr[1]\" is synchronized twice (at \"System_Top.u_FIFO.u_sync_w2r.sync_reg[0][1:0]\") in same destination domain} -comment {Created by ICer on 27-Sep-2026 22:46:17}
+waive -rule Ac_coherency06 -msg {Source flop \"System_Top.u_FIFO.u_fifo_wr.w_ptr[2]\" is synchronized twice (at \"System_Top.u_FIFO.u_sync_w2r.sync_reg[0][2:1]\") in same destination domain} -comment {Created by ICer on 27-Sep-2026 22:46:17}
+waive -rule Ac_coherency06 -msg {Source flop \"System_Top.u_FIFO.u_fifo_wr.w_ptr[3]\" is synchronized twice (at \"System_Top.u_FIFO.u_sync_w2r.sync_reg[0][3:2]\") in same destination domain} -comment {Created by ICer on 27-Sep-2026 22:46:17}
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]; set_goal_option default_waiver_file {./spyglass-1/System_Top/cdc/cdc_verify_struct/spyglass-1_waiver_file.awl}
+remove_waiver -id 18
+waive -rule Ac_coherency06 -msg {Source flop \"System_Top.u_FIFO.u_fifo_wr.w_ptr[3]\" is synchronized twice (at \"System_Top.u_FIFO.u_sync_w2r.sync_reg[0][3:2]\") in same destination domain} -comment {Created by ICer on 27-Sep-2026 22:46:17 Bus is Gray encoded hence no real data incoherency threat} -id 18
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+gui_select_message -rule Ac_glitch03 -msg {Destination flop 'System_Top.u_FIFO.u_sync_r2w.sync_reg[0][2:0]' clocked by 'System_Top.REF_CLK' can glitch (1 source(s), 1 domain(s)). Reason :'Sources from same domain in fanin'}
+gui_open_schematic -is
+gui_expand_schematic {pin {u_FIFO.u_fifo_rd.\r_ptr_reg[3] } CP input}
+gui_expand_schematic {pin u_FIFO.u_fifo_rd r_clk input}
+gui_expand_schematic {pin u_FIFO R_CLK input}
+gui_expand_schematic {pin {u_FIFO.u_sync_r2w.\sync_reg_reg[0][2] } CP input}
+gui_expand_schematic {hierPin u_FIFO.u_sync_r2w clk output}
+gui_expand_schematic {pin u_FIFO.u_sync_r2w clk input}
+gui_expand_schematic {pin {u_FIFO.u_sync_r2w.\sync_reg_reg[0][2] } Q output}
+gui_expand_schematic {pin {u_FIFO.u_sync_r2w.\sync_reg_reg[1][2] } Q output}
+gui_expand_schematic {net u_FIFO.u_sync_r2w.sync_reg[6]}
+gui_expand_schematic {autoBundle u_FIFO.u_sync_r2w.sync_reg[2] 2}
+gui_expand_schematic {pin u_FIFO.u_sync_r2w.rtlc_I1 Z output}
+gui_expand_schematic {pinBus u_FIFO.u_sync_r2w sync_ptr output 4}
+run_goal
+
+gui_select_message -rule Ac_glitch03 -msg {Destination flop 'System_Top.u_FIFO.u_sync_r2w.sync_reg[0][2:0]' clocked by 'System_Top.REF_CLK' can glitch (1 source(s), 1 domain(s)). Reason :'Sources from same domain in fanin'}
+gui_open_schematic -is
+run_goal
+
+gui_select_message -rule Ac_glitch03 -msg {Destination flop 'System_Top.u_BUS_SYNC.Bit_Syncronizer[1]' clocked by 'System_Top.REF_CLK' can glitch (4 source(s), 1 domain(s)). Reason :'Source reconverges'}
+gui_open_schematic -is
+run_goal
+
+run_goal
+
+gui_select_message -rule Ac_conv01 -msg {13 synchronizers (System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:0],System_Top.u_BUS_SYNC.Bit_Syncronizer[1] ...) converge on flop 'System_Top.RF_RdEn'}
+gui_open_schematic -is
+run_goal
+
+gui_select_message -rule Ac_conv01 -msg {13 synchronizers (System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:0],System_Top.u_BUS_SYNC.Bit_Syncronizer[1] ...) converge on flop 'System_Top.RF_RdEn'}
+gui_open_schematic -is
+gui_open_schematic -is
+run_goal
+
+gui_select_message -rule Ac_conv01 -msg {13 synchronizers (System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:0],System_Top.u_BUS_SYNC.Bit_Syncronizer[1] ...) converge on flop 'System_Top.RF_RdEn'}
+gui_open_schematic -is
+run_goal
+
+gui_select_message -rule Ac_conv01 -msg {13 synchronizers (System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:0],System_Top.u_BUS_SYNC.Bit_Syncronizer[1] ...) converge on flop 'System_Top.RF_RdEn'}
+gui_open_schematic -is
+gui_select_message -rule Ac_conv02 -msg {4 synchronizers (System_Top.u_FIFO.u_sync_w2r.sync_reg[0][3:0]) converge on combinational gate 'System_Top.FIFO_EMPTY'. Gray encoding check: 'DISABLED'}
+gui_open_schematic -is
+set_parameter check_gray_encoding yes
+set_goal_option addrules {Ac_cdc08 Ac_conv02 Ac_conv04 Ac_conv05}
+set_parameter enable_fifo yes
+run_goal
+
+run_goal
+
+run_goal
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]
+waive -rule Ac_conv01 -msg {13 synchronizers (System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:0],System_Top.u_BUS_SYNC.Bit_Syncronizer[1] ...) converge on flop 'System_Top.RF_RdEn'} -comment {Created by ICer on 28-Sep-2026 00:26:39}
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]; set_goal_option default_waiver_file {./spyglass-1/System_Top/cdc/cdc_verify_struct/spyglass-1_waiver_file.awl}
+remove_waiver -id 20
+waive -rule Ac_conv01 -msg {13 synchronizers (System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:0],System_Top.u_BUS_SYNC.Bit_Syncronizer[1] ...) converge on flop 'System_Top.RF_RdEn'} -comment {Created by ICer on 28-Sep-2026 00:26:39  Signals are unrelated and there is no threat to the converrgence} -id 20
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]
+waive -rule Ac_conv02 -msg {4 synchronizers (System_Top.u_FIFO.u_sync_w2r.sync_reg[0][3:0]) converge on combinational gate 'System_Top.FIFO_EMPTY'. Gray encoding check: 'DISABLED'} -comment {Created by ICer on 28-Sep-2026 00:27:51}
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+sgdc_help gray_signals
+sg_shell> gray_signals -help
+gray_signals -help
+gui_select_message -rule Ac_conv02 -msg {4 synchronizers (System_Top.u_FIFO.u_sync_w2r.sync_reg[0][3:0]) converge on combinational gate 'System_Top.FIFO_EMPTY'. Gray encoding check: 'DISABLED'}
+gui_open_schematic -is
+run_goal
+
+run_goal
+
+run_goal
+
+run_goal
+
+gui_select_message -rule Ac_conv02 -msg {9 synchronizers (System_Top.u_BUS_SYNC.Bit_Syncronizer[1],System_Top.u_BUS_SYNC.Sync_bus[7:0]) converge on MUX 'System_Top.u_SysCtrl.Nx_S[0]'. Gray encoding check: 'DISABLED'}
+gui_open_schematic -is
+gui_open_schematic -is
+gui_select_message -rule Ac_conv02 -msg {4 synchronizers (System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:0]) converge on combinational gate 'System_Top.FIFO_FULL'. Gray encoding check: 'DISABLED'}
+gui_open_schematic -is
+gui_select_message -rule Ac_conv02 -msg {4 synchronizers (System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:0]) converge on combinational gate 'System_Top.FIFO_FULL'. Gray encoding check: 'DISABLED'}
+gui_select_message -rule Ac_conv02 -msg {4 synchronizers (System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:0]) converge on combinational gate 'System_Top.FIFO_FULL'. Gray encoding check: 'DISABLED'}
+gui_select_message -rule Ac_conv02 -msg {4 synchronizers (System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:0]) converge on combinational gate 'System_Top.FIFO_FULL'. Gray encoding check: 'DISABLED'}
+run_goal
+
+qualifier -help
+run_goal
+
+gui_select_message -rule QualifierSetup -msg {'qualifier' constraint 'System_Top.RX_D_VALID' is not used to synchronize any crossing in the current design 'System_Top'}
+gui_open_schematic -ms
+gui_select_message -rule Ac_conv02 -msg {9 synchronizers (System_Top.u_BUS_SYNC.Bit_Syncronizer[1],System_Top.u_BUS_SYNC.Sync_bus[7:0]) converge on MUX 'System_Top.u_SysCtrl.Nx_S[0]'. Gray encoding check: 'DISABLED'}
+gui_open_schematic -is
+run_goal
+
+run_goal
+
+run_goal
+
+run_goal
+
+run_goal
+
+run_goal
+
+run_goal
+
+run_goal
+
+run_goal
+
+run_goal
+
+run_goal
+
+run_goal
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]
+waive -rule Ac_conv02 -msg {9 synchronizers (System_Top.u_BUS_SYNC.Bit_Syncronizer[1],System_Top.u_BUS_SYNC.Sync_bus[7:0]) converge on MUX 'System_Top.u_SysCtrl.Nx_S[0]'. Gray encoding check: 'DISABLED'} -comment {Created by ICer on 28-Sep-2026 01:32:14}
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]; set_goal_option default_waiver_file {./spyglass-1/System_Top/cdc/cdc_verify_struct/spyglass-1_waiver_file.awl}
+remove_waiver -id 23
+waive -rule Ac_conv02 -msg {9 synchronizers (System_Top.u_BUS_SYNC.Bit_Syncronizer[1],System_Top.u_BUS_SYNC.Sync_bus[7:0]) converge on MUX 'System_Top.u_SysCtrl.Nx_S[0]'. Gray encoding check: 'DISABLED'} -comment {Created by ICer on 28-Sep-2026 01:32:14 Data Bus safely qualified by RX_D_VALID} -id 23
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]; set_goal_option default_waiver_file {./spyglass-1/System_Top/cdc/cdc_verify_struct/spyglass-1_waiver_file.awl}
+remove_waiver -id 23
+waive -rule Ac_conv02 -msg {9 synchronizers (System_Top.u_BUS_SYNC.Bit_Syncronizer[1],System_Top.u_BUS_SYNC.Sync_bus[7:0]) converge on MUX 'System_Top.u_SysCtrl.Nx_S[0]'. Gray encoding check: 'DISABLED'} -comment {Created by ICer on 28-Sep-2026 01:32:14 RX_D_VALID is a Qualifier} -id 23
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+gui_select_message -rule Ac_conv02 -msg {4 synchronizers (System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:0]) converge on combinational gate 'System_Top.FIFO_FULL'. Gray encoding check: 'DISABLED'}
+gui_open_schematic -is
+run_goal
+
+run_goal
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]
+waive -rule Ac_conv02 -msg {4 synchronizers (System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:0]) converge on combinational gate 'System_Top.FIFO_FULL'. Gray encoding check: 'DISABLED'} -comment {Created by ICer on 28-Sep-2026 01:37:11}
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]; set_goal_option default_waiver_file {./spyglass-1/System_Top/cdc/cdc_verify_struct/spyglass-1_waiver_file.awl}
+remove_waiver -id 26
+waive -rule Ac_conv02 -msg {4 synchronizers (System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:0]) converge on combinational gate 'System_Top.FIFO_FULL'. Gray encoding check: 'DISABLED'} -comment {Created by ICer on 28-Sep-2026 01:37:11 Synchronized data bus with gray encoding} -id 26
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+run_goal
+
+current_goal cdc/cdc_verify -top System_Top
+
+
+run_goal
+
+read_file -type awl ./spyglass-1/System_Top/cdc/cdc_verify/spyglass-1_waiver_file.awl
+set_goal_option default_waiver_file ./spyglass-1/System_Top/cdc/cdc_verify/spyglass-1_waiver_file.awl
+read_file -type awl ./spyglass-1/System_Top/cdc/cdc_verify/spyglass-1_waiver_file.awl
+set_goal_option default_waiver_file ./spyglass-1/System_Top/cdc/cdc_verify/spyglass-1_waiver_file.awl
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]
+waive -rule Setup_port01 -msg {Port coverage for top design unit 'System_Top' is: '1' (25.00 %) port(s) not fully constrained} -comment {Created by ICer on 28-Sep-2026 01:39:27}
+waive -rule Setup_port01 -msg {Abstracted sgdc file for input ports of block 'System_Top' is generated} -comment {Created by ICer on 28-Sep-2026 01:39:27}
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]; set_goal_option default_waiver_file {./spyglass-1/System_Top/cdc/cdc_verify/spyglass-1_waiver_file.awl}
+remove_waiver -id 29
+waive -rule Setup_port01 -msg {Abstracted sgdc file for input ports of block 'System_Top' is generated} -comment {Created by ICer on 28-Sep-2026 01:39:27 Async RST handeled within RST Synchronizers } -id 29
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]
+waive -rule Ac_datahold01a -msg {Synchronized crossing: destination flop 'System_Top.u_UART_TX.U2_FSM.P_DATA_Registered[7:0]', clocked by 'System_Top.UART_CLK', source flop 'System_Top.u_FIFO.u_fifo_mem.mem_Buffer[7:0][7:0]', clocked by 'System_Top.REF_CLK'. Data-enable sequencing check: Partially-Proved} -comment {Created by ICer on 28-Sep-2026 01:42:34}
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]; set_goal_option default_waiver_file {./spyglass-1/System_Top/cdc/cdc_verify/spyglass-1_waiver_file.awl}
+remove_waiver -id 31
+waive -rule Ac_datahold01a -msg {Synchronized crossing: destination flop 'System_Top.u_UART_TX.U2_FSM.P_DATA_Registered[7:0]', clocked by 'System_Top.UART_CLK', source flop 'System_Top.u_FIFO.u_fifo_mem.mem_Buffer[7:0][7:0]', clocked by 'System_Top.REF_CLK'. Data-enable sequencing check: Partially-Proved} -comment {Created by ICer on 28-Sep-2026 01:42:34 Synchonization crossing handeled with async_FIFO } -id 31
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+gui_select_message -rule Ac_conv01 -msg {13 synchronizers (System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:0],System_Top.u_BUS_SYNC.Bit_Syncronizer[1] ...) converge on flop 'System_Top.RF_RdEn'}
+gui_open_schematic -is
+gui_expand_schematic {net RX_P_DATA[7]}
+gui_expand_schematic {net u_FIFO.grey_r_ptr[3]}
+gui_expand_schematic {net u_FIFO.grey_r_ptr[3]}
+gui_expand_schematic {net RF_RdEn}
+gui_expand_schematic {autoBundle Sync_RX_P_DATA[7] 8}
+gui_expand_schematic {net Sync_RX_D_VALID}
+gui_expand_schematic {net Sync_RX_D_VALID}
+gui_expand_schematic {net Sync_RX_D_VALID}
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]
+waive -rule Ac_conv01 -msg {13 synchronizers (System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:0],System_Top.u_BUS_SYNC.Bit_Syncronizer[1] ...) converge on flop 'System_Top.RF_RdEn'} -comment {Created by ICer on 28-Sep-2026 01:48:41}
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]; set_goal_option default_waiver_file {./spyglass-1/System_Top/cdc/cdc_verify/spyglass-1_waiver_file.awl}
+remove_waiver -id 33
+waive -rule Ac_conv01 -msg {13 synchronizers (System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:0],System_Top.u_BUS_SYNC.Bit_Syncronizer[1] ...) converge on flop 'System_Top.RF_RdEn'} -comment {Created by ICer on 28-Sep-2026 01:48:41 SysCtrl safely handles data conversion and data is unrelated } -id 33
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]
+waive -rule Ac_conv02 -msg {9 synchronizers (System_Top.u_BUS_SYNC.Bit_Syncronizer[1],System_Top.u_BUS_SYNC.Sync_bus[7:0]) converge on MUX 'System_Top.u_SysCtrl.Nx_S[0]'. Gray encoding check: 'Partially-Proved'} -comment {Created by ICer on 28-Sep-2026 01:50:36}
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]; set_goal_option default_waiver_file {./spyglass-1/System_Top/cdc/cdc_verify/spyglass-1_waiver_file.awl}
+remove_waiver -id 35
+waive -rule Ac_conv02 -msg {9 synchronizers (System_Top.u_BUS_SYNC.Bit_Syncronizer[1],System_Top.u_BUS_SYNC.Sync_bus[7:0]) converge on MUX 'System_Top.u_SysCtrl.Nx_S[0]'. Gray encoding check: 'Partially-Proved'} -comment {Created by ICer on 28-Sep-2026 01:50:36 RX_D_VALID is a qualifier that bypasses data safely} -id 35
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+gui_select_message -rule Ac_conv02 -msg {4 synchronizers (System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:0]) converge on combinational gate 'System_Top.FIFO_FULL'. Gray encoding check: 'Partially-Proved'}
+gui_open_schematic -is
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]
+waive -rule Ac_conv02 -msg {4 synchronizers (System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:0]) converge on combinational gate 'System_Top.FIFO_FULL'. Gray encoding check: 'Partially-Proved'} -comment {Created by ICer on 28-Sep-2026 01:53:09}
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]; set_goal_option default_waiver_file {./spyglass-1/System_Top/cdc/cdc_verify/spyglass-1_waiver_file.awl}
+remove_waiver -id 37
+waive -rule Ac_conv02 -msg {4 synchronizers (System_Top.u_FIFO.u_sync_r2w.sync_reg[0][3:0]) converge on combinational gate 'System_Top.FIFO_FULL'. Gray encoding check: 'Partially-Proved'} -comment {Created by ICer on 28-Sep-2026 01:53:09 Safe data convergence with gray encoding} -id 37
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+gui_select_message -rule Ac_cdc01a -msg {Fast('System_Top.REF_CLK') to slow('System_Top.UART_CLK') clock crossing(from 'System_Top.u_FIFO.grey_w_ptr[3]' to 'System_Top.u_FIFO.u_sync_w2r.sync_reg[0][3]') detected. Data hold check:Partially-Proved}
+gui_open_schematic -is
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]
+waive -rule Ac_cdc01a -msg {Fast('System_Top.REF_CLK') to slow('System_Top.UART_CLK') clock crossing(from 'System_Top.u_FIFO.grey_w_ptr[3]' to 'System_Top.u_FIFO.u_sync_w2r.sync_reg[0][3]') detected. Data hold check:Partially-Proved} -comment {Created by ICer on 28-Sep-2026 01:54:12}
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]; set_goal_option default_waiver_file {./spyglass-1/System_Top/cdc/cdc_verify/spyglass-1_waiver_file.awl}
+remove_waiver -id 39
+waive -rule Ac_cdc01a -msg {Fast('System_Top.REF_CLK') to slow('System_Top.UART_CLK') clock crossing(from 'System_Top.u_FIFO.grey_w_ptr[3]' to 'System_Top.u_FIFO.u_sync_w2r.sync_reg[0][3]') detected. Data hold check:Partially-Proved} -comment {Created by ICer on 28-Sep-2026 01:54:12 FIFO safely handles data loss and synchronization from fast to slow clk domains} -id 39
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+run_goal
+
+current_goal cdc/cdc_abstract -top System_Top
+
+
+run_goal
+
+read_file -type awl ./spyglass-1/System_Top/cdc/cdc_abstract/spyglass-1_waiver_file.awl
+set_goal_option default_waiver_file ./spyglass-1/System_Top/cdc/cdc_abstract/spyglass-1_waiver_file.awl
+read_file -type awl ./spyglass-1/System_Top/cdc/cdc_abstract/spyglass-1_waiver_file.awl
+set_goal_option default_waiver_file ./spyglass-1/System_Top/cdc/cdc_abstract/spyglass-1_waiver_file.awl
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]
+waive -rule Setup_port01 -msg {Port coverage for top design unit 'System_Top' is: '1' (25.00 %) port(s) not fully constrained} -comment {Created by ICer on 28-Sep-2026 01:56:59}
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]; set_goal_option default_waiver_file {./spyglass-1/System_Top/cdc/cdc_abstract/spyglass-1_waiver_file.awl}
+remove_waiver -id 41
+waive -rule Setup_port01 -msg {Port coverage for top design unit 'System_Top' is: '1' (25.00 %) port(s) not fully constrained} -comment {Created by ICer on 28-Sep-2026 01:56:59 async RST handled within RST Synchronizers} -id 41
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+run_goal
+
+current_goal cdc/cdc_verify_struct -top System_Top
+
+
+current_goal rdc/rdc_verify_struct -top System_Top
+
+
+run_goal
+
+read_file -type awl ./spyglass-1/System_Top/rdc/rdc_verify_struct/spyglass-1_waiver_file.awl
+set_goal_option default_waiver_file ./spyglass-1/System_Top/rdc/rdc_verify_struct/spyglass-1_waiver_file.awl
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]
+waive -rule Setup_port01 -comment {Created by ICer on 28-Sep-2026 01:58:15}
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+set _sg_current_default_waiver_file ""; set _sg_current_default_waiver_file [get_goal_option default_waiver_file]; set_goal_option default_waiver_file {./spyglass-1/System_Top/rdc/rdc_verify_struct/spyglass-1_waiver_file.awl}
+remove_waiver -id 43
+waive -rule Setup_port01 -comment {Created by ICer on 28-Sep-2026 01:58:15 async RST handled within RST Synchronizers } -id 43
+if {$_sg_current_default_waiver_file == {} || $_sg_current_default_waiver_file == {{}}} {remove_goal_option default_waiver_file } else { set_goal_option default_waiver_file $_sg_current_default_waiver_file}
+
+
+
+run_goal
+
+save_project -force /home/ICer/Labs/System_Lint

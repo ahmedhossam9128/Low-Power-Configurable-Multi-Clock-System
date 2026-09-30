@@ -1,0 +1,204 @@
+/mnt/hgfs/Shared_Folder/System/RTL/UART/UART_TX/UART_TX_TOP.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_TX/UART_TX_TOP.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module UART_TX_TOP
+
+Top level modules:
+	UART_TX_TOP
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/RST_Synchronizer/RST_Sync.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/RST_Synchronizer/RST_Sync.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module RST_Sync
+
+Top level modules:
+	RST_Sync
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/ASYNC_FIFO/FIFO_MEM.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/ASYNC_FIFO/FIFO_MEM.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module FIFO_MEM
+
+Top level modules:
+	FIFO_MEM
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_RX/Sampler.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_RX/Sampler.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module Sampler
+
+Top level modules:
+	Sampler
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/CLK_GATE/CLK_GATE.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/CLK_GATE/CLK_GATE.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module CLK_GATE
+
+Top level modules:
+	CLK_GATE
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_TOP/UART.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_TOP/UART.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module UART
+
+Top level modules:
+	UART
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_RX/UART_RX_FSM.sv {1 {vlog -work work -vopt -sv -stats=none /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_RX/UART_RX_FSM.sv
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module UART_RX_FSM
+
+Top level modules:
+	UART_RX_FSM
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/ASYNC_FIFO/FIFO_WR.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/ASYNC_FIFO/FIFO_WR.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module FIFO_WR
+
+Top level modules:
+	FIFO_WR
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/Data_Bus_Sync/Data_Bus_Sync.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/Data_Bus_Sync/Data_Bus_Sync.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module Data_Bus_Sync
+
+Top level modules:
+	Data_Bus_Sync
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/ASYNC_FIFO/FIFO_TOP.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/ASYNC_FIFO/FIFO_TOP.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module FIFO_TOP
+
+Top level modules:
+	FIFO_TOP
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_TX/MUX_4x1.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_TX/MUX_4x1.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module MUX_4x1
+
+Top level modules:
+	MUX_4x1
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_TX/UART_TX_FSM.sv {1 {vlog -work work -vopt -sv -stats=none /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_TX/UART_TX_FSM.sv
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module UART_TX_FSM
+
+Top level modules:
+	UART_TX_FSM
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/System_Top/System_Top_pre_dft.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/System_Top/System_Top_pre_dft.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module System_Top
+
+Top level modules:
+	System_Top
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_RX/Stop_Checker.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_RX/Stop_Checker.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module Stop_Checker
+
+Top level modules:
+	Stop_Checker
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_RX/Start_Checker.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_RX/Start_Checker.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module Start_Checker
+
+Top level modules:
+	Start_Checker
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/ASYNC_FIFO/FIFO_RD.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/ASYNC_FIFO/FIFO_RD.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module FIFO_RD
+
+Top level modules:
+	FIFO_RD
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_RX/Deserializer.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_RX/Deserializer.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module Deserializer
+
+Top level modules:
+	Deserializer
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/RX_CLK_DIV_MUX/RX_CLK_DIV_MUX.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/RX_CLK_DIV_MUX/RX_CLK_DIV_MUX.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module RX_CLK_DIV_MUX
+
+Top level modules:
+	RX_CLK_DIV_MUX
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/Pulse_Gen/pulse_gen.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/Pulse_Gen/pulse_gen.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module pulse_gen
+
+Top level modules:
+	pulse_gen
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/ALU/ALU.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/ALU/ALU.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module ALU
+
+Top level modules:
+	ALU
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_RX/UART_RX.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_RX/UART_RX.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module UART_RX
+
+Top level modules:
+	UART_RX
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_RX/Parity_Checker.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_RX/Parity_Checker.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module Parity_Checker
+
+Top level modules:
+	Parity_Checker
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_TX/UART_Parity.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_TX/UART_Parity.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module UART_Parity
+
+Top level modules:
+	UART_Parity
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/Sys_Ctrl/Sys_Ctrl.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/Sys_Ctrl/Sys_Ctrl.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module Sys_Ctrl
+
+Top level modules:
+	Sys_Ctrl
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_TX/UART_Serializer.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_TX/UART_Serializer.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module UART_Serializer
+
+Top level modules:
+	UART_Serializer
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/ASYNC_FIFO/DF_SYNC.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/ASYNC_FIFO/DF_SYNC.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module DF_SYNC
+
+Top level modules:
+	DF_SYNC
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/I_CLK_DIV/I_CLK_DIV.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/I_CLK_DIV/I_CLK_DIV.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module I_CLK_DIV
+
+Top level modules:
+	I_CLK_DIV
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_RX/Edge_Bit_Counter.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/UART/UART_RX/Edge_Bit_Counter.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module Edge_Bit_Counter
+
+Top level modules:
+	Edge_Bit_Counter
+
+} {} {}} /mnt/hgfs/Shared_Folder/System/RTL/REG_FILE/Reg_File.v {1 {vlog -work work -vopt -stats=none /mnt/hgfs/Shared_Folder/System/RTL/REG_FILE/Reg_File.v
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+-- Compiling module Reg_File
+
+Top level modules:
+	Reg_File
+
+} {} {}}

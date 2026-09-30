@@ -1,0 +1,14 @@
+../UART_RX/Deserializer.v
+../UART_RX/Edge_Bit_Counter.v
+../UART_RX/Parity_Checker.v
+../UART_RX/Sampler.v
+../UART_RX/Start_Checker.v
+../UART_RX/Stop_Checker.v
+../UART_RX/UART_RX.v
+../UART_RX/UART_RX_FSM.sv
+../UART_TX/MUX_4x1.v
+../UART_TX/UART_Parity.v
+../UART_TX/UART_Serializer.v
+../UART_TX/UART_TX_FSM.sv
+../UART_TX/UART_TX_TOP.v
+../UART_TOP/UART.v

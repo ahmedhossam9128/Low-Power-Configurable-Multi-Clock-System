@@ -1,0 +1,49 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : System_Top
+Version: O-2018.06-SP1
+Date   : Wed Sep 30 09:20:12 2026
+****************************************
+
+Operating Conditions: scmetro_tsmc_cl013g_rvt_ss_1p08v_125c   Library: scmetro_tsmc_cl013g_rvt_ss_1p08v_125c
+Wire Load Model Mode: top
+
+  Startpoint: u_UART/u_UART_RX/u_UART_RX_FSM/DATA_VALID_reg
+              (rising edge-triggered flip-flop clocked by scan_clk)
+  Endpoint: SO[0] (output port clocked by scan_clk)
+  Path Group: scan_clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock scan_clk (rise edge)                             50.00      50.00
+  clock network delay (ideal)                             0.00      50.00
+  u_UART/u_UART_RX/u_UART_RX_FSM/DATA_VALID_reg/CK (SDFFRHQX1M)
+                                                          0.00      50.00 r
+  u_UART/u_UART_RX/u_UART_RX_FSM/DATA_VALID_reg/Q (SDFFRHQX1M)
+                                                          0.31      50.31 r
+  u_UART/u_UART_RX/u_UART_RX_FSM/DATA_VALID (UART_RX_FSM_test_1)
+                                                          0.00      50.31 r
+  u_UART/u_UART_RX/data_valid (UART_RX_test_1)            0.00      50.31 r
+  u_UART/RX_DATA_VALID (UART_test_1)                      0.00      50.31 r
+  U10/Y (BUFX2M)                                          0.62      50.93 r
+  SO[0] (out)                                             0.00      50.93 r
+  data arrival time                                                 50.93
+
+  clock scan_clk (rise edge)                            150.00     150.00
+  clock network delay (ideal)                             0.00     150.00
+  clock uncertainty                                      -0.20     149.80
+  output external delay                                 -20.00     129.80
+  data required time                                               129.80
+  --------------------------------------------------------------------------
+  data required time                                               129.80
+  data arrival time                                                -50.93
+  --------------------------------------------------------------------------
+  slack (MET)                                                       78.87
+
+
+1

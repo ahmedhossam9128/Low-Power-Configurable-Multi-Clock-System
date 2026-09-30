@@ -1,0 +1,2226 @@
+# //  Questa Sim-64
+# //  Version 10.7c linux_x86_64 Aug 17 2018
+# //
+# //  Copyright 1991-2018 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# vsim do 
+# Start time: 07:46:33 on Sep 30,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-29) Unable to get status of file "/mnt/hgfs/Shared_Folder/System/SIM/work/_info".
+# Input/output error. (errno = EIO)
+# ** Error: (vopt-13130) Failed to find design unit do.
+#         Searched libraries:
+#             work
+# Optimization failed
+# Error loading design
+# End time: 07:46:34 on Sep 30,2026, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 1
+# Loading project Dig_IC_Diploma_Final_System
+do import_files.do
+# file15
+do run.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 07:48:27 on Sep 30,2026
+# vlog -reportprogress 300 -f system.lst 
+# -- Compiling module ALU
+# -- Compiling module DF_SYNC
+# -- Compiling module FIFO_MEM
+# -- Compiling module FIFO_RD
+# -- Compiling module FIFO_TOP
+# -- Compiling module FIFO_WR
+# -- Compiling module CLK_GATE
+# -- Compiling module Data_Bus_Sync
+# -- Compiling module I_CLK_DIV
+# -- Compiling module pulse_gen
+# -- Compiling module Reg_File
+# -- Compiling module RST_Sync
+# -- Compiling module RX_CLK_DIV_MUX
+# -- Compiling module Sys_Ctrl
+# -- Compiling module System_Top
+# -- Compiling module Deserializer
+# -- Compiling module Edge_Bit_Counter
+# -- Compiling module Parity_Checker
+# -- Compiling module Sampler
+# -- Compiling module Start_Checker
+# -- Compiling module Stop_Checker
+# -- Compiling module UART_RX
+# -- Compiling module UART_RX_FSM
+# -- Compiling module MUX_4x1
+# -- Compiling module UART_Parity
+# -- Compiling module UART_Serializer
+# -- Compiling module UART_TX_FSM
+# -- Compiling module UART_TX_TOP
+# -- Compiling module UART
+# 
+# Top level modules:
+# 	System_Top
+# End time: 07:48:28 on Sep 30,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 07:48:28 on Sep 30,2026
+# vlog -reportprogress 300 System_Top_tb.sv 
+# -- Compiling module System__Top_tb
+# 
+# Top level modules:
+# 	System__Top_tb
+# End time: 07:48:28 on Sep 30,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim -wlf logs/vsim.wlf -voptargs="+acc" work.System_Top_tb 
+# Start time: 07:48:28 on Sep 30,2026
+# ** Note: (vsim-8009) Loading existing optimized design _opt1
+# Loading sv_std.std
+# Loading work.System_Top_tb(fast)
+# Loading work.System_Top(fast)
+# Loading work.ALU(fast)
+# Loading work.FIFO_TOP(fast)
+# Loading work.FIFO_MEM(fast)
+# Loading work.FIFO_WR(fast)
+# Loading work.FIFO_RD(fast)
+# Loading work.DF_SYNC(fast)
+# Loading work.DF_SYNC(fast__1)
+# Loading work.Data_Bus_Sync(fast)
+# Loading work.RX_CLK_DIV_MUX(fast)
+# Loading work.I_CLK_DIV(fast)
+# Loading work.I_CLK_DIV(fast__1)
+# Loading work.pulse_gen(fast)
+# Loading work.Reg_File(fast)
+# Loading work.RST_Sync(fast)
+# Loading work.CLK_GATE(fast)
+# Loading work.Sys_Ctrl(fast)
+# Loading work.UART(fast)
+# Loading work.UART_TX_TOP(fast)
+# Loading work.UART_Serializer(fast)
+# Loading work.UART_Parity(fast)
+# Loading work.UART_TX_FSM(fast)
+# Loading work.MUX_4x1(fast)
+# Loading work.UART_RX(fast)
+# Loading work.Sampler(fast)
+# Loading work.Edge_Bit_Counter(fast)
+# Loading work.Deserializer(fast)
+# Loading work.Start_Checker(fast)
+# Loading work.Stop_Checker(fast)
+# Loading work.Parity_Checker(fast)
+# Loading work.UART_RX_FSM(fast)
+# ** Error: Cannot open WLF file: "logs/vsim.wlf"
+#           No such file or directory.
+#           Attempting to use alternate WLF file "logs/wlft2f8NXW".
+# ** Error: Cannot open WLF file: "logs/wlft2f8NXW"
+#           No such file or directory.
+#           Attempting to use alternate WLF file "./wlft3huh2O".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: logs/vsim.wlf
+#           Using alternate file: ./wlft3huh2O
+# =========================================================
+#  TEST 1: Reset / idle sanity check
+# =========================================================
+# [PASS] TX_OUT idle-high immediately after reset
+# [PASS] RX_D_VALID is low immediately after reset
+# =========================================================
+#  TEST 2: Configuration write (REG2, REG3) + readback
+#    (per spec: 'Initially configuration operations are
+#     performed through Register file write operations
+#     in addresses 0x2, 0x3')
+# =========================================================
+# [PASS] TC2-config-readback: RF read addr=0x2 = 0x81
+# [PASS] TC2-divratio-readback: RF read addr=0x3 = 0x20
+# =========================================================
+#  TEST 3: Normal RegFile write/readback data integrity
+#    (addresses 0x4-0xF; see header note on the 0x15
+#     range mismatch vs RF_DEPTH=16)
+# =========================================================
+# [PASS] TC3-addr4: RF read addr=0x4 = 0xa5
+# [PASS] TC3-addr5: RF read addr=0x5 = 0x3c
+# [PASS] TC3-addrF: RF read addr=0xf = 0x01
+# =========================================================
+#  TEST 4: ALU_OPER_W_OP_CMD - all arithmetic ops (ADD/SUB/MUL/DIV)
+# =========================================================
+# [PASS] TC4-ADD: ALU op(fun=0,a=10,b=15) = 0x0019
+# [PASS] TC4-SUB: ALU op(fun=1,a=50,b=18) = 0x0020
+# [PASS] TC4-MUL: ALU op(fun=2,a=12,b=11) = 0x0084
+# [PASS] TC4-DIV: ALU op(fun=3,a=97,b=7) = 0x000d
+# =========================================================
+#  TEST 5: ALU_OPER_W_OP_CMD - all logic ops (AND/OR/NAND/NOR/XOR/XNOR)
+# =========================================================
+# [PASS] TC5-AND: ALU op(fun=4,a=240,b=60) = 0x0030
+# [PASS] TC5-OR: ALU op(fun=5,a=15,b=160) = 0x00af
+# [PASS] TC5-NAND: ALU op(fun=6,a=255,b=15) = 0xfff0
+# [PASS] TC5-NOR: ALU op(fun=7,a=0,b=0) = 0xffff
+# [PASS] TC5-XOR: ALU op(fun=8,a=170,b=85) = 0x00ff
+# [PASS] TC5-XNOR: ALU op(fun=9,a=60,b=60) = 0xffff
+# =========================================================
+#  TEST 6: ALU_OPER_W_NOP_CMD - compare & shift, operands
+#    taken from RegFile REG0/REG1 (written via RF_Wr_CMD)
+# =========================================================
+# [PASS] TC6-CMP_EQ(false): ALU no-op(fun=10) = 0x0000
+# [PASS] TC6-CMP_GT(true): ALU no-op(fun=11) = 0x0002
+# [PASS] TC6-SHR: ALU no-op(fun=13) = 0x0022
+# [PASS] TC6-SHL: ALU no-op(fun=14) = 0x0088
+# [PASS] TC6-CMP_EQ(true): ALU no-op(fun=10) = 0x0001
+# =========================================================
+#  TEST 7: Mixed command-type sequence (real master traffic)
+#    Exercises the spec's 'Sequence of Operation': the FSM
+#    must return cleanly to fetch and correctly re-decode a
+#    fresh CMD byte after each different command type, not
+#    just after repeats of the same one.
+# =========================================================
+# [PASS] TC7-mixed-1-RFread: RF read addr=0x8 = 0x11
+# [PASS] TC7-mixed-2-ALU_OP: ALU op(fun=2,a=20,b=4) = 0x0050
+# [PASS] TC7-mixed-4-RFread: RF read addr=0x9 = 0x22
+# =========================================================
+#  TEST 8: Back-to-back commands (FIFO / burst handling)
+# =========================================================
+# [PASS] TC8-burst-1-MUL: ALU op(fun=2,a=5,b=6) = 0x001e
+# [PASS] TC8-burst-2-OR: ALU op(fun=5,a=200,b=50) = 0x00fa
+# [PASS] TC8-burst-3-DIV: ALU op(fun=3,a=9,b=3) = 0x0003
+# [PASS] TC8-burst-4-RFread: RF read addr=0x6 = 0xcc
+# =========================================================
+#  === FINAL RESULT: 29 checks, 0 errors ===
+#  === ALL TESTS PASSED ===
+# =========================================================
+# ** Note: $stop    : System_Top_tb.sv(406)
+#    Time: 16516278 ns  Iteration: 0  Instance: /System_Top_tb
+# Break in Module System_Top_tb at System_Top_tb.sv line 406
+do run.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 07:52:40 on Sep 30,2026
+# vlog -reportprogress 300 -f system.lst 
+# -- Compiling module ALU
+# -- Compiling module DF_SYNC
+# -- Compiling module FIFO_MEM
+# -- Compiling module FIFO_RD
+# -- Compiling module FIFO_TOP
+# -- Compiling module FIFO_WR
+# -- Compiling module CLK_GATE
+# -- Compiling module Data_Bus_Sync
+# -- Compiling module I_CLK_DIV
+# -- Compiling module pulse_gen
+# -- Compiling module Reg_File
+# -- Compiling module RST_Sync
+# -- Compiling module RX_CLK_DIV_MUX
+# -- Compiling module Sys_Ctrl
+# -- Compiling module System_Top
+# -- Compiling module Deserializer
+# -- Compiling module Edge_Bit_Counter
+# -- Compiling module Parity_Checker
+# -- Compiling module Sampler
+# -- Compiling module Start_Checker
+# -- Compiling module Stop_Checker
+# -- Compiling module UART_RX
+# -- Compiling module UART_RX_FSM
+# -- Compiling module MUX_4x1
+# -- Compiling module UART_Parity
+# -- Compiling module UART_Serializer
+# -- Compiling module UART_TX_FSM
+# -- Compiling module UART_TX_TOP
+# -- Compiling module UART
+# 
+# Top level modules:
+# 	System_Top
+# End time: 07:52:41 on Sep 30,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 07:52:41 on Sep 30,2026
+# vlog -reportprogress 300 System_Top_tb.sv 
+# -- Compiling module System__Top_tb
+# 
+# Top level modules:
+# 	System__Top_tb
+# End time: 07:52:41 on Sep 30,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 07:52:45 on Sep 30,2026, Elapsed time: 0:04:17
+# Errors: 2, Warnings: 1
+# vsim -wlf logs/vsim.wlf -voptargs="+acc" work.System_Top_tb 
+# Start time: 07:52:46 on Sep 30,2026
+# ** Note: (vsim-8009) Loading existing optimized design _opt1
+# Loading sv_std.std
+# Loading work.System_Top_tb(fast)
+# Loading work.System_Top(fast)
+# Loading work.ALU(fast)
+# Loading work.FIFO_TOP(fast)
+# Loading work.FIFO_MEM(fast)
+# Loading work.FIFO_WR(fast)
+# Loading work.FIFO_RD(fast)
+# Loading work.DF_SYNC(fast)
+# Loading work.DF_SYNC(fast__1)
+# Loading work.Data_Bus_Sync(fast)
+# Loading work.RX_CLK_DIV_MUX(fast)
+# Loading work.I_CLK_DIV(fast)
+# Loading work.I_CLK_DIV(fast__1)
+# Loading work.pulse_gen(fast)
+# Loading work.Reg_File(fast)
+# Loading work.RST_Sync(fast)
+# Loading work.CLK_GATE(fast)
+# Loading work.Sys_Ctrl(fast)
+# Loading work.UART(fast)
+# Loading work.UART_TX_TOP(fast)
+# Loading work.UART_Serializer(fast)
+# Loading work.UART_Parity(fast)
+# Loading work.UART_TX_FSM(fast)
+# Loading work.MUX_4x1(fast)
+# Loading work.UART_RX(fast)
+# Loading work.Sampler(fast)
+# Loading work.Edge_Bit_Counter(fast)
+# Loading work.Deserializer(fast)
+# Loading work.Start_Checker(fast)
+# Loading work.Stop_Checker(fast)
+# Loading work.Parity_Checker(fast)
+# Loading work.UART_RX_FSM(fast)
+# ** Error: Cannot open WLF file: "logs/vsim.wlf"
+#           No such file or directory.
+#           Attempting to use alternate WLF file "logs/wlftACQyr1".
+# ** Error: Cannot open WLF file: "logs/wlftACQyr1"
+#           No such file or directory.
+#           Attempting to use alternate WLF file "./wlftBDKmrR".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: logs/vsim.wlf
+#           Using alternate file: ./wlftBDKmrR
+# =========================================================
+#  TEST 1: Reset / idle sanity check
+# =========================================================
+# [PASS] TX_OUT idle-high immediately after reset
+# [PASS] RX_D_VALID is low immediately after reset
+# =========================================================
+#  TEST 2: Configuration write (REG2, REG3) + readback
+#    (per spec: 'Initially configuration operations are
+#     performed through Register file write operations
+#     in addresses 0x2, 0x3')
+# =========================================================
+# [PASS] TC2-config-readback: RF read addr=0x2 = 0x81
+# [PASS] TC2-divratio-readback: RF read addr=0x3 = 0x20
+# =========================================================
+#  TEST 3: Normal RegFile write/readback data integrity
+#    (addresses 0x4-0xF; see header note on the 0x15
+#     range mismatch vs RF_DEPTH=16)
+# =========================================================
+# [PASS] TC3-addr4: RF read addr=0x4 = 0xa5
+# [PASS] TC3-addr5: RF read addr=0x5 = 0x3c
+# [PASS] TC3-addrF: RF read addr=0xf = 0x01
+# =========================================================
+#  TEST 4: ALU_OPER_W_OP_CMD - all arithmetic ops (ADD/SUB/MUL/DIV)
+# =========================================================
+# [PASS] TC4-ADD: ALU op(fun=0,a=10,b=15) = 0x0019
+# [PASS] TC4-SUB: ALU op(fun=1,a=50,b=18) = 0x0020
+# [PASS] TC4-MUL: ALU op(fun=2,a=12,b=11) = 0x0084
+# [PASS] TC4-DIV: ALU op(fun=3,a=97,b=7) = 0x000d
+# =========================================================
+#  TEST 5: ALU_OPER_W_OP_CMD - all logic ops (AND/OR/NAND/NOR/XOR/XNOR)
+# =========================================================
+# [PASS] TC5-AND: ALU op(fun=4,a=240,b=60) = 0x0030
+# [PASS] TC5-OR: ALU op(fun=5,a=15,b=160) = 0x00af
+# [PASS] TC5-NAND: ALU op(fun=6,a=255,b=15) = 0xfff0
+# [PASS] TC5-NOR: ALU op(fun=7,a=0,b=0) = 0xffff
+# [PASS] TC5-XOR: ALU op(fun=8,a=170,b=85) = 0x00ff
+# [PASS] TC5-XNOR: ALU op(fun=9,a=60,b=60) = 0xffff
+# =========================================================
+#  TEST 6: ALU_OPER_W_NOP_CMD - compare & shift, operands
+#    taken from RegFile REG0/REG1 (written via RF_Wr_CMD)
+# =========================================================
+# [PASS] TC6-CMP_EQ(false): ALU no-op(fun=10) = 0x0000
+# [PASS] TC6-CMP_GT(true): ALU no-op(fun=11) = 0x0002
+# [PASS] TC6-SHR: ALU no-op(fun=13) = 0x0022
+# [PASS] TC6-SHL: ALU no-op(fun=14) = 0x0088
+# [PASS] TC6-CMP_EQ(true): ALU no-op(fun=10) = 0x0001
+# =========================================================
+#  TEST 7: Mixed command-type sequence (real master traffic)
+#    Exercises the spec's 'Sequence of Operation': the FSM
+#    must return cleanly to fetch and correctly re-decode a
+#    fresh CMD byte after each different command type, not
+#    just after repeats of the same one.
+# =========================================================
+# [PASS] TC7-mixed-1-RFread: RF read addr=0x8 = 0x11
+# [PASS] TC7-mixed-2-ALU_OP: ALU op(fun=2,a=20,b=4) = 0x0050
+# [PASS] TC7-mixed-4-RFread: RF read addr=0x9 = 0x22
+# =========================================================
+#  TEST 8: Back-to-back commands (FIFO / burst handling)
+# =========================================================
+# [PASS] TC8-burst-1-MUL: ALU op(fun=2,a=5,b=6) = 0x001e
+# [PASS] TC8-burst-2-OR: ALU op(fun=5,a=200,b=50) = 0x00fa
+# [PASS] TC8-burst-3-DIV: ALU op(fun=3,a=9,b=3) = 0x0003
+# [PASS] TC8-burst-4-RFread: RF read addr=0x6 = 0xcc
+# =========================================================
+#  === FINAL RESULT: 29 checks, 0 errors ===
+#  === ALL TESTS PASSED ===
+# =========================================================
+# ** Note: $stop    : System_Top_tb.sv(406)
+#    Time: 16516278 ns  Iteration: 0  Instance: /System_Top_tb
+# Break in Module System_Top_tb at System_Top_tb.sv line 406
+# Compile of ALU.v was successful.
+# Compile of DF_SYNC.v was successful.
+# Compile of FIFO_MEM.v was successful.
+# Compile of FIFO_RD.v was successful.
+# Compile of FIFO_TOP.v was successful.
+# Compile of FIFO_WR.v was successful.
+# Compile of CLK_GATE.v was successful.
+# Compile of Data_Bus_Sync.v was successful.
+# Compile of I_CLK_DIV.v was successful.
+# Compile of pulse_gen.v was successful.
+# Compile of Reg_File.v was successful.
+# Compile of RST_Sync.v was successful.
+# Compile of RX_CLK_DIV_MUX.v was successful.
+# Compile of Sys_Ctrl.v was successful.
+# Compile of System_Top_pre_dft.v was successful.
+# Compile of Deserializer.v was successful.
+# Compile of Edge_Bit_Counter.v was successful.
+# Compile of Parity_Checker.v was successful.
+# Compile of Sampler.v was successful.
+# Compile of Start_Checker.v was successful.
+# Compile of Stop_Checker.v was successful.
+# Compile of UART_RX.v was successful.
+# Compile of UART_RX_FSM.sv was successful.
+# Compile of MUX_4x1.v was successful.
+# Compile of UART_Parity.v was successful.
+# Compile of UART_Serializer.v was successful.
+# Compile of UART_TX_FSM.sv was successful.
+# Compile of UART_TX_TOP.v was successful.
+# Compile of UART.v was successful.
+# Compile of System_Top_tb.sv was successful.
+# 30 compiles, 0 failed with no errors.
+do run.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 07:54:36 on Sep 30,2026
+# vlog -reportprogress 300 -f system.lst 
+# -- Compiling module ALU
+# -- Compiling module DF_SYNC
+# -- Compiling module FIFO_MEM
+# -- Compiling module FIFO_RD
+# -- Compiling module FIFO_TOP
+# -- Compiling module FIFO_WR
+# -- Compiling module CLK_GATE
+# -- Compiling module Data_Bus_Sync
+# -- Compiling module I_CLK_DIV
+# -- Compiling module pulse_gen
+# -- Compiling module Reg_File
+# -- Compiling module RST_Sync
+# -- Compiling module RX_CLK_DIV_MUX
+# -- Compiling module Sys_Ctrl
+# -- Compiling module System_Top
+# -- Compiling module Deserializer
+# -- Compiling module Edge_Bit_Counter
+# -- Compiling module Parity_Checker
+# -- Compiling module Sampler
+# -- Compiling module Start_Checker
+# -- Compiling module Stop_Checker
+# -- Compiling module UART_RX
+# -- Compiling module UART_RX_FSM
+# -- Compiling module MUX_4x1
+# -- Compiling module UART_Parity
+# -- Compiling module UART_Serializer
+# -- Compiling module UART_TX_FSM
+# -- Compiling module UART_TX_TOP
+# -- Compiling module UART
+# 
+# Top level modules:
+# 	System_Top
+# End time: 07:54:37 on Sep 30,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 07:54:37 on Sep 30,2026
+# vlog -reportprogress 300 System_Top_tb.sv 
+# -- Compiling module System_Top_tb
+# 
+# Top level modules:
+# 	System_Top_tb
+# End time: 07:54:37 on Sep 30,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 07:54:40 on Sep 30,2026, Elapsed time: 0:01:54
+# Errors: 2, Warnings: 1
+# vsim -wlf logs/vsim.wlf -voptargs="+acc" work.System_Top_tb 
+# Start time: 07:54:40 on Sep 30,2026
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-29) Unable to get status of file "/mnt/hgfs/Shared_Folder/System/SIM/work/_info".
+# Input/output error. (errno = EIO)
+# ** Error (suppressible): System_Top_tb.sv(364): (vopt-7063) Failed to find 'System_tb' in hierarchical name 'System_tb'.
+#         Region: System_Top_tb
+# Optimization failed
+# Error loading design
+# Error: Error loading design
+#        Pausing macro execution
+# MACRO ./run.do PAUSED at line 5
+do run.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 07:55:32 on Sep 30,2026
+# vlog -reportprogress 300 -f system.lst 
+# -- Compiling module ALU
+# -- Compiling module DF_SYNC
+# -- Compiling module FIFO_MEM
+# -- Compiling module FIFO_RD
+# -- Compiling module FIFO_TOP
+# -- Compiling module FIFO_WR
+# -- Compiling module CLK_GATE
+# -- Compiling module Data_Bus_Sync
+# -- Compiling module I_CLK_DIV
+# -- Compiling module pulse_gen
+# -- Compiling module Reg_File
+# -- Compiling module RST_Sync
+# -- Compiling module RX_CLK_DIV_MUX
+# -- Compiling module Sys_Ctrl
+# -- Compiling module System_Top
+# -- Compiling module Deserializer
+# -- Compiling module Edge_Bit_Counter
+# -- Compiling module Parity_Checker
+# -- Compiling module Sampler
+# -- Compiling module Start_Checker
+# -- Compiling module Stop_Checker
+# -- Compiling module UART_RX
+# -- Compiling module UART_RX_FSM
+# -- Compiling module MUX_4x1
+# -- Compiling module UART_Parity
+# -- Compiling module UART_Serializer
+# -- Compiling module UART_TX_FSM
+# -- Compiling module UART_TX_TOP
+# -- Compiling module UART
+# 
+# Top level modules:
+# 	System_Top
+# End time: 07:55:32 on Sep 30,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 07:55:32 on Sep 30,2026
+# vlog -reportprogress 300 System_Top_tb.sv 
+# -- Compiling module System_Top_tb
+# 
+# Top level modules:
+# 	System_Top_tb
+# End time: 07:55:32 on Sep 30,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim -wlf logs/vsim.wlf -voptargs="+acc" work.System_Top_tb 
+# Start time: 07:54:40 on Sep 30,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-29) Unable to get status of file "/mnt/hgfs/Shared_Folder/System/SIM/work/_info".
+# Input/output error. (errno = EIO)
+# ** Note: (vopt-143) Recognized 1 FSM in module "Sys_Ctrl(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "UART_RX_FSM(fast)".
+# ** Note: (vopt-143) Recognized 1 FSM in module "UART_TX_FSM(fast)".
+# Loading sv_std.std
+# Loading work.System_Top_tb(fast)
+# Loading work.System_Top(fast)
+# Loading work.ALU(fast)
+# Loading work.FIFO_TOP(fast)
+# Loading work.FIFO_MEM(fast)
+# Loading work.FIFO_WR(fast)
+# Loading work.FIFO_RD(fast)
+# Loading work.DF_SYNC(fast)
+# Loading work.DF_SYNC(fast__1)
+# Loading work.Data_Bus_Sync(fast)
+# Loading work.RX_CLK_DIV_MUX(fast)
+# Loading work.I_CLK_DIV(fast)
+# Loading work.I_CLK_DIV(fast__1)
+# Loading work.pulse_gen(fast)
+# Loading work.Reg_File(fast)
+# Loading work.RST_Sync(fast)
+# Loading work.CLK_GATE(fast)
+# Loading work.Sys_Ctrl(fast)
+# Loading work.UART(fast)
+# Loading work.UART_TX_TOP(fast)
+# Loading work.UART_Serializer(fast)
+# Loading work.UART_Parity(fast)
+# Loading work.UART_TX_FSM(fast)
+# Loading work.MUX_4x1(fast)
+# Loading work.UART_RX(fast)
+# Loading work.Sampler(fast)
+# Loading work.Edge_Bit_Counter(fast)
+# Loading work.Deserializer(fast)
+# Loading work.Start_Checker(fast)
+# Loading work.Stop_Checker(fast)
+# Loading work.Parity_Checker(fast)
+# Loading work.UART_RX_FSM(fast)
+# ** Error: Cannot open WLF file: "logs/vsim.wlf"
+#           No such file or directory.
+#           Attempting to use alternate WLF file "logs/wlftHDaeA5".
+# ** Error: Cannot open WLF file: "logs/wlftHDaeA5"
+#           No such file or directory.
+#           Attempting to use alternate WLF file "./wlftH2KtYL".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: logs/vsim.wlf
+#           Using alternate file: ./wlftH2KtYL
+# ** Error: (vish-4014) No objects found matching '/System_Top_tb/errors'.
+# Executing ONERROR command at macro ./wave.do line 145
+# ** Error: (vish-4014) No objects found matching '/System_Top_tb/checks'.
+# Executing ONERROR command at macro ./wave.do line 146
+# 
+# ================ Prescale = 32  (PAR_EN=1 PAR_TYP=0) ================
+# [703805000] PASS  RX_CLK period 271.3 ns (Prescale 32 -> UART_CLK/1)
+# [712485000] PASS  TX_CLK period 8680.6 ns (= 1 bit @ 115200 baud)
+# [1024985000] PASS  RD REG2 (UART cfg) : 81
+# [1337485000] PASS  RD REG3 (div ratio) : 20
+# [2804499000] PASS  RF writes: no response : no unexpected TX traffic
+# [3116999000] PASS  RD RF[04] : 85
+# [3429499000] PASS  RD RF[07] : 1c
+# [3741999000] PASS  RD RF[0b] : ff
+# [4054499000] PASS  RD RF[0f] : 21
+# [4575333000] PASS  CC ADD  A=c8 B=07 LSB : cf
+# [4679499000] PASS  CC ADD  A=c8 B=07 MSB : 00
+# [5200333000] PASS  CC ADD  A=62 B=ec LSB : 4e
+# [5304500000] PASS  CC ADD  A=62 B=ec MSB : 01
+# [5825333000] PASS  CC ADD  A=c7 B=08 LSB : bf
+# [5929500000] PASS  CC ADD  A=c7 B=08 MSB : 00
+# [6450333000] PASS  CC ADD  A=98 B=45 LSB : 53
+# [6554500000] PASS  CC ADD  A=98 B=45 MSB : 00
+# [7075333000] PASS  CC ADD  A=c6 B=09 LSB : f6
+# [7179500000] PASS  CC ADD  A=c6 B=09 MSB : 06
+# [7700333000] PASS  CC ADD  A=c5 B=e8 LSB : 88
+# [7804500000] PASS  CC ADD  A=c5 B=e8 MSB : b2
+# [8325333000] PASS  CC ADD  A=c5 B=0a LSB : 13
+# [8429500000] PASS  CC ADD  A=c5 B=0a MSB : 00
+# [8950333000] PASS  CC ADD  A=8d B=bd LSB : 00
+# [9054500000] PASS  CC ADD  A=8d B=bd MSB : 00
+# [9575333000] PASS  CC ADD  A=c4 B=0b LSB : 00
+# [9679500000] PASS  CC ADD  A=c4 B=0b MSB : 00
+# [10200333000] PASS  CC ADD  A=8f B=17 LSB : 07
+# [10304500000] PASS  CC ADD  A=8f B=17 MSB : 00
+# [10825333000] PASS  CC ADD  A=c3 B=0c LSB : cf
+# [10929500000] PASS  CC ADD  A=c3 B=0c MSB : 00
+# [11450333000] PASS  CC ADD  A=5e B=94 LSB : de
+# [11554500000] PASS  CC ADD  A=5e B=94 MSB : 00
+# [12075333000] PASS  CC ADD  A=c2 B=0d LSB : cf
+# [12179500000] PASS  CC ADD  A=c2 B=0d MSB : 00
+# [12700333000] PASS  CC ADD  A=16 B=15 LSB : 03
+# [12804500000] PASS  CC ADD  A=16 B=15 MSB : 00
+# [13325333000] PASS  CC ADD  A=c1 B=0e LSB : 00
+# [13429500000] PASS  CC ADD  A=c1 B=0e MSB : 00
+# [13950333000] PASS  CC ADD  A=fd B=75 LSB : 00
+# [14054500000] PASS  CC ADD  A=fd B=75 MSB : 00
+# [14575333000] PASS  CC ADD  A=c0 B=0f LSB : 02
+# [14679500000] PASS  CC ADD  A=c0 B=0f MSB : 00
+# [15200333000] PASS  CC ADD  A=1f B=12 LSB : 02
+# [15304500000] PASS  CC ADD  A=1f B=12 MSB : 00
+# [15825333000] PASS  CC ADD  A=bf B=10 LSB : 5f
+# [15929500000] PASS  CC ADD  A=bf B=10 MSB : 00
+# [16450333000] PASS  CC ADD  A=ec B=9f LSB : 76
+# [16554500000] PASS  CC ADD  A=ec B=9f MSB : 00
+# [17075333000] PASS  CC ADD  A=be B=11 LSB : 7c
+# [17179500000] PASS  CC ADD  A=be B=11 MSB : 01
+# [17700333000] PASS  CC ADD  A=72 B=91 LSB : e4
+# [17804500000] PASS  CC ADD  A=72 B=91 MSB : 00
+# [18325334000] PASS  CC ADD  A=37 B=37 LSB : 01
+# [18429500000] PASS  CC ADD  A=37 B=37 MSB : 00
+# [18950334000] PASS  CC ADD  A=ff B=ff LSB : 01
+# [19054500000] PASS  CC ADD  A=ff B=ff MSB : fe
+# [19575334000] PASS  CC ADD  A=0a B=00 LSB : 00
+# [19679500000] PASS  CC ADD  A=0a B=00 MSB : 00
+# [20521514000] PASS  REG0/REG1 writes: no resp : no unexpected TX traffic
+# [20834014000] PASS  DD ADD  A=7a B=0c LSB : 86
+# [20938181000] PASS  DD ADD  A=7a B=0c MSB : 00
+# [21250681000] PASS  DD ADD  A=7a B=0c LSB : 6e
+# [21354848000] PASS  DD ADD  A=7a B=0c MSB : 00
+# [21667348000] PASS  DD ADD  A=7a B=0c LSB : 08
+# [21771514000] PASS  DD ADD  A=7a B=0c MSB : 00
+# [22084014000] PASS  DD ADD  A=7a B=0c LSB : f4
+# [22188181000] PASS  DD ADD  A=7a B=0c MSB : 00
+# [22500681000] PASS  DD ADD  A=7a B=0c LSB : 02
+# [22604848000] PASS  DD ADD  A=7a B=0c MSB : 00
+# [23125681000] PASS  CC ADD  A=21 B=03 LSB : 0b
+# [23229848000] PASS  CC ADD  A=21 B=03 MSB : 00
+# [23542348000] PASS  DD ADD  A=21 B=03 LSB : 63
+# [23646514000] PASS  DD ADD  A=21 B=03 MSB : 00
+# [23863528000] PASS  end of sweep: TX idle : no unexpected TX traffic
+# 
+# ================ Prescale = 16  (PAR_EN=1 PAR_TYP=0) ================
+# [24523848000] PASS  RX_CLK period 542.5 ns (Prescale 16 -> UART_CLK/2)
+# [24540667000] PASS  TX_CLK period 8680.6 ns (= 1 bit @ 115200 baud)
+# [24853167000] PASS  RD REG2 (UART cfg) : 41
+# [25165667000] PASS  RD REG3 (div ratio) : 20
+# [26632681000] PASS  RF writes: no response : no unexpected TX traffic
+# [26945181000] PASS  RD RF[04] : b5
+# [27257681000] PASS  RD RF[07] : 2c
+# [27570181000] PASS  RD RF[0b] : ff
+# [27882681000] PASS  RD RF[0f] : 11
+# [28403514000] PASS  CC ADD  A=c8 B=07 LSB : cf
+# [28507681000] PASS  CC ADD  A=c8 B=07 MSB : 00
+# [29028514000] PASS  CC ADD  A=a7 B=82 LSB : 29
+# [29132681000] PASS  CC ADD  A=a7 B=82 MSB : 01
+# [29653514000] PASS  CC ADD  A=c7 B=08 LSB : bf
+# [29757681000] PASS  CC ADD  A=c7 B=08 MSB : 00
+# [30278514000] PASS  CC ADD  A=aa B=25 LSB : 85
+# [30382681000] PASS  CC ADD  A=aa B=25 MSB : 00
+# [30903514000] PASS  CC ADD  A=c6 B=09 LSB : f6
+# [31007681000] PASS  CC ADD  A=c6 B=09 MSB : 06
+# [31528514000] PASS  CC ADD  A=88 B=89 LSB : c8
+# [31632681000] PASS  CC ADD  A=88 B=89 MSB : 48
+# [32153514000] PASS  CC ADD  A=c5 B=0a LSB : 13
+# [32257681000] PASS  CC ADD  A=c5 B=0a MSB : 00
+# [32778514000] PASS  CC ADD  A=fa B=a5 LSB : 01
+# [32882681000] PASS  CC ADD  A=fa B=a5 MSB : 00
+# [33403514000] PASS  CC ADD  A=c4 B=0b LSB : 00
+# [33507681000] PASS  CC ADD  A=c4 B=0b MSB : 00
+# [34028514000] PASS  CC ADD  A=26 B=87 LSB : 06
+# [34132681000] PASS  CC ADD  A=26 B=87 MSB : 00
+# [34653514000] PASS  CC ADD  A=c3 B=0c LSB : cf
+# [34757681000] PASS  CC ADD  A=c3 B=0c MSB : 00
+# [35278514000] PASS  CC ADD  A=71 B=77 LSB : 77
+# [35382681000] PASS  CC ADD  A=71 B=77 MSB : 00
+# [35903514000] PASS  CC ADD  A=c2 B=0d LSB : cf
+# [36007681000] PASS  CC ADD  A=c2 B=0d MSB : 00
+# [36528514000] PASS  CC ADD  A=a3 B=34 LSB : 97
+# [36632681000] PASS  CC ADD  A=a3 B=34 MSB : 00
+# [37153514000] PASS  CC ADD  A=c1 B=0e LSB : 00
+# [37257681000] PASS  CC ADD  A=c1 B=0e MSB : 00
+# [37778514000] PASS  CC ADD  A=32 B=f9 LSB : 00
+# [37882681000] PASS  CC ADD  A=32 B=f9 MSB : 00
+# [38403514000] PASS  CC ADD  A=c0 B=0f LSB : 02
+# [38507681000] PASS  CC ADD  A=c0 B=0f MSB : 00
+# [39028514000] PASS  CC ADD  A=9e B=34 LSB : 02
+# [39132681000] PASS  CC ADD  A=9e B=34 MSB : 00
+# [39653515000] PASS  CC ADD  A=bf B=10 LSB : 5f
+# [39757681000] PASS  CC ADD  A=bf B=10 MSB : 00
+# [40278515000] PASS  CC ADD  A=04 B=ed LSB : 02
+# [40382681000] PASS  CC ADD  A=04 B=ed MSB : 00
+# [40903515000] PASS  CC ADD  A=be B=11 LSB : 7c
+# [41007681000] PASS  CC ADD  A=be B=11 MSB : 01
+# [41528515000] PASS  CC ADD  A=d4 B=62 LSB : a8
+# [41632681000] PASS  CC ADD  A=d4 B=62 MSB : 01
+# [42153515000] PASS  CC ADD  A=37 B=37 LSB : 01
+# [42257681000] PASS  CC ADD  A=37 B=37 MSB : 00
+# [42778515000] PASS  CC ADD  A=ff B=ff LSB : 01
+# [42882681000] PASS  CC ADD  A=ff B=ff MSB : fe
+# [43403515000] PASS  CC ADD  A=0a B=00 LSB : 00
+# [43507681000] PASS  CC ADD  A=0a B=00 MSB : 00
+# [44349695000] PASS  REG0/REG1 writes: no resp : no unexpected TX traffic
+# [44662195000] PASS  DD ADD  A=6a B=0c LSB : 76
+# [44766362000] PASS  DD ADD  A=6a B=0c MSB : 00
+# [45078862000] PASS  DD ADD  A=6a B=0c LSB : 5e
+# [45183029000] PASS  DD ADD  A=6a B=0c MSB : 00
+# [45495529000] PASS  DD ADD  A=6a B=0c LSB : 08
+# [45599695000] PASS  DD ADD  A=6a B=0c MSB : 00
+# [45912195000] PASS  DD ADD  A=6a B=0c LSB : d4
+# [46016362000] PASS  DD ADD  A=6a B=0c MSB : 00
+# [46328862000] PASS  DD ADD  A=6a B=0c LSB : 02
+# [46433029000] PASS  DD ADD  A=6a B=0c MSB : 00
+# [46953862000] PASS  CC ADD  A=21 B=03 LSB : 0b
+# [47058029000] PASS  CC ADD  A=21 B=03 MSB : 00
+# [47370529000] PASS  DD ADD  A=21 B=03 LSB : 63
+# [47474695000] PASS  DD ADD  A=21 B=03 MSB : 00
+# [47691709000] PASS  end of sweep: TX idle : no unexpected TX traffic
+# 
+# ================ Prescale = 8  (PAR_EN=1 PAR_TYP=0) ================
+# [48352572000] PASS  RX_CLK period 1085.1 ns (Prescale 8 -> UART_CLK/4)
+# [48368848000] PASS  TX_CLK period 8680.6 ns (= 1 bit @ 115200 baud)
+# [48681348000] PASS  RD REG2 (UART cfg) : 21
+# [48993848000] PASS  RD REG3 (div ratio) : 20
+# [50460862000] PASS  RF writes: no response : no unexpected TX traffic
+# [50773362000] PASS  RD RF[04] : ad
+# [51085862000] PASS  RD RF[07] : 34
+# [51398362000] PASS  RD RF[0b] : ff
+# [51710862000] PASS  RD RF[0f] : 09
+# [52231695000] PASS  CC ADD  A=c8 B=07 LSB : cf
+# [52335862000] PASS  CC ADD  A=c8 B=07 MSB : 00
+# [52856695000] PASS  CC ADD  A=10 B=ec LSB : fc
+# [52960862000] PASS  CC ADD  A=10 B=ec MSB : 00
+# [53481695000] PASS  CC ADD  A=c7 B=08 LSB : bf
+# [53585862000] PASS  CC ADD  A=c7 B=08 MSB : 00
+# [54106695000] PASS  CC ADD  A=62 B=02 LSB : 60
+# [54210862000] PASS  CC ADD  A=62 B=02 MSB : 00
+# [54731695000] PASS  CC ADD  A=c6 B=09 LSB : f6
+# [54835862000] PASS  CC ADD  A=c6 B=09 MSB : 06
+# [55356695000] PASS  CC ADD  A=3b B=e0 LSB : a0
+# [55460862000] PASS  CC ADD  A=3b B=e0 MSB : 33
+# [55981695000] PASS  CC ADD  A=c5 B=0a LSB : 13
+# [56085862000] PASS  CC ADD  A=c5 B=0a MSB : 00
+# [56606695000] PASS  CC ADD  A=f3 B=40 LSB : 03
+# [56710862000] PASS  CC ADD  A=f3 B=40 MSB : 00
+# [57231695000] PASS  CC ADD  A=c4 B=0b LSB : 00
+# [57335862000] PASS  CC ADD  A=c4 B=0b MSB : 00
+# [57856695000] PASS  CC ADD  A=55 B=a7 LSB : 05
+# [57960862000] PASS  CC ADD  A=55 B=a7 MSB : 00
+# [58481695000] PASS  CC ADD  A=c3 B=0c LSB : cf
+# [58585862000] PASS  CC ADD  A=c3 B=0c MSB : 00
+# [59106695000] PASS  CC ADD  A=87 B=c2 LSB : c7
+# [59210862000] PASS  CC ADD  A=87 B=c2 MSB : 00
+# [59731695000] PASS  CC ADD  A=c2 B=0d LSB : cf
+# [59835862000] PASS  CC ADD  A=c2 B=0d MSB : 00
+# [60356695000] PASS  CC ADD  A=73 B=e4 LSB : 97
+# [60460862000] PASS  CC ADD  A=73 B=e4 MSB : 00
+# [60981695000] PASS  CC ADD  A=c1 B=0e LSB : 00
+# [61085862000] PASS  CC ADD  A=c1 B=0e MSB : 00
+# [61606696000] PASS  CC ADD  A=38 B=5b LSB : 00
+# [61710862000] PASS  CC ADD  A=38 B=5b MSB : 00
+# [62231696000] PASS  CC ADD  A=c0 B=0f LSB : 02
+# [62335862000] PASS  CC ADD  A=c0 B=0f MSB : 00
+# [62856696000] PASS  CC ADD  A=c0 B=c3 LSB : 00
+# [62960862000] PASS  CC ADD  A=c0 B=c3 MSB : 00
+# [63481696000] PASS  CC ADD  A=bf B=10 LSB : 5f
+# [63585862000] PASS  CC ADD  A=bf B=10 MSB : 00
+# [64106696000] PASS  CC ADD  A=8e B=11 LSB : 47
+# [64210862000] PASS  CC ADD  A=8e B=11 MSB : 00
+# [64731696000] PASS  CC ADD  A=be B=11 LSB : 7c
+# [64835862000] PASS  CC ADD  A=be B=11 MSB : 01
+# [65356696000] PASS  CC ADD  A=bd B=58 LSB : 7a
+# [65460862000] PASS  CC ADD  A=bd B=58 MSB : 01
+# [65981696000] PASS  CC ADD  A=37 B=37 LSB : 01
+# [66085862000] PASS  CC ADD  A=37 B=37 MSB : 00
+# [66606696000] PASS  CC ADD  A=ff B=ff LSB : 01
+# [66710862000] PASS  CC ADD  A=ff B=ff MSB : fe
+# [67231696000] PASS  CC ADD  A=0a B=00 LSB : 00
+# [67335862000] PASS  CC ADD  A=0a B=00 MSB : 00
+# [68177876000] PASS  REG0/REG1 writes: no resp : no unexpected TX traffic
+# [68490376000] PASS  DD ADD  A=62 B=0c LSB : 6e
+# [68594543000] PASS  DD ADD  A=62 B=0c MSB : 00
+# [68907043000] PASS  DD ADD  A=62 B=0c LSB : 56
+# [69011210000] PASS  DD ADD  A=62 B=0c MSB : 00
+# [69323710000] PASS  DD ADD  A=62 B=0c LSB : 00
+# [69427876000] PASS  DD ADD  A=62 B=0c MSB : 00
+# [69740376000] PASS  DD ADD  A=62 B=0c LSB : c4
+# [69844543000] PASS  DD ADD  A=62 B=0c MSB : 00
+# [70157043000] PASS  DD ADD  A=62 B=0c LSB : 02
+# [70261210000] PASS  DD ADD  A=62 B=0c MSB : 00
+# [70782043000] PASS  CC ADD  A=21 B=03 LSB : 0b
+# [70886210000] PASS  CC ADD  A=21 B=03 MSB : 00
+# [71198710000] PASS  DD ADD  A=21 B=03 LSB : 63
+# [71302877000] PASS  DD ADD  A=21 B=03 MSB : 00
+# [71519890000] PASS  end of sweep: TX idle : no unexpected TX traffic
+# 
+# ==================== SUMMARY ====================
+# PASSED: 225   FAILED: 0
+# ALL TESTS PASSED
+# =================================================
+# ** Note: $stop    : System_Top_tb.sv(384)
+#    Time: 71519890461 ps  Iteration: 0  Instance: /System_Top_tb
+# Break in Module System_Top_tb at System_Top_tb.sv line 384
+do run.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 08:01:37 on Sep 30,2026
+# vlog -reportprogress 300 -f system.lst 
+# -- Compiling module ALU
+# -- Compiling module DF_SYNC
+# -- Compiling module FIFO_MEM
+# -- Compiling module FIFO_RD
+# -- Compiling module FIFO_TOP
+# -- Compiling module FIFO_WR
+# -- Compiling module CLK_GATE
+# -- Compiling module Data_Bus_Sync
+# -- Compiling module I_CLK_DIV
+# -- Compiling module pulse_gen
+# -- Compiling module Reg_File
+# -- Compiling module RST_Sync
+# -- Compiling module RX_CLK_DIV_MUX
+# -- Compiling module Sys_Ctrl
+# -- Compiling module System_Top
+# -- Compiling module Deserializer
+# -- Compiling module Edge_Bit_Counter
+# -- Compiling module Parity_Checker
+# -- Compiling module Sampler
+# -- Compiling module Start_Checker
+# -- Compiling module Stop_Checker
+# -- Compiling module UART_RX
+# -- Compiling module UART_RX_FSM
+# -- Compiling module MUX_4x1
+# -- Compiling module UART_Parity
+# -- Compiling module UART_Serializer
+# -- Compiling module UART_TX_FSM
+# -- Compiling module UART_TX_TOP
+# -- Compiling module UART
+# 
+# Top level modules:
+# 	System_Top
+# End time: 08:01:38 on Sep 30,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 08:01:38 on Sep 30,2026
+# vlog -reportprogress 300 System_Top_tb.sv 
+# -- Compiling module System_Top_tb
+# 
+# Top level modules:
+# 	System_Top_tb
+# End time: 08:01:39 on Sep 30,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# End time: 08:01:42 on Sep 30,2026, Elapsed time: 0:07:02
+# Errors: 9, Warnings: 3
+# vsim -wlf logs/vsim.wlf -voptargs="+acc" work.System_Top_tb 
+# Start time: 08:01:42 on Sep 30,2026
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-29) Unable to get status of file "/mnt/hgfs/Shared_Folder/System/SIM/work/_info".
+# Input/output error. (errno = EIO)
+# Loading sv_std.std
+# Loading work.System_Top_tb(fast)
+# Loading work.System_Top(fast)
+# Loading work.ALU(fast)
+# Loading work.FIFO_TOP(fast)
+# Loading work.FIFO_MEM(fast)
+# Loading work.FIFO_WR(fast)
+# Loading work.FIFO_RD(fast)
+# Loading work.DF_SYNC(fast)
+# Loading work.DF_SYNC(fast__1)
+# Loading work.Data_Bus_Sync(fast)
+# Loading work.RX_CLK_DIV_MUX(fast)
+# Loading work.I_CLK_DIV(fast)
+# Loading work.I_CLK_DIV(fast__1)
+# Loading work.pulse_gen(fast)
+# Loading work.Reg_File(fast)
+# Loading work.RST_Sync(fast)
+# Loading work.CLK_GATE(fast)
+# Loading work.Sys_Ctrl(fast)
+# Loading work.UART(fast)
+# Loading work.UART_TX_TOP(fast)
+# Loading work.UART_Serializer(fast)
+# Loading work.UART_Parity(fast)
+# Loading work.UART_TX_FSM(fast)
+# Loading work.MUX_4x1(fast)
+# Loading work.UART_RX(fast)
+# Loading work.Sampler(fast)
+# Loading work.Edge_Bit_Counter(fast)
+# Loading work.Deserializer(fast)
+# Loading work.Start_Checker(fast)
+# Loading work.Stop_Checker(fast)
+# Loading work.Parity_Checker(fast)
+# Loading work.UART_RX_FSM(fast)
+# ** Error: Cannot open WLF file: "logs/vsim.wlf"
+#           No such file or directory.
+#           Attempting to use alternate WLF file "logs/wlftAebzrx".
+# ** Error: Cannot open WLF file: "logs/wlftAebzrx"
+#           No such file or directory.
+#           Attempting to use alternate WLF file "./wlftJvxQnv".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: logs/vsim.wlf
+#           Using alternate file: ./wlftJvxQnv
+# ** Error: (vish-4014) No objects found matching '/System_Top_tb/errors'.
+# Executing ONERROR command at macro ./wave.do line 145
+# ** Error: (vish-4014) No objects found matching '/System_Top_tb/checks'.
+# Executing ONERROR command at macro ./wave.do line 146
+# 
+# ================ Prescale = 32  (PAR_EN=1 PAR_TYP=0) ================
+# [703805000] PASS  RX_CLK period 271.3 ns (Prescale 32 -> UART_CLK/1)
+# [712485000] PASS  TX_CLK period 8680.6 ns (= 1 bit @ 115200 baud)
+# [1024985000] PASS  RD REG2 (UART cfg) : 81
+# [1337485000] PASS  RD REG3 (div ratio) : 20
+# [2804499000] PASS  RF writes: no response : no unexpected TX traffic
+# [3116999000] PASS  RD RF[04] : 85
+# [3429499000] PASS  RD RF[07] : 1c
+# [3741999000] PASS  RD RF[0b] : ff
+# [4054499000] PASS  RD RF[0f] : 21
+# [4575333000] PASS  CC ADD  A=c8 B=07 LSB : cf
+# [4679499000] PASS  CC ADD  A=c8 B=07 MSB : 00
+# [5200333000] PASS  CC ADD  A=62 B=ec LSB : 4e
+# [5304500000] PASS  CC ADD  A=62 B=ec MSB : 01
+# [5825333000] PASS  CC ADD  A=c7 B=08 LSB : bf
+# [5929500000] PASS  CC ADD  A=c7 B=08 MSB : 00
+# [6450333000] PASS  CC ADD  A=98 B=45 LSB : 53
+# [6554500000] PASS  CC ADD  A=98 B=45 MSB : 00
+# [7075333000] PASS  CC ADD  A=c6 B=09 LSB : f6
+# [7179500000] PASS  CC ADD  A=c6 B=09 MSB : 06
+# [7700333000] PASS  CC ADD  A=c5 B=e8 LSB : 88
+# [7804500000] PASS  CC ADD  A=c5 B=e8 MSB : b2
+# [8325333000] PASS  CC ADD  A=c5 B=0a LSB : 13
+# [8429500000] PASS  CC ADD  A=c5 B=0a MSB : 00
+# [8950333000] PASS  CC ADD  A=8d B=bd LSB : 00
+# [9054500000] PASS  CC ADD  A=8d B=bd MSB : 00
+# [9575333000] PASS  CC ADD  A=c4 B=0b LSB : 00
+# [9679500000] PASS  CC ADD  A=c4 B=0b MSB : 00
+# [10200333000] PASS  CC ADD  A=8f B=17 LSB : 07
+# [10304500000] PASS  CC ADD  A=8f B=17 MSB : 00
+# [10825333000] PASS  CC ADD  A=c3 B=0c LSB : cf
+# [10929500000] PASS  CC ADD  A=c3 B=0c MSB : 00
+# [11450333000] PASS  CC ADD  A=5e B=94 LSB : de
+# [11554500000] PASS  CC ADD  A=5e B=94 MSB : 00
+# [12075333000] PASS  CC ADD  A=c2 B=0d LSB : cf
+# [12179500000] PASS  CC ADD  A=c2 B=0d MSB : 00
+# [12700333000] PASS  CC ADD  A=16 B=15 LSB : 03
+# [12804500000] PASS  CC ADD  A=16 B=15 MSB : 00
+# [13325333000] PASS  CC ADD  A=c1 B=0e LSB : 00
+# [13429500000] PASS  CC ADD  A=c1 B=0e MSB : 00
+# [13950333000] PASS  CC ADD  A=fd B=75 LSB : 00
+# [14054500000] PASS  CC ADD  A=fd B=75 MSB : 00
+# [14575333000] PASS  CC ADD  A=c0 B=0f LSB : 02
+# [14679500000] PASS  CC ADD  A=c0 B=0f MSB : 00
+# [15200333000] PASS  CC ADD  A=1f B=12 LSB : 02
+# [15304500000] PASS  CC ADD  A=1f B=12 MSB : 00
+# [15825333000] PASS  CC ADD  A=bf B=10 LSB : 5f
+# [15929500000] PASS  CC ADD  A=bf B=10 MSB : 00
+# [16450333000] PASS  CC ADD  A=ec B=9f LSB : 76
+# [16554500000] PASS  CC ADD  A=ec B=9f MSB : 00
+# [17075333000] PASS  CC ADD  A=be B=11 LSB : 7c
+# [17179500000] PASS  CC ADD  A=be B=11 MSB : 01
+# [17700333000] PASS  CC ADD  A=72 B=91 LSB : e4
+# [17804500000] PASS  CC ADD  A=72 B=91 MSB : 00
+# [18325334000] PASS  CC ADD  A=37 B=37 LSB : 01
+# [18429500000] PASS  CC ADD  A=37 B=37 MSB : 00
+# [18950334000] PASS  CC ADD  A=ff B=ff LSB : 01
+# [19054500000] PASS  CC ADD  A=ff B=ff MSB : fe
+# [19575334000] PASS  CC ADD  A=0a B=00 LSB : 00
+# [19679500000] PASS  CC ADD  A=0a B=00 MSB : 00
+# [20521514000] PASS  REG0/REG1 writes: no resp : no unexpected TX traffic
+# [20834014000] PASS  DD ADD  A=7a B=0c LSB : 86
+# [20938181000] PASS  DD ADD  A=7a B=0c MSB : 00
+# [21250681000] PASS  DD ADD  A=7a B=0c LSB : 6e
+# [21354848000] PASS  DD ADD  A=7a B=0c MSB : 00
+# [21667348000] PASS  DD ADD  A=7a B=0c LSB : 08
+# [21771514000] PASS  DD ADD  A=7a B=0c MSB : 00
+# [22084014000] PASS  DD ADD  A=7a B=0c LSB : f4
+# [22188181000] PASS  DD ADD  A=7a B=0c MSB : 00
+# [22500681000] PASS  DD ADD  A=7a B=0c LSB : 02
+# [22604848000] PASS  DD ADD  A=7a B=0c MSB : 00
+# [23125681000] PASS  CC ADD  A=21 B=03 LSB : 0b
+# [23229848000] PASS  CC ADD  A=21 B=03 MSB : 00
+# [23542348000] PASS  DD ADD  A=21 B=03 LSB : 63
+# [23646514000] PASS  DD ADD  A=21 B=03 MSB : 00
+# [23863528000] PASS  end of sweep: TX idle : no unexpected TX traffic
+# 
+# ================ Prescale = 16  (PAR_EN=1 PAR_TYP=0) ================
+# [24523848000] PASS  RX_CLK period 542.5 ns (Prescale 16 -> UART_CLK/2)
+# [24540667000] PASS  TX_CLK period 8680.6 ns (= 1 bit @ 115200 baud)
+# [24853167000] PASS  RD REG2 (UART cfg) : 41
+# [25165667000] PASS  RD REG3 (div ratio) : 20
+# [26632681000] PASS  RF writes: no response : no unexpected TX traffic
+# [26945181000] PASS  RD RF[04] : b5
+# [27257681000] PASS  RD RF[07] : 2c
+# [27570181000] PASS  RD RF[0b] : ff
+# [27882681000] PASS  RD RF[0f] : 11
+# [28403514000] PASS  CC ADD  A=c8 B=07 LSB : cf
+# [28507681000] PASS  CC ADD  A=c8 B=07 MSB : 00
+# [29028514000] PASS  CC ADD  A=a7 B=82 LSB : 29
+# [29132681000] PASS  CC ADD  A=a7 B=82 MSB : 01
+# [29653514000] PASS  CC ADD  A=c7 B=08 LSB : bf
+# [29757681000] PASS  CC ADD  A=c7 B=08 MSB : 00
+# [30278514000] PASS  CC ADD  A=aa B=25 LSB : 85
+# [30382681000] PASS  CC ADD  A=aa B=25 MSB : 00
+# [30903514000] PASS  CC ADD  A=c6 B=09 LSB : f6
+# [31007681000] PASS  CC ADD  A=c6 B=09 MSB : 06
+# [31528514000] PASS  CC ADD  A=88 B=89 LSB : c8
+# [31632681000] PASS  CC ADD  A=88 B=89 MSB : 48
+# [32153514000] PASS  CC ADD  A=c5 B=0a LSB : 13
+# [32257681000] PASS  CC ADD  A=c5 B=0a MSB : 00
+# [32778514000] PASS  CC ADD  A=fa B=a5 LSB : 01
+# [32882681000] PASS  CC ADD  A=fa B=a5 MSB : 00
+# [33403514000] PASS  CC ADD  A=c4 B=0b LSB : 00
+# [33507681000] PASS  CC ADD  A=c4 B=0b MSB : 00
+# [34028514000] PASS  CC ADD  A=26 B=87 LSB : 06
+# [34132681000] PASS  CC ADD  A=26 B=87 MSB : 00
+# [34653514000] PASS  CC ADD  A=c3 B=0c LSB : cf
+# [34757681000] PASS  CC ADD  A=c3 B=0c MSB : 00
+# [35278514000] PASS  CC ADD  A=71 B=77 LSB : 77
+# [35382681000] PASS  CC ADD  A=71 B=77 MSB : 00
+# [35903514000] PASS  CC ADD  A=c2 B=0d LSB : cf
+# [36007681000] PASS  CC ADD  A=c2 B=0d MSB : 00
+# [36528514000] PASS  CC ADD  A=a3 B=34 LSB : 97
+# [36632681000] PASS  CC ADD  A=a3 B=34 MSB : 00
+# [37153514000] PASS  CC ADD  A=c1 B=0e LSB : 00
+# [37257681000] PASS  CC ADD  A=c1 B=0e MSB : 00
+# [37778514000] PASS  CC ADD  A=32 B=f9 LSB : 00
+# [37882681000] PASS  CC ADD  A=32 B=f9 MSB : 00
+# [38403514000] PASS  CC ADD  A=c0 B=0f LSB : 02
+# [38507681000] PASS  CC ADD  A=c0 B=0f MSB : 00
+# [39028514000] PASS  CC ADD  A=9e B=34 LSB : 02
+# [39132681000] PASS  CC ADD  A=9e B=34 MSB : 00
+# [39653515000] PASS  CC ADD  A=bf B=10 LSB : 5f
+# [39757681000] PASS  CC ADD  A=bf B=10 MSB : 00
+# [40278515000] PASS  CC ADD  A=04 B=ed LSB : 02
+# [40382681000] PASS  CC ADD  A=04 B=ed MSB : 00
+# [40903515000] PASS  CC ADD  A=be B=11 LSB : 7c
+# [41007681000] PASS  CC ADD  A=be B=11 MSB : 01
+# [41528515000] PASS  CC ADD  A=d4 B=62 LSB : a8
+# [41632681000] PASS  CC ADD  A=d4 B=62 MSB : 01
+# [42153515000] PASS  CC ADD  A=37 B=37 LSB : 01
+# [42257681000] PASS  CC ADD  A=37 B=37 MSB : 00
+# [42778515000] PASS  CC ADD  A=ff B=ff LSB : 01
+# [42882681000] PASS  CC ADD  A=ff B=ff MSB : fe
+# [43403515000] PASS  CC ADD  A=0a B=00 LSB : 00
+# [43507681000] PASS  CC ADD  A=0a B=00 MSB : 00
+# [44349695000] PASS  REG0/REG1 writes: no resp : no unexpected TX traffic
+# [44662195000] PASS  DD ADD  A=6a B=0c LSB : 76
+# [44766362000] PASS  DD ADD  A=6a B=0c MSB : 00
+# [45078862000] PASS  DD ADD  A=6a B=0c LSB : 5e
+# [45183029000] PASS  DD ADD  A=6a B=0c MSB : 00
+# [45495529000] PASS  DD ADD  A=6a B=0c LSB : 08
+# [45599695000] PASS  DD ADD  A=6a B=0c MSB : 00
+# [45912195000] PASS  DD ADD  A=6a B=0c LSB : d4
+# [46016362000] PASS  DD ADD  A=6a B=0c MSB : 00
+# [46328862000] PASS  DD ADD  A=6a B=0c LSB : 02
+# [46433029000] PASS  DD ADD  A=6a B=0c MSB : 00
+# [46953862000] PASS  CC ADD  A=21 B=03 LSB : 0b
+# [47058029000] PASS  CC ADD  A=21 B=03 MSB : 00
+# [47370529000] PASS  DD ADD  A=21 B=03 LSB : 63
+# [47474695000] PASS  DD ADD  A=21 B=03 MSB : 00
+# [47691709000] PASS  end of sweep: TX idle : no unexpected TX traffic
+# 
+# ================ Prescale = 8  (PAR_EN=1 PAR_TYP=0) ================
+# [48352572000] PASS  RX_CLK period 1085.1 ns (Prescale 8 -> UART_CLK/4)
+# [48368848000] PASS  TX_CLK period 8680.6 ns (= 1 bit @ 115200 baud)
+# [48681348000] PASS  RD REG2 (UART cfg) : 21
+# [48993848000] PASS  RD REG3 (div ratio) : 20
+# [50460862000] PASS  RF writes: no response : no unexpected TX traffic
+# [50773362000] PASS  RD RF[04] : ad
+# [51085862000] PASS  RD RF[07] : 34
+# [51398362000] PASS  RD RF[0b] : ff
+# [51710862000] PASS  RD RF[0f] : 09
+# [52231695000] PASS  CC ADD  A=c8 B=07 LSB : cf
+# [52335862000] PASS  CC ADD  A=c8 B=07 MSB : 00
+# [52856695000] PASS  CC ADD  A=10 B=ec LSB : fc
+# [52960862000] PASS  CC ADD  A=10 B=ec MSB : 00
+# [53481695000] PASS  CC ADD  A=c7 B=08 LSB : bf
+# [53585862000] PASS  CC ADD  A=c7 B=08 MSB : 00
+# [54106695000] PASS  CC ADD  A=62 B=02 LSB : 60
+# [54210862000] PASS  CC ADD  A=62 B=02 MSB : 00
+# [54731695000] PASS  CC ADD  A=c6 B=09 LSB : f6
+# [54835862000] PASS  CC ADD  A=c6 B=09 MSB : 06
+# [55356695000] PASS  CC ADD  A=3b B=e0 LSB : a0
+# [55460862000] PASS  CC ADD  A=3b B=e0 MSB : 33
+# [55981695000] PASS  CC ADD  A=c5 B=0a LSB : 13
+# [56085862000] PASS  CC ADD  A=c5 B=0a MSB : 00
+# [56606695000] PASS  CC ADD  A=f3 B=40 LSB : 03
+# [56710862000] PASS  CC ADD  A=f3 B=40 MSB : 00
+# [57231695000] PASS  CC ADD  A=c4 B=0b LSB : 00
+# [57335862000] PASS  CC ADD  A=c4 B=0b MSB : 00
+# [57856695000] PASS  CC ADD  A=55 B=a7 LSB : 05
+# [57960862000] PASS  CC ADD  A=55 B=a7 MSB : 00
+# [58481695000] PASS  CC ADD  A=c3 B=0c LSB : cf
+# [58585862000] PASS  CC ADD  A=c3 B=0c MSB : 00
+# [59106695000] PASS  CC ADD  A=87 B=c2 LSB : c7
+# [59210862000] PASS  CC ADD  A=87 B=c2 MSB : 00
+# [59731695000] PASS  CC ADD  A=c2 B=0d LSB : cf
+# [59835862000] PASS  CC ADD  A=c2 B=0d MSB : 00
+# [60356695000] PASS  CC ADD  A=73 B=e4 LSB : 97
+# [60460862000] PASS  CC ADD  A=73 B=e4 MSB : 00
+# [60981695000] PASS  CC ADD  A=c1 B=0e LSB : 00
+# [61085862000] PASS  CC ADD  A=c1 B=0e MSB : 00
+# [61606696000] PASS  CC ADD  A=38 B=5b LSB : 00
+# [61710862000] PASS  CC ADD  A=38 B=5b MSB : 00
+# [62231696000] PASS  CC ADD  A=c0 B=0f LSB : 02
+# [62335862000] PASS  CC ADD  A=c0 B=0f MSB : 00
+# [62856696000] PASS  CC ADD  A=c0 B=c3 LSB : 00
+# [62960862000] PASS  CC ADD  A=c0 B=c3 MSB : 00
+# [63481696000] PASS  CC ADD  A=bf B=10 LSB : 5f
+# [63585862000] PASS  CC ADD  A=bf B=10 MSB : 00
+# [64106696000] PASS  CC ADD  A=8e B=11 LSB : 47
+# [64210862000] PASS  CC ADD  A=8e B=11 MSB : 00
+# [64731696000] PASS  CC ADD  A=be B=11 LSB : 7c
+# [64835862000] PASS  CC ADD  A=be B=11 MSB : 01
+# [65356696000] PASS  CC ADD  A=bd B=58 LSB : 7a
+# [65460862000] PASS  CC ADD  A=bd B=58 MSB : 01
+# [65981696000] PASS  CC ADD  A=37 B=37 LSB : 01
+# [66085862000] PASS  CC ADD  A=37 B=37 MSB : 00
+# [66606696000] PASS  CC ADD  A=ff B=ff LSB : 01
+# [66710862000] PASS  CC ADD  A=ff B=ff MSB : fe
+# [67231696000] PASS  CC ADD  A=0a B=00 LSB : 00
+# [67335862000] PASS  CC ADD  A=0a B=00 MSB : 00
+# [68177876000] PASS  REG0/REG1 writes: no resp : no unexpected TX traffic
+# [68490376000] PASS  DD ADD  A=62 B=0c LSB : 6e
+# [68594543000] PASS  DD ADD  A=62 B=0c MSB : 00
+# [68907043000] PASS  DD ADD  A=62 B=0c LSB : 56
+# [69011210000] PASS  DD ADD  A=62 B=0c MSB : 00
+# [69323710000] PASS  DD ADD  A=62 B=0c LSB : 00
+# [69427876000] PASS  DD ADD  A=62 B=0c MSB : 00
+# [69740376000] PASS  DD ADD  A=62 B=0c LSB : c4
+# [69844543000] PASS  DD ADD  A=62 B=0c MSB : 00
+# [70157043000] PASS  DD ADD  A=62 B=0c LSB : 02
+# [70261210000] PASS  DD ADD  A=62 B=0c MSB : 00
+# [70782043000] PASS  CC ADD  A=21 B=03 LSB : 0b
+# [70886210000] PASS  CC ADD  A=21 B=03 MSB : 00
+# [71198710000] PASS  DD ADD  A=21 B=03 LSB : 63
+# [71302877000] PASS  DD ADD  A=21 B=03 MSB : 00
+# [71519890000] PASS  end of sweep: TX idle : no unexpected TX traffic
+# 
+# ==================== SUMMARY ====================
+# PASSED: 225   FAILED: 0
+# ALL TESTS PASSED
+# =================================================
+# ** Note: $stop    : System_Top_tb.sv(384)
+#    Time: 71519890461 ps  Iteration: 0  Instance: /System_Top_tb
+# Break in Module System_Top_tb at System_Top_tb.sv line 384
+do run.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 08:05:41 on Sep 30,2026
+# vlog -reportprogress 300 -f system.lst 
+# -- Compiling module ALU
+# -- Compiling module DF_SYNC
+# -- Compiling module FIFO_MEM
+# -- Compiling module FIFO_RD
+# -- Compiling module FIFO_TOP
+# -- Compiling module FIFO_WR
+# -- Compiling module CLK_GATE
+# -- Compiling module Data_Bus_Sync
+# -- Compiling module I_CLK_DIV
+# -- Compiling module pulse_gen
+# -- Compiling module Reg_File
+# -- Compiling module RST_Sync
+# -- Compiling module RX_CLK_DIV_MUX
+# -- Compiling module Sys_Ctrl
+# -- Compiling module System_Top
+# -- Compiling module Deserializer
+# -- Compiling module Edge_Bit_Counter
+# -- Compiling module Parity_Checker
+# -- Compiling module Sampler
+# -- Compiling module Start_Checker
+# -- Compiling module Stop_Checker
+# -- Compiling module UART_RX
+# -- Compiling module UART_RX_FSM
+# -- Compiling module MUX_4x1
+# -- Compiling module UART_Parity
+# -- Compiling module UART_Serializer
+# -- Compiling module UART_TX_FSM
+# -- Compiling module UART_TX_TOP
+# -- Compiling module UART
+# 
+# Top level modules:
+# 	System_Top
+# End time: 08:05:42 on Sep 30,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 08:05:42 on Sep 30,2026
+# vlog -reportprogress 300 System_Top_tb.sv 
+# -- Compiling module System_Top_tb
+# 
+# Top level modules:
+# 	System_Top_tb
+# End time: 08:05:42 on Sep 30,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 08:05:45 on Sep 30,2026, Elapsed time: 0:04:03
+# Errors: 8, Warnings: 2
+# vsim -wlf logs/vsim.wlf -voptargs="+acc" work.System_Top_tb 
+# Start time: 08:05:45 on Sep 30,2026
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-29) Unable to get status of file "/mnt/hgfs/Shared_Folder/System/SIM/work/_info".
+# Input/output error. (errno = EIO)
+# Loading sv_std.std
+# Loading work.System_Top_tb(fast)
+# Loading work.System_Top(fast)
+# Loading work.ALU(fast)
+# Loading work.FIFO_TOP(fast)
+# Loading work.FIFO_MEM(fast)
+# Loading work.FIFO_WR(fast)
+# Loading work.FIFO_RD(fast)
+# Loading work.DF_SYNC(fast)
+# Loading work.DF_SYNC(fast__1)
+# Loading work.Data_Bus_Sync(fast)
+# Loading work.RX_CLK_DIV_MUX(fast)
+# Loading work.I_CLK_DIV(fast)
+# Loading work.I_CLK_DIV(fast__1)
+# Loading work.pulse_gen(fast)
+# Loading work.Reg_File(fast)
+# Loading work.RST_Sync(fast)
+# Loading work.CLK_GATE(fast)
+# Loading work.Sys_Ctrl(fast)
+# Loading work.UART(fast)
+# Loading work.UART_TX_TOP(fast)
+# Loading work.UART_Serializer(fast)
+# Loading work.UART_Parity(fast)
+# Loading work.UART_TX_FSM(fast)
+# Loading work.MUX_4x1(fast)
+# Loading work.UART_RX(fast)
+# Loading work.Sampler(fast)
+# Loading work.Edge_Bit_Counter(fast)
+# Loading work.Deserializer(fast)
+# Loading work.Start_Checker(fast)
+# Loading work.Stop_Checker(fast)
+# Loading work.Parity_Checker(fast)
+# Loading work.UART_RX_FSM(fast)
+# ** Error: Cannot open WLF file: "logs/vsim.wlf"
+#           No such file or directory.
+#           Attempting to use alternate WLF file "logs/wlftFkGy8R".
+# ** Error: Cannot open WLF file: "logs/wlftFkGy8R"
+#           No such file or directory.
+#           Attempting to use alternate WLF file "./wlftaVmQtW".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: logs/vsim.wlf
+#           Using alternate file: ./wlftaVmQtW
+# ** Error: (vish-4014) No objects found matching '/System_Top_tb/errors'.
+# Executing ONERROR command at macro ./wave.do line 145
+# ** Error: (vish-4014) No objects found matching '/System_Top_tb/checks'.
+# Executing ONERROR command at macro ./wave.do line 146
+# 
+# ================ Prescale = 32  (PAR_EN=1 PAR_TYP=0) ================
+# [703805000] PASS  RX_CLK period 271.3 ns (Prescale 32 -> UART_CLK/1)
+# [712485000] PASS  TX_CLK period 8680.6 ns (= 1 bit @ 115200 baud)
+# [1024985000] PASS  RD REG2 (UART cfg) : 0x81
+# [1337485000] PASS  RD REG3 (div ratio) : 0x20
+# [2804499000] PASS  RF writes: no response : no unexpected TX traffic
+# [3116999000] PASS  RD RF[0x04] : 0x85
+# [3429499000] PASS  RD RF[0x07] : 0x1c
+# [3741999000] PASS  RD RF[0x0b] : 0xff
+# [4054499000] PASS  RD RF[0x0f] : 0x21
+# [4575333000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
+# [4679499000] PASS  CC ADD  A=0xc8 B=0x07 MSB : 0x00
+# [5200333000] PASS  CC ADD  A=0x62 B=0xec LSB : 0x4e
+# [5304500000] PASS  CC ADD  A=0x62 B=0xec MSB : 0x01
+# [5825333000] PASS  CC ADD  A=0xc7 B=0x08 LSB : 0xbf
+# [5929500000] PASS  CC ADD  A=0xc7 B=0x08 MSB : 0x00
+# [6450333000] PASS  CC ADD  A=0x98 B=0x45 LSB : 0x53
+# [6554500000] PASS  CC ADD  A=0x98 B=0x45 MSB : 0x00
+# [7075333000] PASS  CC ADD  A=0xc6 B=0x09 LSB : 0xf6
+# [7179500000] PASS  CC ADD  A=0xc6 B=0x09 MSB : 0x06
+# [7700333000] PASS  CC ADD  A=0xc5 B=0xe8 LSB : 0x88
+# [7804500000] PASS  CC ADD  A=0xc5 B=0xe8 MSB : 0xb2
+# [8325333000] PASS  CC ADD  A=0xc5 B=0x0a LSB : 0x13
+# [8429500000] PASS  CC ADD  A=0xc5 B=0x0a MSB : 0x00
+# [8950333000] PASS  CC ADD  A=0x8d B=0xbd LSB : 0x00
+# [9054500000] PASS  CC ADD  A=0x8d B=0xbd MSB : 0x00
+# [9575333000] PASS  CC ADD  A=0xc4 B=0x0b LSB : 0x00
+# [9679500000] PASS  CC ADD  A=0xc4 B=0x0b MSB : 0x00
+# [10200333000] PASS  CC ADD  A=0x8f B=0x17 LSB : 0x07
+# [10304500000] PASS  CC ADD  A=0x8f B=0x17 MSB : 0x00
+# [10825333000] PASS  CC ADD  A=0xc3 B=0x0c LSB : 0xcf
+# [10929500000] PASS  CC ADD  A=0xc3 B=0x0c MSB : 0x00
+# [11450333000] PASS  CC ADD  A=0x5e B=0x94 LSB : 0xde
+# [11554500000] PASS  CC ADD  A=0x5e B=0x94 MSB : 0x00
+# [12075333000] PASS  CC ADD  A=0xc2 B=0x0d LSB : 0xcf
+# [12179500000] PASS  CC ADD  A=0xc2 B=0x0d MSB : 0x00
+# [12700333000] PASS  CC ADD  A=0x16 B=0x15 LSB : 0x03
+# [12804500000] PASS  CC ADD  A=0x16 B=0x15 MSB : 0x00
+# [13325333000] PASS  CC ADD  A=0xc1 B=0x0e LSB : 0x00
+# [13429500000] PASS  CC ADD  A=0xc1 B=0x0e MSB : 0x00
+# [13950333000] PASS  CC ADD  A=0xfd B=0x75 LSB : 0x00
+# [14054500000] PASS  CC ADD  A=0xfd B=0x75 MSB : 0x00
+# [14575333000] PASS  CC ADD  A=0xc0 B=0x0f LSB : 0x02
+# [14679500000] PASS  CC ADD  A=0xc0 B=0x0f MSB : 0x00
+# [15200333000] PASS  CC ADD  A=0x1f B=0x12 LSB : 0x02
+# [15304500000] PASS  CC ADD  A=0x1f B=0x12 MSB : 0x00
+# [15825333000] PASS  CC ADD  A=0xbf B=0x10 LSB : 0x5f
+# [15929500000] PASS  CC ADD  A=0xbf B=0x10 MSB : 0x00
+# [16450333000] PASS  CC ADD  A=0xec B=0x9f LSB : 0x76
+# [16554500000] PASS  CC ADD  A=0xec B=0x9f MSB : 0x00
+# [17075333000] PASS  CC ADD  A=0xbe B=0x11 LSB : 0x7c
+# [17179500000] PASS  CC ADD  A=0xbe B=0x11 MSB : 0x01
+# [17700333000] PASS  CC ADD  A=0x72 B=0x91 LSB : 0xe4
+# [17804500000] PASS  CC ADD  A=0x72 B=0x91 MSB : 0x00
+# [18325334000] PASS  CC ADD  A=0x37 B=0x37 LSB : 0x01
+# [18429500000] PASS  CC ADD  A=0x37 B=0x37 MSB : 0x00
+# [18950334000] PASS  CC ADD  A=0xff B=0xff LSB : 0x01
+# [19054500000] PASS  CC ADD  A=0xff B=0xff MSB : 0xfe
+# [19575334000] PASS  CC ADD  A=0x0a B=0x00 LSB : 0x00
+# [19679500000] PASS  CC ADD  A=0x0a B=0x00 MSB : 0x00
+# [20521514000] PASS  REG0/REG1 writes: no resp : no unexpected TX traffic
+# [20834014000] PASS  DD ADD  A=0x7a B=0x0c LSB : 0x86
+# [20938181000] PASS  DD ADD  A=0x7a B=0x0c MSB : 0x00
+# [21250681000] PASS  DD ADD  A=0x7a B=0x0c LSB : 0x6e
+# [21354848000] PASS  DD ADD  A=0x7a B=0x0c MSB : 0x00
+# [21667348000] PASS  DD ADD  A=0x7a B=0x0c LSB : 0x08
+# [21771514000] PASS  DD ADD  A=0x7a B=0x0c MSB : 0x00
+# [22084014000] PASS  DD ADD  A=0x7a B=0x0c LSB : 0xf4
+# [22188181000] PASS  DD ADD  A=0x7a B=0x0c MSB : 0x00
+# [22500681000] PASS  DD ADD  A=0x7a B=0x0c LSB : 0x02
+# [22604848000] PASS  DD ADD  A=0x7a B=0x0c MSB : 0x00
+# [23125681000] PASS  CC ADD  A=0x21 B=0x03 LSB : 0x0b
+# [23229848000] PASS  CC ADD  A=0x21 B=0x03 MSB : 0x00
+# [23542348000] PASS  DD ADD  A=0x21 B=0x03 LSB : 0x63
+# [23646514000] PASS  DD ADD  A=0x21 B=0x03 MSB : 0x00
+# [23863528000] PASS  end of sweep: TX idle : no unexpected TX traffic
+# 
+# ================ Prescale = 16  (PAR_EN=1 PAR_TYP=0) ================
+# [24523848000] PASS  RX_CLK period 542.5 ns (Prescale 16 -> UART_CLK/2)
+# [24540667000] PASS  TX_CLK period 8680.6 ns (= 1 bit @ 115200 baud)
+# [24853167000] PASS  RD REG2 (UART cfg) : 0x41
+# [25165667000] PASS  RD REG3 (div ratio) : 0x20
+# [26632681000] PASS  RF writes: no response : no unexpected TX traffic
+# [26945181000] PASS  RD RF[0x04] : 0xb5
+# [27257681000] PASS  RD RF[0x07] : 0x2c
+# [27570181000] PASS  RD RF[0x0b] : 0xff
+# [27882681000] PASS  RD RF[0x0f] : 0x11
+# [28403514000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
+# [28507681000] PASS  CC ADD  A=0xc8 B=0x07 MSB : 0x00
+# [29028514000] PASS  CC ADD  A=0xa7 B=0x82 LSB : 0x29
+# [29132681000] PASS  CC ADD  A=0xa7 B=0x82 MSB : 0x01
+# [29653514000] PASS  CC ADD  A=0xc7 B=0x08 LSB : 0xbf
+# [29757681000] PASS  CC ADD  A=0xc7 B=0x08 MSB : 0x00
+# [30278514000] PASS  CC ADD  A=0xaa B=0x25 LSB : 0x85
+# [30382681000] PASS  CC ADD  A=0xaa B=0x25 MSB : 0x00
+# [30903514000] PASS  CC ADD  A=0xc6 B=0x09 LSB : 0xf6
+# [31007681000] PASS  CC ADD  A=0xc6 B=0x09 MSB : 0x06
+# [31528514000] PASS  CC ADD  A=0x88 B=0x89 LSB : 0xc8
+# [31632681000] PASS  CC ADD  A=0x88 B=0x89 MSB : 0x48
+# [32153514000] PASS  CC ADD  A=0xc5 B=0x0a LSB : 0x13
+# [32257681000] PASS  CC ADD  A=0xc5 B=0x0a MSB : 0x00
+# [32778514000] PASS  CC ADD  A=0xfa B=0xa5 LSB : 0x01
+# [32882681000] PASS  CC ADD  A=0xfa B=0xa5 MSB : 0x00
+# [33403514000] PASS  CC ADD  A=0xc4 B=0x0b LSB : 0x00
+# [33507681000] PASS  CC ADD  A=0xc4 B=0x0b MSB : 0x00
+# [34028514000] PASS  CC ADD  A=0x26 B=0x87 LSB : 0x06
+# [34132681000] PASS  CC ADD  A=0x26 B=0x87 MSB : 0x00
+# [34653514000] PASS  CC ADD  A=0xc3 B=0x0c LSB : 0xcf
+# [34757681000] PASS  CC ADD  A=0xc3 B=0x0c MSB : 0x00
+# [35278514000] PASS  CC ADD  A=0x71 B=0x77 LSB : 0x77
+# [35382681000] PASS  CC ADD  A=0x71 B=0x77 MSB : 0x00
+# [35903514000] PASS  CC ADD  A=0xc2 B=0x0d LSB : 0xcf
+# [36007681000] PASS  CC ADD  A=0xc2 B=0x0d MSB : 0x00
+# [36528514000] PASS  CC ADD  A=0xa3 B=0x34 LSB : 0x97
+# [36632681000] PASS  CC ADD  A=0xa3 B=0x34 MSB : 0x00
+# [37153514000] PASS  CC ADD  A=0xc1 B=0x0e LSB : 0x00
+# [37257681000] PASS  CC ADD  A=0xc1 B=0x0e MSB : 0x00
+# [37778514000] PASS  CC ADD  A=0x32 B=0xf9 LSB : 0x00
+# [37882681000] PASS  CC ADD  A=0x32 B=0xf9 MSB : 0x00
+# [38403514000] PASS  CC ADD  A=0xc0 B=0x0f LSB : 0x02
+# [38507681000] PASS  CC ADD  A=0xc0 B=0x0f MSB : 0x00
+# [39028514000] PASS  CC ADD  A=0x9e B=0x34 LSB : 0x02
+# [39132681000] PASS  CC ADD  A=0x9e B=0x34 MSB : 0x00
+# [39653515000] PASS  CC ADD  A=0xbf B=0x10 LSB : 0x5f
+# [39757681000] PASS  CC ADD  A=0xbf B=0x10 MSB : 0x00
+# [40278515000] PASS  CC ADD  A=0x04 B=0xed LSB : 0x02
+# [40382681000] PASS  CC ADD  A=0x04 B=0xed MSB : 0x00
+# [40903515000] PASS  CC ADD  A=0xbe B=0x11 LSB : 0x7c
+# [41007681000] PASS  CC ADD  A=0xbe B=0x11 MSB : 0x01
+# [41528515000] PASS  CC ADD  A=0xd4 B=0x62 LSB : 0xa8
+# [41632681000] PASS  CC ADD  A=0xd4 B=0x62 MSB : 0x01
+# [42153515000] PASS  CC ADD  A=0x37 B=0x37 LSB : 0x01
+# [42257681000] PASS  CC ADD  A=0x37 B=0x37 MSB : 0x00
+# [42778515000] PASS  CC ADD  A=0xff B=0xff LSB : 0x01
+# [42882681000] PASS  CC ADD  A=0xff B=0xff MSB : 0xfe
+# [43403515000] PASS  CC ADD  A=0x0a B=0x00 LSB : 0x00
+# [43507681000] PASS  CC ADD  A=0x0a B=0x00 MSB : 0x00
+# [44349695000] PASS  REG0/REG1 writes: no resp : no unexpected TX traffic
+# [44662195000] PASS  DD ADD  A=0x6a B=0x0c LSB : 0x76
+# [44766362000] PASS  DD ADD  A=0x6a B=0x0c MSB : 0x00
+# [45078862000] PASS  DD ADD  A=0x6a B=0x0c LSB : 0x5e
+# [45183029000] PASS  DD ADD  A=0x6a B=0x0c MSB : 0x00
+# [45495529000] PASS  DD ADD  A=0x6a B=0x0c LSB : 0x08
+# [45599695000] PASS  DD ADD  A=0x6a B=0x0c MSB : 0x00
+# [45912195000] PASS  DD ADD  A=0x6a B=0x0c LSB : 0xd4
+# [46016362000] PASS  DD ADD  A=0x6a B=0x0c MSB : 0x00
+# [46328862000] PASS  DD ADD  A=0x6a B=0x0c LSB : 0x02
+# [46433029000] PASS  DD ADD  A=0x6a B=0x0c MSB : 0x00
+# [46953862000] PASS  CC ADD  A=0x21 B=0x03 LSB : 0x0b
+# [47058029000] PASS  CC ADD  A=0x21 B=0x03 MSB : 0x00
+# [47370529000] PASS  DD ADD  A=0x21 B=0x03 LSB : 0x63
+# [47474695000] PASS  DD ADD  A=0x21 B=0x03 MSB : 0x00
+# [47691709000] PASS  end of sweep: TX idle : no unexpected TX traffic
+# 
+# ================ Prescale = 8  (PAR_EN=1 PAR_TYP=0) ================
+# [48352572000] PASS  RX_CLK period 1085.1 ns (Prescale 8 -> UART_CLK/4)
+# [48368848000] PASS  TX_CLK period 8680.6 ns (= 1 bit @ 115200 baud)
+# [48681348000] PASS  RD REG2 (UART cfg) : 0x21
+# [48993848000] PASS  RD REG3 (div ratio) : 0x20
+# [50460862000] PASS  RF writes: no response : no unexpected TX traffic
+# [50773362000] PASS  RD RF[0x04] : 0xad
+# [51085862000] PASS  RD RF[0x07] : 0x34
+# [51398362000] PASS  RD RF[0x0b] : 0xff
+# [51710862000] PASS  RD RF[0x0f] : 0x09
+# [52231695000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
+# [52335862000] PASS  CC ADD  A=0xc8 B=0x07 MSB : 0x00
+# [52856695000] PASS  CC ADD  A=0x10 B=0xec LSB : 0xfc
+# [52960862000] PASS  CC ADD  A=0x10 B=0xec MSB : 0x00
+# [53481695000] PASS  CC ADD  A=0xc7 B=0x08 LSB : 0xbf
+# [53585862000] PASS  CC ADD  A=0xc7 B=0x08 MSB : 0x00
+# [54106695000] PASS  CC ADD  A=0x62 B=0x02 LSB : 0x60
+# [54210862000] PASS  CC ADD  A=0x62 B=0x02 MSB : 0x00
+# [54731695000] PASS  CC ADD  A=0xc6 B=0x09 LSB : 0xf6
+# [54835862000] PASS  CC ADD  A=0xc6 B=0x09 MSB : 0x06
+# [55356695000] PASS  CC ADD  A=0x3b B=0xe0 LSB : 0xa0
+# [55460862000] PASS  CC ADD  A=0x3b B=0xe0 MSB : 0x33
+# [55981695000] PASS  CC ADD  A=0xc5 B=0x0a LSB : 0x13
+# [56085862000] PASS  CC ADD  A=0xc5 B=0x0a MSB : 0x00
+# [56606695000] PASS  CC ADD  A=0xf3 B=0x40 LSB : 0x03
+# [56710862000] PASS  CC ADD  A=0xf3 B=0x40 MSB : 0x00
+# [57231695000] PASS  CC ADD  A=0xc4 B=0x0b LSB : 0x00
+# [57335862000] PASS  CC ADD  A=0xc4 B=0x0b MSB : 0x00
+# [57856695000] PASS  CC ADD  A=0x55 B=0xa7 LSB : 0x05
+# [57960862000] PASS  CC ADD  A=0x55 B=0xa7 MSB : 0x00
+# [58481695000] PASS  CC ADD  A=0xc3 B=0x0c LSB : 0xcf
+# [58585862000] PASS  CC ADD  A=0xc3 B=0x0c MSB : 0x00
+# [59106695000] PASS  CC ADD  A=0x87 B=0xc2 LSB : 0xc7
+# [59210862000] PASS  CC ADD  A=0x87 B=0xc2 MSB : 0x00
+# [59731695000] PASS  CC ADD  A=0xc2 B=0x0d LSB : 0xcf
+# [59835862000] PASS  CC ADD  A=0xc2 B=0x0d MSB : 0x00
+# [60356695000] PASS  CC ADD  A=0x73 B=0xe4 LSB : 0x97
+# [60460862000] PASS  CC ADD  A=0x73 B=0xe4 MSB : 0x00
+# [60981695000] PASS  CC ADD  A=0xc1 B=0x0e LSB : 0x00
+# [61085862000] PASS  CC ADD  A=0xc1 B=0x0e MSB : 0x00
+# [61606696000] PASS  CC ADD  A=0x38 B=0x5b LSB : 0x00
+# [61710862000] PASS  CC ADD  A=0x38 B=0x5b MSB : 0x00
+# [62231696000] PASS  CC ADD  A=0xc0 B=0x0f LSB : 0x02
+# [62335862000] PASS  CC ADD  A=0xc0 B=0x0f MSB : 0x00
+# [62856696000] PASS  CC ADD  A=0xc0 B=0xc3 LSB : 0x00
+# [62960862000] PASS  CC ADD  A=0xc0 B=0xc3 MSB : 0x00
+# [63481696000] PASS  CC ADD  A=0xbf B=0x10 LSB : 0x5f
+# [63585862000] PASS  CC ADD  A=0xbf B=0x10 MSB : 0x00
+# [64106696000] PASS  CC ADD  A=0x8e B=0x11 LSB : 0x47
+# [64210862000] PASS  CC ADD  A=0x8e B=0x11 MSB : 0x00
+# [64731696000] PASS  CC ADD  A=0xbe B=0x11 LSB : 0x7c
+# [64835862000] PASS  CC ADD  A=0xbe B=0x11 MSB : 0x01
+# [65356696000] PASS  CC ADD  A=0xbd B=0x58 LSB : 0x7a
+# [65460862000] PASS  CC ADD  A=0xbd B=0x58 MSB : 0x01
+# [65981696000] PASS  CC ADD  A=0x37 B=0x37 LSB : 0x01
+# [66085862000] PASS  CC ADD  A=0x37 B=0x37 MSB : 0x00
+# [66606696000] PASS  CC ADD  A=0xff B=0xff LSB : 0x01
+# [66710862000] PASS  CC ADD  A=0xff B=0xff MSB : 0xfe
+# [67231696000] PASS  CC ADD  A=0x0a B=0x00 LSB : 0x00
+# [67335862000] PASS  CC ADD  A=0x0a B=0x00 MSB : 0x00
+# [68177876000] PASS  REG0/REG1 writes: no resp : no unexpected TX traffic
+# [68490376000] PASS  DD ADD  A=0x62 B=0x0c LSB : 0x6e
+# [68594543000] PASS  DD ADD  A=0x62 B=0x0c MSB : 0x00
+# [68907043000] PASS  DD ADD  A=0x62 B=0x0c LSB : 0x56
+# [69011210000] PASS  DD ADD  A=0x62 B=0x0c MSB : 0x00
+# [69323710000] PASS  DD ADD  A=0x62 B=0x0c LSB : 0x00
+# [69427876000] PASS  DD ADD  A=0x62 B=0x0c MSB : 0x00
+# [69740376000] PASS  DD ADD  A=0x62 B=0x0c LSB : 0xc4
+# [69844543000] PASS  DD ADD  A=0x62 B=0x0c MSB : 0x00
+# [70157043000] PASS  DD ADD  A=0x62 B=0x0c LSB : 0x02
+# [70261210000] PASS  DD ADD  A=0x62 B=0x0c MSB : 0x00
+# [70782043000] PASS  CC ADD  A=0x21 B=0x03 LSB : 0x0b
+# [70886210000] PASS  CC ADD  A=0x21 B=0x03 MSB : 0x00
+# [71198710000] PASS  DD ADD  A=0x21 B=0x03 LSB : 0x63
+# [71302877000] PASS  DD ADD  A=0x21 B=0x03 MSB : 0x00
+# [71519890000] PASS  end of sweep: TX idle : no unexpected TX traffic
+# 
+# ==================== SUMMARY ====================
+# PASSED: 225   FAILED: 0
+# ALL TESTS PASSED
+# =================================================
+# ** Note: $stop    : System_Top_tb.sv(384)
+#    Time: 71519890461 ps  Iteration: 0  Instance: /System_Top_tb
+# Break in Module System_Top_tb at System_Top_tb.sv line 384
+add wave -position insertpoint  \
+sim:/System_Top_tb/REF_HALF \
+sim:/System_Top_tb/UART_HALF \
+sim:/System_Top_tb/BIT_NS \
+sim:/System_Top_tb/RF_WR_CMD \
+sim:/System_Top_tb/RF_RD_CMD \
+sim:/System_Top_tb/ALU_OP_CMD \
+sim:/System_Top_tb/ALU_NOP_CMD \
+sim:/System_Top_tb/F_ADD \
+sim:/System_Top_tb/F_SUB \
+sim:/System_Top_tb/F_MUL \
+sim:/System_Top_tb/F_DIV \
+sim:/System_Top_tb/F_AND \
+sim:/System_Top_tb/F_OR \
+sim:/System_Top_tb/F_XOR \
+sim:/System_Top_tb/F_EQ \
+sim:/System_Top_tb/F_GT \
+sim:/System_Top_tb/F_SHR \
+sim:/System_Top_tb/F_SHL \
+sim:/System_Top_tb/GAP_BITS \
+sim:/System_Top_tb/REF_CLK \
+sim:/System_Top_tb/UART_CLK \
+sim:/System_Top_tb/RST \
+sim:/System_Top_tb/RX_IN \
+sim:/System_Top_tb/TX_OUT \
+sim:/System_Top_tb/RX_D_VALID \
+sim:/System_Top_tb/TGT_PAR_EN \
+sim:/System_Top_tb/TGT_PAR_TYP \
+sim:/System_Top_tb/quick \
+sim:/System_Top_tb/cfg_par_en \
+sim:/System_Top_tb/cfg_par_typ \
+sim:/System_Top_tb/pass_cnt \
+sim:/System_Top_tb/fail_cnt \
+sim:/System_Top_tb/mon_data \
+sim:/System_Top_tb/mon_par_ok \
+sim:/System_Top_tb/mon_stp_ok \
+sim:/System_Top_tb/mon_wr \
+sim:/System_Top_tb/mon_rd \
+sim:/System_Top_tb/mon_en
+do run.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 08:09:36 on Sep 30,2026
+# vlog -reportprogress 300 -f system.lst 
+# -- Compiling module ALU
+# -- Compiling module DF_SYNC
+# -- Compiling module FIFO_MEM
+# -- Compiling module FIFO_RD
+# -- Compiling module FIFO_TOP
+# -- Compiling module FIFO_WR
+# -- Compiling module CLK_GATE
+# -- Compiling module Data_Bus_Sync
+# -- Compiling module I_CLK_DIV
+# -- Compiling module pulse_gen
+# -- Compiling module Reg_File
+# -- Compiling module RST_Sync
+# -- Compiling module RX_CLK_DIV_MUX
+# -- Compiling module Sys_Ctrl
+# -- Compiling module System_Top
+# -- Compiling module Deserializer
+# -- Compiling module Edge_Bit_Counter
+# -- Compiling module Parity_Checker
+# -- Compiling module Sampler
+# -- Compiling module Start_Checker
+# -- Compiling module Stop_Checker
+# -- Compiling module UART_RX
+# -- Compiling module UART_RX_FSM
+# -- Compiling module MUX_4x1
+# -- Compiling module UART_Parity
+# -- Compiling module UART_Serializer
+# -- Compiling module UART_TX_FSM
+# -- Compiling module UART_TX_TOP
+# -- Compiling module UART
+# 
+# Top level modules:
+# 	System_Top
+# End time: 08:09:37 on Sep 30,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 08:09:37 on Sep 30,2026
+# vlog -reportprogress 300 System_Top_tb.sv 
+# -- Compiling module System_Top_tb
+# 
+# Top level modules:
+# 	System_Top_tb
+# End time: 08:09:37 on Sep 30,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 08:09:38 on Sep 30,2026, Elapsed time: 0:03:53
+# Errors: 8, Warnings: 2
+# vsim -wlf logs/vsim.wlf -voptargs="+acc" work.System_Top_tb 
+# Start time: 08:09:38 on Sep 30,2026
+# ** Note: (vsim-8009) Loading existing optimized design _opt1
+# Loading sv_std.std
+# Loading work.System_Top_tb(fast)
+# Loading work.System_Top(fast)
+# Loading work.ALU(fast)
+# Loading work.FIFO_TOP(fast)
+# Loading work.FIFO_MEM(fast)
+# Loading work.FIFO_WR(fast)
+# Loading work.FIFO_RD(fast)
+# Loading work.DF_SYNC(fast)
+# Loading work.DF_SYNC(fast__1)
+# Loading work.Data_Bus_Sync(fast)
+# Loading work.RX_CLK_DIV_MUX(fast)
+# Loading work.I_CLK_DIV(fast)
+# Loading work.I_CLK_DIV(fast__1)
+# Loading work.pulse_gen(fast)
+# Loading work.Reg_File(fast)
+# Loading work.RST_Sync(fast)
+# Loading work.CLK_GATE(fast)
+# Loading work.Sys_Ctrl(fast)
+# Loading work.UART(fast)
+# Loading work.UART_TX_TOP(fast)
+# Loading work.UART_Serializer(fast)
+# Loading work.UART_Parity(fast)
+# Loading work.UART_TX_FSM(fast)
+# Loading work.MUX_4x1(fast)
+# Loading work.UART_RX(fast)
+# Loading work.Sampler(fast)
+# Loading work.Edge_Bit_Counter(fast)
+# Loading work.Deserializer(fast)
+# Loading work.Start_Checker(fast)
+# Loading work.Stop_Checker(fast)
+# Loading work.Parity_Checker(fast)
+# Loading work.UART_RX_FSM(fast)
+# ** Error: Cannot open WLF file: "logs/vsim.wlf"
+#           No such file or directory.
+#           Attempting to use alternate WLF file "logs/wlftsnpttd".
+# ** Error: Cannot open WLF file: "logs/wlftsnpttd"
+#           No such file or directory.
+#           Attempting to use alternate WLF file "./wlft6e1m4L".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: logs/vsim.wlf
+#           Using alternate file: ./wlft6e1m4L
+# ** Error: (vish-4014) No objects found matching '/System_Top_tb/errors'.
+# Executing ONERROR command at macro ./wave.do line 145
+# ** Error: (vish-4014) No objects found matching '/System_Top_tb/checks'.
+# Executing ONERROR command at macro ./wave.do line 146
+# 
+# ================ Prescale = 32  (PAR_EN=1 PAR_TYP=0) ================
+# [703805000] PASS  RX_CLK period 271.3 ns (Prescale 32 -> UART_CLK/1)
+# [712485000] PASS  TX_CLK period 8680.6 ns (= 1 bit @ 115200 baud)
+# [1024985000] PASS  RD REG2 (UART cfg) : 0x81
+# [1337485000] PASS  RD REG3 (div ratio) : 0x20
+# [2804499000] PASS  RF writes: no response : no unexpected TX traffic
+# [3116999000] PASS  RD RF[0x04] : 0x85
+# [3429499000] PASS  RD RF[0x07] : 0x1c
+# [3741999000] PASS  RD RF[0x0b] : 0xff
+# [4054499000] PASS  RD RF[0x0f] : 0x21
+# [4575333000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
+# [4679499000] PASS  CC ADD  A=0xc8 B=0x07 MSB : 0x00
+# [5200333000] PASS  CC ADD  A=0x62 B=0xec LSB : 0x4e
+# [5304500000] PASS  CC ADD  A=0x62 B=0xec MSB : 0x01
+# [5825333000] PASS  CC ADD  A=0xc7 B=0x08 LSB : 0xbf
+# [5929500000] PASS  CC ADD  A=0xc7 B=0x08 MSB : 0x00
+# [6450333000] PASS  CC ADD  A=0x98 B=0x45 LSB : 0x53
+# [6554500000] PASS  CC ADD  A=0x98 B=0x45 MSB : 0x00
+# [7075333000] PASS  CC ADD  A=0xc6 B=0x09 LSB : 0xf6
+# [7179500000] PASS  CC ADD  A=0xc6 B=0x09 MSB : 0x06
+# [7700333000] PASS  CC ADD  A=0xc5 B=0xe8 LSB : 0x88
+# [7804500000] PASS  CC ADD  A=0xc5 B=0xe8 MSB : 0xb2
+# [8325333000] PASS  CC ADD  A=0xc5 B=0x0a LSB : 0x13
+# [8429500000] PASS  CC ADD  A=0xc5 B=0x0a MSB : 0x00
+# [8950333000] PASS  CC ADD  A=0x8d B=0xbd LSB : 0x00
+# [9054500000] PASS  CC ADD  A=0x8d B=0xbd MSB : 0x00
+# [9575333000] PASS  CC ADD  A=0xc4 B=0x0b LSB : 0x00
+# [9679500000] PASS  CC ADD  A=0xc4 B=0x0b MSB : 0x00
+# [10200333000] PASS  CC ADD  A=0x8f B=0x17 LSB : 0x07
+# [10304500000] PASS  CC ADD  A=0x8f B=0x17 MSB : 0x00
+# [10825333000] PASS  CC ADD  A=0xc3 B=0x0c LSB : 0xcf
+# [10929500000] PASS  CC ADD  A=0xc3 B=0x0c MSB : 0x00
+# [11450333000] PASS  CC ADD  A=0x5e B=0x94 LSB : 0xde
+# [11554500000] PASS  CC ADD  A=0x5e B=0x94 MSB : 0x00
+# [12075333000] PASS  CC ADD  A=0xc2 B=0x0d LSB : 0xcf
+# [12179500000] PASS  CC ADD  A=0xc2 B=0x0d MSB : 0x00
+# [12700333000] PASS  CC ADD  A=0x16 B=0x15 LSB : 0x03
+# [12804500000] PASS  CC ADD  A=0x16 B=0x15 MSB : 0x00
+# [13325333000] PASS  CC ADD  A=0xc1 B=0x0e LSB : 0x00
+# [13429500000] PASS  CC ADD  A=0xc1 B=0x0e MSB : 0x00
+# [13950333000] PASS  CC ADD  A=0xfd B=0x75 LSB : 0x00
+# [14054500000] PASS  CC ADD  A=0xfd B=0x75 MSB : 0x00
+# [14575333000] PASS  CC ADD  A=0xc0 B=0x0f LSB : 0x02
+# [14679500000] PASS  CC ADD  A=0xc0 B=0x0f MSB : 0x00
+# [15200333000] PASS  CC ADD  A=0x1f B=0x12 LSB : 0x02
+# [15304500000] PASS  CC ADD  A=0x1f B=0x12 MSB : 0x00
+# [15825333000] PASS  CC ADD  A=0xbf B=0x10 LSB : 0x5f
+# [15929500000] PASS  CC ADD  A=0xbf B=0x10 MSB : 0x00
+# [16450333000] PASS  CC ADD  A=0xec B=0x9f LSB : 0x76
+# [16554500000] PASS  CC ADD  A=0xec B=0x9f MSB : 0x00
+# [17075333000] PASS  CC ADD  A=0xbe B=0x11 LSB : 0x7c
+# [17179500000] PASS  CC ADD  A=0xbe B=0x11 MSB : 0x01
+# [17700333000] PASS  CC ADD  A=0x72 B=0x91 LSB : 0xe4
+# [17804500000] PASS  CC ADD  A=0x72 B=0x91 MSB : 0x00
+# [18325334000] PASS  CC ADD  A=0x37 B=0x37 LSB : 0x01
+# [18429500000] PASS  CC ADD  A=0x37 B=0x37 MSB : 0x00
+# [18950334000] PASS  CC ADD  A=0xff B=0xff LSB : 0x01
+# [19054500000] PASS  CC ADD  A=0xff B=0xff MSB : 0xfe
+# [19575334000] PASS  CC ADD  A=0x0a B=0x00 LSB : 0x00
+# [19679500000] PASS  CC ADD  A=0x0a B=0x00 MSB : 0x00
+# [20521514000] PASS  REG0/REG1 writes: no resp : no unexpected TX traffic
+# [20834014000] PASS  DD ADD  A=0x7a B=0x0c LSB : 0x86
+# [20938181000] PASS  DD ADD  A=0x7a B=0x0c MSB : 0x00
+# [21250681000] PASS  DD ADD  A=0x7a B=0x0c LSB : 0x6e
+# [21354848000] PASS  DD ADD  A=0x7a B=0x0c MSB : 0x00
+# [21667348000] PASS  DD ADD  A=0x7a B=0x0c LSB : 0x08
+# [21771514000] PASS  DD ADD  A=0x7a B=0x0c MSB : 0x00
+# [22084014000] PASS  DD ADD  A=0x7a B=0x0c LSB : 0xf4
+# [22188181000] PASS  DD ADD  A=0x7a B=0x0c MSB : 0x00
+# [22500681000] PASS  DD ADD  A=0x7a B=0x0c LSB : 0x02
+# [22604848000] PASS  DD ADD  A=0x7a B=0x0c MSB : 0x00
+# [23125681000] PASS  CC ADD  A=0x21 B=0x03 LSB : 0x0b
+# [23229848000] PASS  CC ADD  A=0x21 B=0x03 MSB : 0x00
+# [23542348000] PASS  DD ADD  A=0x21 B=0x03 LSB : 0x63
+# [23646514000] PASS  DD ADD  A=0x21 B=0x03 MSB : 0x00
+# [23863528000] PASS  end of sweep: TX idle : no unexpected TX traffic
+# 
+# ================ Prescale = 16  (PAR_EN=1 PAR_TYP=0) ================
+# [24523848000] PASS  RX_CLK period 542.5 ns (Prescale 16 -> UART_CLK/2)
+# [24540667000] PASS  TX_CLK period 8680.6 ns (= 1 bit @ 115200 baud)
+# [24853167000] PASS  RD REG2 (UART cfg) : 0x41
+# [25165667000] PASS  RD REG3 (div ratio) : 0x20
+# [26632681000] PASS  RF writes: no response : no unexpected TX traffic
+# [26945181000] PASS  RD RF[0x04] : 0xb5
+# [27257681000] PASS  RD RF[0x07] : 0x2c
+# [27570181000] PASS  RD RF[0x0b] : 0xff
+# [27882681000] PASS  RD RF[0x0f] : 0x11
+# [28403514000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
+# [28507681000] PASS  CC ADD  A=0xc8 B=0x07 MSB : 0x00
+# [29028514000] PASS  CC ADD  A=0xa7 B=0x82 LSB : 0x29
+# [29132681000] PASS  CC ADD  A=0xa7 B=0x82 MSB : 0x01
+# [29653514000] PASS  CC ADD  A=0xc7 B=0x08 LSB : 0xbf
+# [29757681000] PASS  CC ADD  A=0xc7 B=0x08 MSB : 0x00
+# [30278514000] PASS  CC ADD  A=0xaa B=0x25 LSB : 0x85
+# [30382681000] PASS  CC ADD  A=0xaa B=0x25 MSB : 0x00
+# [30903514000] PASS  CC ADD  A=0xc6 B=0x09 LSB : 0xf6
+# [31007681000] PASS  CC ADD  A=0xc6 B=0x09 MSB : 0x06
+# [31528514000] PASS  CC ADD  A=0x88 B=0x89 LSB : 0xc8
+# [31632681000] PASS  CC ADD  A=0x88 B=0x89 MSB : 0x48
+# [32153514000] PASS  CC ADD  A=0xc5 B=0x0a LSB : 0x13
+# [32257681000] PASS  CC ADD  A=0xc5 B=0x0a MSB : 0x00
+# [32778514000] PASS  CC ADD  A=0xfa B=0xa5 LSB : 0x01
+# [32882681000] PASS  CC ADD  A=0xfa B=0xa5 MSB : 0x00
+# [33403514000] PASS  CC ADD  A=0xc4 B=0x0b LSB : 0x00
+# [33507681000] PASS  CC ADD  A=0xc4 B=0x0b MSB : 0x00
+# [34028514000] PASS  CC ADD  A=0x26 B=0x87 LSB : 0x06
+# [34132681000] PASS  CC ADD  A=0x26 B=0x87 MSB : 0x00
+# [34653514000] PASS  CC ADD  A=0xc3 B=0x0c LSB : 0xcf
+# [34757681000] PASS  CC ADD  A=0xc3 B=0x0c MSB : 0x00
+# [35278514000] PASS  CC ADD  A=0x71 B=0x77 LSB : 0x77
+# [35382681000] PASS  CC ADD  A=0x71 B=0x77 MSB : 0x00
+# [35903514000] PASS  CC ADD  A=0xc2 B=0x0d LSB : 0xcf
+# [36007681000] PASS  CC ADD  A=0xc2 B=0x0d MSB : 0x00
+# [36528514000] PASS  CC ADD  A=0xa3 B=0x34 LSB : 0x97
+# [36632681000] PASS  CC ADD  A=0xa3 B=0x34 MSB : 0x00
+# [37153514000] PASS  CC ADD  A=0xc1 B=0x0e LSB : 0x00
+# [37257681000] PASS  CC ADD  A=0xc1 B=0x0e MSB : 0x00
+# [37778514000] PASS  CC ADD  A=0x32 B=0xf9 LSB : 0x00
+# [37882681000] PASS  CC ADD  A=0x32 B=0xf9 MSB : 0x00
+# [38403514000] PASS  CC ADD  A=0xc0 B=0x0f LSB : 0x02
+# [38507681000] PASS  CC ADD  A=0xc0 B=0x0f MSB : 0x00
+# [39028514000] PASS  CC ADD  A=0x9e B=0x34 LSB : 0x02
+# [39132681000] PASS  CC ADD  A=0x9e B=0x34 MSB : 0x00
+# [39653515000] PASS  CC ADD  A=0xbf B=0x10 LSB : 0x5f
+# [39757681000] PASS  CC ADD  A=0xbf B=0x10 MSB : 0x00
+# [40278515000] PASS  CC ADD  A=0x04 B=0xed LSB : 0x02
+# [40382681000] PASS  CC ADD  A=0x04 B=0xed MSB : 0x00
+# [40903515000] PASS  CC ADD  A=0xbe B=0x11 LSB : 0x7c
+# [41007681000] PASS  CC ADD  A=0xbe B=0x11 MSB : 0x01
+# [41528515000] PASS  CC ADD  A=0xd4 B=0x62 LSB : 0xa8
+# [41632681000] PASS  CC ADD  A=0xd4 B=0x62 MSB : 0x01
+# [42153515000] PASS  CC ADD  A=0x37 B=0x37 LSB : 0x01
+# [42257681000] PASS  CC ADD  A=0x37 B=0x37 MSB : 0x00
+# [42778515000] PASS  CC ADD  A=0xff B=0xff LSB : 0x01
+# [42882681000] PASS  CC ADD  A=0xff B=0xff MSB : 0xfe
+# [43403515000] PASS  CC ADD  A=0x0a B=0x00 LSB : 0x00
+# [43507681000] PASS  CC ADD  A=0x0a B=0x00 MSB : 0x00
+# [44349695000] PASS  REG0/REG1 writes: no resp : no unexpected TX traffic
+# [44662195000] PASS  DD ADD  A=0x6a B=0x0c LSB : 0x76
+# [44766362000] PASS  DD ADD  A=0x6a B=0x0c MSB : 0x00
+# [45078862000] PASS  DD ADD  A=0x6a B=0x0c LSB : 0x5e
+# [45183029000] PASS  DD ADD  A=0x6a B=0x0c MSB : 0x00
+# [45495529000] PASS  DD ADD  A=0x6a B=0x0c LSB : 0x08
+# [45599695000] PASS  DD ADD  A=0x6a B=0x0c MSB : 0x00
+# [45912195000] PASS  DD ADD  A=0x6a B=0x0c LSB : 0xd4
+# [46016362000] PASS  DD ADD  A=0x6a B=0x0c MSB : 0x00
+# [46328862000] PASS  DD ADD  A=0x6a B=0x0c LSB : 0x02
+# [46433029000] PASS  DD ADD  A=0x6a B=0x0c MSB : 0x00
+# [46953862000] PASS  CC ADD  A=0x21 B=0x03 LSB : 0x0b
+# [47058029000] PASS  CC ADD  A=0x21 B=0x03 MSB : 0x00
+# [47370529000] PASS  DD ADD  A=0x21 B=0x03 LSB : 0x63
+# [47474695000] PASS  DD ADD  A=0x21 B=0x03 MSB : 0x00
+# [47691709000] PASS  end of sweep: TX idle : no unexpected TX traffic
+# 
+# ================ Prescale = 8  (PAR_EN=1 PAR_TYP=0) ================
+# [48352572000] PASS  RX_CLK period 1085.1 ns (Prescale 8 -> UART_CLK/4)
+# [48368848000] PASS  TX_CLK period 8680.6 ns (= 1 bit @ 115200 baud)
+# [48681348000] PASS  RD REG2 (UART cfg) : 0x21
+# [48993848000] PASS  RD REG3 (div ratio) : 0x20
+# [50460862000] PASS  RF writes: no response : no unexpected TX traffic
+# [50773362000] PASS  RD RF[0x04] : 0xad
+# [51085862000] PASS  RD RF[0x07] : 0x34
+# [51398362000] PASS  RD RF[0x0b] : 0xff
+# [51710862000] PASS  RD RF[0x0f] : 0x09
+# [52231695000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
+# [52335862000] PASS  CC ADD  A=0xc8 B=0x07 MSB : 0x00
+# [52856695000] PASS  CC ADD  A=0x10 B=0xec LSB : 0xfc
+# [52960862000] PASS  CC ADD  A=0x10 B=0xec MSB : 0x00
+# [53481695000] PASS  CC ADD  A=0xc7 B=0x08 LSB : 0xbf
+# [53585862000] PASS  CC ADD  A=0xc7 B=0x08 MSB : 0x00
+# [54106695000] PASS  CC ADD  A=0x62 B=0x02 LSB : 0x60
+# [54210862000] PASS  CC ADD  A=0x62 B=0x02 MSB : 0x00
+# [54731695000] PASS  CC ADD  A=0xc6 B=0x09 LSB : 0xf6
+# [54835862000] PASS  CC ADD  A=0xc6 B=0x09 MSB : 0x06
+# [55356695000] PASS  CC ADD  A=0x3b B=0xe0 LSB : 0xa0
+# [55460862000] PASS  CC ADD  A=0x3b B=0xe0 MSB : 0x33
+# [55981695000] PASS  CC ADD  A=0xc5 B=0x0a LSB : 0x13
+# [56085862000] PASS  CC ADD  A=0xc5 B=0x0a MSB : 0x00
+# [56606695000] PASS  CC ADD  A=0xf3 B=0x40 LSB : 0x03
+# [56710862000] PASS  CC ADD  A=0xf3 B=0x40 MSB : 0x00
+# [57231695000] PASS  CC ADD  A=0xc4 B=0x0b LSB : 0x00
+# [57335862000] PASS  CC ADD  A=0xc4 B=0x0b MSB : 0x00
+# [57856695000] PASS  CC ADD  A=0x55 B=0xa7 LSB : 0x05
+# [57960862000] PASS  CC ADD  A=0x55 B=0xa7 MSB : 0x00
+# [58481695000] PASS  CC ADD  A=0xc3 B=0x0c LSB : 0xcf
+# [58585862000] PASS  CC ADD  A=0xc3 B=0x0c MSB : 0x00
+# [59106695000] PASS  CC ADD  A=0x87 B=0xc2 LSB : 0xc7
+# [59210862000] PASS  CC ADD  A=0x87 B=0xc2 MSB : 0x00
+# [59731695000] PASS  CC ADD  A=0xc2 B=0x0d LSB : 0xcf
+# [59835862000] PASS  CC ADD  A=0xc2 B=0x0d MSB : 0x00
+# [60356695000] PASS  CC ADD  A=0x73 B=0xe4 LSB : 0x97
+# [60460862000] PASS  CC ADD  A=0x73 B=0xe4 MSB : 0x00
+# [60981695000] PASS  CC ADD  A=0xc1 B=0x0e LSB : 0x00
+# [61085862000] PASS  CC ADD  A=0xc1 B=0x0e MSB : 0x00
+# [61606696000] PASS  CC ADD  A=0x38 B=0x5b LSB : 0x00
+# [61710862000] PASS  CC ADD  A=0x38 B=0x5b MSB : 0x00
+# [62231696000] PASS  CC ADD  A=0xc0 B=0x0f LSB : 0x02
+# [62335862000] PASS  CC ADD  A=0xc0 B=0x0f MSB : 0x00
+# [62856696000] PASS  CC ADD  A=0xc0 B=0xc3 LSB : 0x00
+# [62960862000] PASS  CC ADD  A=0xc0 B=0xc3 MSB : 0x00
+# [63481696000] PASS  CC ADD  A=0xbf B=0x10 LSB : 0x5f
+# [63585862000] PASS  CC ADD  A=0xbf B=0x10 MSB : 0x00
+# [64106696000] PASS  CC ADD  A=0x8e B=0x11 LSB : 0x47
+# [64210862000] PASS  CC ADD  A=0x8e B=0x11 MSB : 0x00
+# [64731696000] PASS  CC ADD  A=0xbe B=0x11 LSB : 0x7c
+# [64835862000] PASS  CC ADD  A=0xbe B=0x11 MSB : 0x01
+# [65356696000] PASS  CC ADD  A=0xbd B=0x58 LSB : 0x7a
+# [65460862000] PASS  CC ADD  A=0xbd B=0x58 MSB : 0x01
+# [65981696000] PASS  CC ADD  A=0x37 B=0x37 LSB : 0x01
+# [66085862000] PASS  CC ADD  A=0x37 B=0x37 MSB : 0x00
+# [66606696000] PASS  CC ADD  A=0xff B=0xff LSB : 0x01
+# [66710862000] PASS  CC ADD  A=0xff B=0xff MSB : 0xfe
+# [67231696000] PASS  CC ADD  A=0x0a B=0x00 LSB : 0x00
+# [67335862000] PASS  CC ADD  A=0x0a B=0x00 MSB : 0x00
+# [68177876000] PASS  REG0/REG1 writes: no resp : no unexpected TX traffic
+# [68490376000] PASS  DD ADD  A=0x62 B=0x0c LSB : 0x6e
+# [68594543000] PASS  DD ADD  A=0x62 B=0x0c MSB : 0x00
+# [68907043000] PASS  DD ADD  A=0x62 B=0x0c LSB : 0x56
+# [69011210000] PASS  DD ADD  A=0x62 B=0x0c MSB : 0x00
+# [69323710000] PASS  DD ADD  A=0x62 B=0x0c LSB : 0x00
+# [69427876000] PASS  DD ADD  A=0x62 B=0x0c MSB : 0x00
+# [69740376000] PASS  DD ADD  A=0x62 B=0x0c LSB : 0xc4
+# [69844543000] PASS  DD ADD  A=0x62 B=0x0c MSB : 0x00
+# [70157043000] PASS  DD ADD  A=0x62 B=0x0c LSB : 0x02
+# [70261210000] PASS  DD ADD  A=0x62 B=0x0c MSB : 0x00
+# [70782043000] PASS  CC ADD  A=0x21 B=0x03 LSB : 0x0b
+# [70886210000] PASS  CC ADD  A=0x21 B=0x03 MSB : 0x00
+# [71198710000] PASS  DD ADD  A=0x21 B=0x03 LSB : 0x63
+# [71302877000] PASS  DD ADD  A=0x21 B=0x03 MSB : 0x00
+# [71519890000] PASS  end of sweep: TX idle : no unexpected TX traffic
+# 
+# ==================== SUMMARY ====================
+# PASSED: 225   FAILED: 0
+# ALL TESTS PASSED
+# =================================================
+# ** Note: $stop    : System_Top_tb.sv(384)
+#    Time: 71519890461 ps  Iteration: 0  Instance: /System_Top_tb
+# Break in Module System_Top_tb at System_Top_tb.sv line 384
+add wave -position insertpoint  \
+sim:/System_Top_tb/REF_HALF \
+sim:/System_Top_tb/UART_HALF \
+sim:/System_Top_tb/BIT_NS \
+sim:/System_Top_tb/RF_WR_CMD \
+sim:/System_Top_tb/RF_RD_CMD \
+sim:/System_Top_tb/ALU_OP_CMD \
+sim:/System_Top_tb/ALU_NOP_CMD \
+sim:/System_Top_tb/F_ADD \
+sim:/System_Top_tb/F_SUB \
+sim:/System_Top_tb/F_MUL \
+sim:/System_Top_tb/F_DIV \
+sim:/System_Top_tb/F_AND \
+sim:/System_Top_tb/F_OR \
+sim:/System_Top_tb/F_XOR \
+sim:/System_Top_tb/F_EQ \
+sim:/System_Top_tb/F_GT \
+sim:/System_Top_tb/F_SHR \
+sim:/System_Top_tb/F_SHL \
+sim:/System_Top_tb/GAP_BITS \
+sim:/System_Top_tb/REF_CLK \
+sim:/System_Top_tb/UART_CLK \
+sim:/System_Top_tb/RST \
+sim:/System_Top_tb/RX_IN \
+sim:/System_Top_tb/TX_OUT \
+sim:/System_Top_tb/RX_D_VALID \
+sim:/System_Top_tb/TGT_PAR_EN \
+sim:/System_Top_tb/TGT_PAR_TYP \
+sim:/System_Top_tb/quick \
+sim:/System_Top_tb/cfg_par_en \
+sim:/System_Top_tb/cfg_par_typ \
+sim:/System_Top_tb/pass_cnt \
+sim:/System_Top_tb/fail_cnt \
+sim:/System_Top_tb/mon_data \
+sim:/System_Top_tb/mon_par_ok \
+sim:/System_Top_tb/mon_stp_ok \
+sim:/System_Top_tb/mon_wr \
+sim:/System_Top_tb/mon_rd \
+sim:/System_Top_tb/mon_en
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf /mnt/hgfs/Shared_Folder/System/SIM/wave.do
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf /mnt/hgfs/Shared_Folder/System/SIM/wave.do
+do run.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 08:10:48 on Sep 30,2026
+# vlog -reportprogress 300 -f system.lst 
+# -- Compiling module ALU
+# -- Compiling module DF_SYNC
+# -- Compiling module FIFO_MEM
+# -- Compiling module FIFO_RD
+# -- Compiling module FIFO_TOP
+# -- Compiling module FIFO_WR
+# -- Compiling module CLK_GATE
+# -- Compiling module Data_Bus_Sync
+# -- Compiling module I_CLK_DIV
+# -- Compiling module pulse_gen
+# -- Compiling module Reg_File
+# -- Compiling module RST_Sync
+# -- Compiling module RX_CLK_DIV_MUX
+# -- Compiling module Sys_Ctrl
+# -- Compiling module System_Top
+# -- Compiling module Deserializer
+# -- Compiling module Edge_Bit_Counter
+# -- Compiling module Parity_Checker
+# -- Compiling module Sampler
+# -- Compiling module Start_Checker
+# -- Compiling module Stop_Checker
+# -- Compiling module UART_RX
+# -- Compiling module UART_RX_FSM
+# -- Compiling module MUX_4x1
+# -- Compiling module UART_Parity
+# -- Compiling module UART_Serializer
+# -- Compiling module UART_TX_FSM
+# -- Compiling module UART_TX_TOP
+# -- Compiling module UART
+# 
+# Top level modules:
+# 	System_Top
+# End time: 08:10:48 on Sep 30,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 08:10:48 on Sep 30,2026
+# vlog -reportprogress 300 System_Top_tb.sv 
+# -- Compiling module System_Top_tb
+# 
+# Top level modules:
+# 	System_Top_tb
+# End time: 08:10:48 on Sep 30,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 08:10:50 on Sep 30,2026, Elapsed time: 0:01:12
+# Errors: 8, Warnings: 1
+# vsim -wlf logs/vsim.wlf -voptargs="+acc" work.System_Top_tb 
+# Start time: 08:10:50 on Sep 30,2026
+# ** Note: (vsim-8009) Loading existing optimized design _opt1
+# Loading sv_std.std
+# Loading work.System_Top_tb(fast)
+# Loading work.System_Top(fast)
+# Loading work.ALU(fast)
+# Loading work.FIFO_TOP(fast)
+# Loading work.FIFO_MEM(fast)
+# Loading work.FIFO_WR(fast)
+# Loading work.FIFO_RD(fast)
+# Loading work.DF_SYNC(fast)
+# Loading work.DF_SYNC(fast__1)
+# Loading work.Data_Bus_Sync(fast)
+# Loading work.RX_CLK_DIV_MUX(fast)
+# Loading work.I_CLK_DIV(fast)
+# Loading work.I_CLK_DIV(fast__1)
+# Loading work.pulse_gen(fast)
+# Loading work.Reg_File(fast)
+# Loading work.RST_Sync(fast)
+# Loading work.CLK_GATE(fast)
+# Loading work.Sys_Ctrl(fast)
+# Loading work.UART(fast)
+# Loading work.UART_TX_TOP(fast)
+# Loading work.UART_Serializer(fast)
+# Loading work.UART_Parity(fast)
+# Loading work.UART_TX_FSM(fast)
+# Loading work.MUX_4x1(fast)
+# Loading work.UART_RX(fast)
+# Loading work.Sampler(fast)
+# Loading work.Edge_Bit_Counter(fast)
+# Loading work.Deserializer(fast)
+# Loading work.Start_Checker(fast)
+# Loading work.Stop_Checker(fast)
+# Loading work.Parity_Checker(fast)
+# Loading work.UART_RX_FSM(fast)
+# ** Error: Cannot open WLF file: "logs/vsim.wlf"
+#           No such file or directory.
+#           Attempting to use alternate WLF file "logs/wlftiAYKya".
+# ** Error: Cannot open WLF file: "logs/wlftiAYKya"
+#           No such file or directory.
+#           Attempting to use alternate WLF file "./wlftrnutlS".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: logs/vsim.wlf
+#           Using alternate file: ./wlftrnutlS
+# 
+# ================ Prescale = 32  (PAR_EN=1 PAR_TYP=0) ================
+# [703805000] PASS  RX_CLK period 271.3 ns (Prescale 32 -> UART_CLK/1)
+# [712485000] PASS  TX_CLK period 8680.6 ns (= 1 bit @ 115200 baud)
+# [1024985000] PASS  RD REG2 (UART cfg) : 0x81
+# [1337485000] PASS  RD REG3 (div ratio) : 0x20
+# [2804499000] PASS  RF writes: no response : no unexpected TX traffic
+# [3116999000] PASS  RD RF[0x04] : 0x85
+# [3429499000] PASS  RD RF[0x07] : 0x1c
+# [3741999000] PASS  RD RF[0x0b] : 0xff
+# [4054499000] PASS  RD RF[0x0f] : 0x21
+# [4575333000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
+# [4679499000] PASS  CC ADD  A=0xc8 B=0x07 MSB : 0x00
+# [5200333000] PASS  CC ADD  A=0x62 B=0xec LSB : 0x4e
+# [5304500000] PASS  CC ADD  A=0x62 B=0xec MSB : 0x01
+# [5825333000] PASS  CC ADD  A=0xc7 B=0x08 LSB : 0xbf
+# [5929500000] PASS  CC ADD  A=0xc7 B=0x08 MSB : 0x00
+# [6450333000] PASS  CC ADD  A=0x98 B=0x45 LSB : 0x53
+# [6554500000] PASS  CC ADD  A=0x98 B=0x45 MSB : 0x00
+# [7075333000] PASS  CC ADD  A=0xc6 B=0x09 LSB : 0xf6
+# [7179500000] PASS  CC ADD  A=0xc6 B=0x09 MSB : 0x06
+# [7700333000] PASS  CC ADD  A=0xc5 B=0xe8 LSB : 0x88
+# [7804500000] PASS  CC ADD  A=0xc5 B=0xe8 MSB : 0xb2
+# [8325333000] PASS  CC ADD  A=0xc5 B=0x0a LSB : 0x13
+# [8429500000] PASS  CC ADD  A=0xc5 B=0x0a MSB : 0x00
+# [8950333000] PASS  CC ADD  A=0x8d B=0xbd LSB : 0x00
+# [9054500000] PASS  CC ADD  A=0x8d B=0xbd MSB : 0x00
+# [9575333000] PASS  CC ADD  A=0xc4 B=0x0b LSB : 0x00
+# [9679500000] PASS  CC ADD  A=0xc4 B=0x0b MSB : 0x00
+# [10200333000] PASS  CC ADD  A=0x8f B=0x17 LSB : 0x07
+# [10304500000] PASS  CC ADD  A=0x8f B=0x17 MSB : 0x00
+# [10825333000] PASS  CC ADD  A=0xc3 B=0x0c LSB : 0xcf
+# [10929500000] PASS  CC ADD  A=0xc3 B=0x0c MSB : 0x00
+# [11450333000] PASS  CC ADD  A=0x5e B=0x94 LSB : 0xde
+# [11554500000] PASS  CC ADD  A=0x5e B=0x94 MSB : 0x00
+# [12075333000] PASS  CC ADD  A=0xc2 B=0x0d LSB : 0xcf
+# [12179500000] PASS  CC ADD  A=0xc2 B=0x0d MSB : 0x00
+# [12700333000] PASS  CC ADD  A=0x16 B=0x15 LSB : 0x03
+# [12804500000] PASS  CC ADD  A=0x16 B=0x15 MSB : 0x00
+# [13325333000] PASS  CC ADD  A=0xc1 B=0x0e LSB : 0x00
+# [13429500000] PASS  CC ADD  A=0xc1 B=0x0e MSB : 0x00
+# [13950333000] PASS  CC ADD  A=0xfd B=0x75 LSB : 0x00
+# [14054500000] PASS  CC ADD  A=0xfd B=0x75 MSB : 0x00
+# [14575333000] PASS  CC ADD  A=0xc0 B=0x0f LSB : 0x02
+# [14679500000] PASS  CC ADD  A=0xc0 B=0x0f MSB : 0x00
+# [15200333000] PASS  CC ADD  A=0x1f B=0x12 LSB : 0x02
+# [15304500000] PASS  CC ADD  A=0x1f B=0x12 MSB : 0x00
+# [15825333000] PASS  CC ADD  A=0xbf B=0x10 LSB : 0x5f
+# [15929500000] PASS  CC ADD  A=0xbf B=0x10 MSB : 0x00
+# [16450333000] PASS  CC ADD  A=0xec B=0x9f LSB : 0x76
+# [16554500000] PASS  CC ADD  A=0xec B=0x9f MSB : 0x00
+# [17075333000] PASS  CC ADD  A=0xbe B=0x11 LSB : 0x7c
+# [17179500000] PASS  CC ADD  A=0xbe B=0x11 MSB : 0x01
+# [17700333000] PASS  CC ADD  A=0x72 B=0x91 LSB : 0xe4
+# [17804500000] PASS  CC ADD  A=0x72 B=0x91 MSB : 0x00
+# [18325334000] PASS  CC ADD  A=0x37 B=0x37 LSB : 0x01
+# [18429500000] PASS  CC ADD  A=0x37 B=0x37 MSB : 0x00
+# [18950334000] PASS  CC ADD  A=0xff B=0xff LSB : 0x01
+# [19054500000] PASS  CC ADD  A=0xff B=0xff MSB : 0xfe
+# [19575334000] PASS  CC ADD  A=0x0a B=0x00 LSB : 0x00
+# [19679500000] PASS  CC ADD  A=0x0a B=0x00 MSB : 0x00
+# [20521514000] PASS  REG0/REG1 writes: no resp : no unexpected TX traffic
+# [20834014000] PASS  DD ADD  A=0x7a B=0x0c LSB : 0x86
+# [20938181000] PASS  DD ADD  A=0x7a B=0x0c MSB : 0x00
+# [21250681000] PASS  DD ADD  A=0x7a B=0x0c LSB : 0x6e
+# [21354848000] PASS  DD ADD  A=0x7a B=0x0c MSB : 0x00
+# [21667348000] PASS  DD ADD  A=0x7a B=0x0c LSB : 0x08
+# [21771514000] PASS  DD ADD  A=0x7a B=0x0c MSB : 0x00
+# [22084014000] PASS  DD ADD  A=0x7a B=0x0c LSB : 0xf4
+# [22188181000] PASS  DD ADD  A=0x7a B=0x0c MSB : 0x00
+# [22500681000] PASS  DD ADD  A=0x7a B=0x0c LSB : 0x02
+# [22604848000] PASS  DD ADD  A=0x7a B=0x0c MSB : 0x00
+# [23125681000] PASS  CC ADD  A=0x21 B=0x03 LSB : 0x0b
+# [23229848000] PASS  CC ADD  A=0x21 B=0x03 MSB : 0x00
+# [23542348000] PASS  DD ADD  A=0x21 B=0x03 LSB : 0x63
+# [23646514000] PASS  DD ADD  A=0x21 B=0x03 MSB : 0x00
+# [23863528000] PASS  end of sweep: TX idle : no unexpected TX traffic
+# 
+# ================ Prescale = 16  (PAR_EN=1 PAR_TYP=0) ================
+# [24523848000] PASS  RX_CLK period 542.5 ns (Prescale 16 -> UART_CLK/2)
+# [24540667000] PASS  TX_CLK period 8680.6 ns (= 1 bit @ 115200 baud)
+# [24853167000] PASS  RD REG2 (UART cfg) : 0x41
+# [25165667000] PASS  RD REG3 (div ratio) : 0x20
+# [26632681000] PASS  RF writes: no response : no unexpected TX traffic
+# [26945181000] PASS  RD RF[0x04] : 0xb5
+# [27257681000] PASS  RD RF[0x07] : 0x2c
+# [27570181000] PASS  RD RF[0x0b] : 0xff
+# [27882681000] PASS  RD RF[0x0f] : 0x11
+# [28403514000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
+# [28507681000] PASS  CC ADD  A=0xc8 B=0x07 MSB : 0x00
+# [29028514000] PASS  CC ADD  A=0xa7 B=0x82 LSB : 0x29
+# [29132681000] PASS  CC ADD  A=0xa7 B=0x82 MSB : 0x01
+# [29653514000] PASS  CC ADD  A=0xc7 B=0x08 LSB : 0xbf
+# [29757681000] PASS  CC ADD  A=0xc7 B=0x08 MSB : 0x00
+# [30278514000] PASS  CC ADD  A=0xaa B=0x25 LSB : 0x85
+# [30382681000] PASS  CC ADD  A=0xaa B=0x25 MSB : 0x00
+# [30903514000] PASS  CC ADD  A=0xc6 B=0x09 LSB : 0xf6
+# [31007681000] PASS  CC ADD  A=0xc6 B=0x09 MSB : 0x06
+# [31528514000] PASS  CC ADD  A=0x88 B=0x89 LSB : 0xc8
+# [31632681000] PASS  CC ADD  A=0x88 B=0x89 MSB : 0x48
+# [32153514000] PASS  CC ADD  A=0xc5 B=0x0a LSB : 0x13
+# [32257681000] PASS  CC ADD  A=0xc5 B=0x0a MSB : 0x00
+# [32778514000] PASS  CC ADD  A=0xfa B=0xa5 LSB : 0x01
+# [32882681000] PASS  CC ADD  A=0xfa B=0xa5 MSB : 0x00
+# [33403514000] PASS  CC ADD  A=0xc4 B=0x0b LSB : 0x00
+# [33507681000] PASS  CC ADD  A=0xc4 B=0x0b MSB : 0x00
+# [34028514000] PASS  CC ADD  A=0x26 B=0x87 LSB : 0x06
+# [34132681000] PASS  CC ADD  A=0x26 B=0x87 MSB : 0x00
+# [34653514000] PASS  CC ADD  A=0xc3 B=0x0c LSB : 0xcf
+# [34757681000] PASS  CC ADD  A=0xc3 B=0x0c MSB : 0x00
+# [35278514000] PASS  CC ADD  A=0x71 B=0x77 LSB : 0x77
+# [35382681000] PASS  CC ADD  A=0x71 B=0x77 MSB : 0x00
+# [35903514000] PASS  CC ADD  A=0xc2 B=0x0d LSB : 0xcf
+# [36007681000] PASS  CC ADD  A=0xc2 B=0x0d MSB : 0x00
+# [36528514000] PASS  CC ADD  A=0xa3 B=0x34 LSB : 0x97
+# [36632681000] PASS  CC ADD  A=0xa3 B=0x34 MSB : 0x00
+# [37153514000] PASS  CC ADD  A=0xc1 B=0x0e LSB : 0x00
+# [37257681000] PASS  CC ADD  A=0xc1 B=0x0e MSB : 0x00
+# [37778514000] PASS  CC ADD  A=0x32 B=0xf9 LSB : 0x00
+# [37882681000] PASS  CC ADD  A=0x32 B=0xf9 MSB : 0x00
+# [38403514000] PASS  CC ADD  A=0xc0 B=0x0f LSB : 0x02
+# [38507681000] PASS  CC ADD  A=0xc0 B=0x0f MSB : 0x00
+# [39028514000] PASS  CC ADD  A=0x9e B=0x34 LSB : 0x02
+# [39132681000] PASS  CC ADD  A=0x9e B=0x34 MSB : 0x00
+# [39653515000] PASS  CC ADD  A=0xbf B=0x10 LSB : 0x5f
+# [39757681000] PASS  CC ADD  A=0xbf B=0x10 MSB : 0x00
+# [40278515000] PASS  CC ADD  A=0x04 B=0xed LSB : 0x02
+# [40382681000] PASS  CC ADD  A=0x04 B=0xed MSB : 0x00
+# [40903515000] PASS  CC ADD  A=0xbe B=0x11 LSB : 0x7c
+# [41007681000] PASS  CC ADD  A=0xbe B=0x11 MSB : 0x01
+# [41528515000] PASS  CC ADD  A=0xd4 B=0x62 LSB : 0xa8
+# [41632681000] PASS  CC ADD  A=0xd4 B=0x62 MSB : 0x01
+# [42153515000] PASS  CC ADD  A=0x37 B=0x37 LSB : 0x01
+# [42257681000] PASS  CC ADD  A=0x37 B=0x37 MSB : 0x00
+# [42778515000] PASS  CC ADD  A=0xff B=0xff LSB : 0x01
+# [42882681000] PASS  CC ADD  A=0xff B=0xff MSB : 0xfe
+# [43403515000] PASS  CC ADD  A=0x0a B=0x00 LSB : 0x00
+# [43507681000] PASS  CC ADD  A=0x0a B=0x00 MSB : 0x00
+# [44349695000] PASS  REG0/REG1 writes: no resp : no unexpected TX traffic
+# [44662195000] PASS  DD ADD  A=0x6a B=0x0c LSB : 0x76
+# [44766362000] PASS  DD ADD  A=0x6a B=0x0c MSB : 0x00
+# [45078862000] PASS  DD ADD  A=0x6a B=0x0c LSB : 0x5e
+# [45183029000] PASS  DD ADD  A=0x6a B=0x0c MSB : 0x00
+# [45495529000] PASS  DD ADD  A=0x6a B=0x0c LSB : 0x08
+# [45599695000] PASS  DD ADD  A=0x6a B=0x0c MSB : 0x00
+# [45912195000] PASS  DD ADD  A=0x6a B=0x0c LSB : 0xd4
+# [46016362000] PASS  DD ADD  A=0x6a B=0x0c MSB : 0x00
+# [46328862000] PASS  DD ADD  A=0x6a B=0x0c LSB : 0x02
+# [46433029000] PASS  DD ADD  A=0x6a B=0x0c MSB : 0x00
+# [46953862000] PASS  CC ADD  A=0x21 B=0x03 LSB : 0x0b
+# [47058029000] PASS  CC ADD  A=0x21 B=0x03 MSB : 0x00
+# [47370529000] PASS  DD ADD  A=0x21 B=0x03 LSB : 0x63
+# [47474695000] PASS  DD ADD  A=0x21 B=0x03 MSB : 0x00
+# [47691709000] PASS  end of sweep: TX idle : no unexpected TX traffic
+# 
+# ================ Prescale = 8  (PAR_EN=1 PAR_TYP=0) ================
+# [48352572000] PASS  RX_CLK period 1085.1 ns (Prescale 8 -> UART_CLK/4)
+# [48368848000] PASS  TX_CLK period 8680.6 ns (= 1 bit @ 115200 baud)
+# [48681348000] PASS  RD REG2 (UART cfg) : 0x21
+# [48993848000] PASS  RD REG3 (div ratio) : 0x20
+# [50460862000] PASS  RF writes: no response : no unexpected TX traffic
+# [50773362000] PASS  RD RF[0x04] : 0xad
+# [51085862000] PASS  RD RF[0x07] : 0x34
+# [51398362000] PASS  RD RF[0x0b] : 0xff
+# [51710862000] PASS  RD RF[0x0f] : 0x09
+# [52231695000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
+# [52335862000] PASS  CC ADD  A=0xc8 B=0x07 MSB : 0x00
+# [52856695000] PASS  CC ADD  A=0x10 B=0xec LSB : 0xfc
+# [52960862000] PASS  CC ADD  A=0x10 B=0xec MSB : 0x00
+# [53481695000] PASS  CC ADD  A=0xc7 B=0x08 LSB : 0xbf
+# [53585862000] PASS  CC ADD  A=0xc7 B=0x08 MSB : 0x00
+# [54106695000] PASS  CC ADD  A=0x62 B=0x02 LSB : 0x60
+# [54210862000] PASS  CC ADD  A=0x62 B=0x02 MSB : 0x00
+# [54731695000] PASS  CC ADD  A=0xc6 B=0x09 LSB : 0xf6
+# [54835862000] PASS  CC ADD  A=0xc6 B=0x09 MSB : 0x06
+# [55356695000] PASS  CC ADD  A=0x3b B=0xe0 LSB : 0xa0
+# [55460862000] PASS  CC ADD  A=0x3b B=0xe0 MSB : 0x33
+# [55981695000] PASS  CC ADD  A=0xc5 B=0x0a LSB : 0x13
+# [56085862000] PASS  CC ADD  A=0xc5 B=0x0a MSB : 0x00
+# [56606695000] PASS  CC ADD  A=0xf3 B=0x40 LSB : 0x03
+# [56710862000] PASS  CC ADD  A=0xf3 B=0x40 MSB : 0x00
+# [57231695000] PASS  CC ADD  A=0xc4 B=0x0b LSB : 0x00
+# [57335862000] PASS  CC ADD  A=0xc4 B=0x0b MSB : 0x00
+# [57856695000] PASS  CC ADD  A=0x55 B=0xa7 LSB : 0x05
+# [57960862000] PASS  CC ADD  A=0x55 B=0xa7 MSB : 0x00
+# [58481695000] PASS  CC ADD  A=0xc3 B=0x0c LSB : 0xcf
+# [58585862000] PASS  CC ADD  A=0xc3 B=0x0c MSB : 0x00
+# [59106695000] PASS  CC ADD  A=0x87 B=0xc2 LSB : 0xc7
+# [59210862000] PASS  CC ADD  A=0x87 B=0xc2 MSB : 0x00
+# [59731695000] PASS  CC ADD  A=0xc2 B=0x0d LSB : 0xcf
+# [59835862000] PASS  CC ADD  A=0xc2 B=0x0d MSB : 0x00
+# [60356695000] PASS  CC ADD  A=0x73 B=0xe4 LSB : 0x97
+# [60460862000] PASS  CC ADD  A=0x73 B=0xe4 MSB : 0x00
+# [60981695000] PASS  CC ADD  A=0xc1 B=0x0e LSB : 0x00
+# [61085862000] PASS  CC ADD  A=0xc1 B=0x0e MSB : 0x00
+# [61606696000] PASS  CC ADD  A=0x38 B=0x5b LSB : 0x00
+# [61710862000] PASS  CC ADD  A=0x38 B=0x5b MSB : 0x00
+# [62231696000] PASS  CC ADD  A=0xc0 B=0x0f LSB : 0x02
+# [62335862000] PASS  CC ADD  A=0xc0 B=0x0f MSB : 0x00
+# [62856696000] PASS  CC ADD  A=0xc0 B=0xc3 LSB : 0x00
+# [62960862000] PASS  CC ADD  A=0xc0 B=0xc3 MSB : 0x00
+# [63481696000] PASS  CC ADD  A=0xbf B=0x10 LSB : 0x5f
+# [63585862000] PASS  CC ADD  A=0xbf B=0x10 MSB : 0x00
+# [64106696000] PASS  CC ADD  A=0x8e B=0x11 LSB : 0x47
+# [64210862000] PASS  CC ADD  A=0x8e B=0x11 MSB : 0x00
+# [64731696000] PASS  CC ADD  A=0xbe B=0x11 LSB : 0x7c
+# [64835862000] PASS  CC ADD  A=0xbe B=0x11 MSB : 0x01
+# [65356696000] PASS  CC ADD  A=0xbd B=0x58 LSB : 0x7a
+# [65460862000] PASS  CC ADD  A=0xbd B=0x58 MSB : 0x01
+# [65981696000] PASS  CC ADD  A=0x37 B=0x37 LSB : 0x01
+# [66085862000] PASS  CC ADD  A=0x37 B=0x37 MSB : 0x00
+# [66606696000] PASS  CC ADD  A=0xff B=0xff LSB : 0x01
+# [66710862000] PASS  CC ADD  A=0xff B=0xff MSB : 0xfe
+# [67231696000] PASS  CC ADD  A=0x0a B=0x00 LSB : 0x00
+# [67335862000] PASS  CC ADD  A=0x0a B=0x00 MSB : 0x00
+# [68177876000] PASS  REG0/REG1 writes: no resp : no unexpected TX traffic
+# [68490376000] PASS  DD ADD  A=0x62 B=0x0c LSB : 0x6e
+# [68594543000] PASS  DD ADD  A=0x62 B=0x0c MSB : 0x00
+# [68907043000] PASS  DD ADD  A=0x62 B=0x0c LSB : 0x56
+# [69011210000] PASS  DD ADD  A=0x62 B=0x0c MSB : 0x00
+# [69323710000] PASS  DD ADD  A=0x62 B=0x0c LSB : 0x00
+# [69427876000] PASS  DD ADD  A=0x62 B=0x0c MSB : 0x00
+# [69740376000] PASS  DD ADD  A=0x62 B=0x0c LSB : 0xc4
+# [69844543000] PASS  DD ADD  A=0x62 B=0x0c MSB : 0x00
+# [70157043000] PASS  DD ADD  A=0x62 B=0x0c LSB : 0x02
+# [70261210000] PASS  DD ADD  A=0x62 B=0x0c MSB : 0x00
+# [70782043000] PASS  CC ADD  A=0x21 B=0x03 LSB : 0x0b
+# [70886210000] PASS  CC ADD  A=0x21 B=0x03 MSB : 0x00
+# [71198710000] PASS  DD ADD  A=0x21 B=0x03 LSB : 0x63
+# [71302877000] PASS  DD ADD  A=0x21 B=0x03 MSB : 0x00
+# [71519890000] PASS  end of sweep: TX idle : no unexpected TX traffic
+# 
+# ==================== SUMMARY ====================
+# PASSED: 225   FAILED: 0
+# ALL TESTS PASSED
+# =================================================
+# ** Note: $stop    : System_Top_tb.sv(384)
+#    Time: 71519890461 ps  Iteration: 0  Instance: /System_Top_tb
+# Break in Module System_Top_tb at System_Top_tb.sv line 384
+add wave -position insertpoint  \
+sim:/System_Top_tb/pass_cnt \
+sim:/System_Top_tb/fail_cnt
+add wave -position insertpoint  \
+sim:/System_Top_tb/RX_IN \
+sim:/System_Top_tb/TX_OUT \
+sim:/System_Top_tb/RX_D_VALID
+# error writing "file27": broken pipe
+# error writing "file27": broken pipe
+# Causality operation skipped due to absence of debug database file

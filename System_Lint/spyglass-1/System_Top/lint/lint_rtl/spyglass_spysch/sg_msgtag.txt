@@ -1,0 +1,117 @@
+8 "Domain_Matrix01" 1
+"DomainMatrix_SS"
+35
+9 "Domain_Matrix01" 1
+"DomainMatrix_SS"
+36
+10 "Domain_Matrix01" 1
+"DomainMatrix_SS"
+37
+11 "Domain_Matrix01" 1
+"DomainMatrix_SS"
+38
+12 "Domain_Matrix01" 1
+"DomainMatrix_SS"
+39
+13 "Domain_Matrix01" 1
+"DomainMatrix_SS"
+40
+14 "Domain_Matrix01" 1
+"DomainMatrix_SS"
+41
+15 "Domain_Matrix01" 1
+"DomainMatrix_SS"
+42
+16 "Domain_Matrix01" 1
+"DomainMatrix_SS"
+43
+17 "Domain_Matrix01" 1
+"DomainMatrix_SS"
+44
+18 "Domain_Matrix01" 1
+"DomainMatrix_SS"
+45
+19 "Domain_Matrix01" 1
+"Open_Sp_Sheet"
+["./spyglass-1/System_Top/lint/lint_rtl/spyglass_reports/sdc2sgdc/Domain/clock_System_Top_domain_matrix_0.csv@@noofheadercol:3"]
+20 "SDC_Mapping01" 1
+"SDCMapping_TAG"
+1
+21 "SDC_Mapping01" 1
+"SDCMapping_TAG"
+2
+22 "SDC_Mapping01" 1
+"SDCMapping_TAG"
+3
+23 "SDC_Mapping01" 1
+"SDCMapping_TAG"
+4
+24 "SDC_Mapping01" 1
+"SDCMapping_TAG"
+5
+25 "SDC_Mapping01" 1
+"SDCMapping_TAG"
+6
+26 "SDC_Mapping01" 1
+"SDCMapping_TAG"
+7
+27 "SDC_Mapping01" 1
+"SDCMapping_TAG"
+8
+28 "SDC_Mapping01" 1
+"SDCMapping_TAG"
+9
+29 "SDC_Mapping01" 1
+"SDCMapping_TAG"
+10
+30 "SDC_Mapping01" 1
+"SDCMapping_TAG"
+11
+31 "SDC_Mapping01" 1
+"SDCMapping_TAG"
+12
+32 "SDC_Mapping01" 1
+"SDCMapping_TAG"
+13
+34 "SDC_Mapping01" 1
+"Open_Sp_Sheet"
+["./spyglass-1/System_Top/lint/lint_rtl/spyglass_reports/sdc2sgdc/sdcMapping.csv"]
+-1 "DetectTopDesignUnits" 2
+"RULEGROUP"
+["Design Read"]
+"BUILTIN"
+"1"
+-1 "Domain_Matrix01" 2
+"RULEGROUP"
+["Design Read"]
+"BUILTIN"
+"1"
+-1 "ElabSummary" 2
+"RULEGROUP"
+["Design Read"]
+"BUILTIN"
+"1"
+-1 "RegInputOutput-ML" 3
+"TEMPLATE"
+["lint/lint_rtl"]
+"RULE_ORDER"
+[63]
+"RULEGROUP"
+["morelint"]
+-1 "ReportPortInfo-ML" 3
+"TEMPLATE"
+["lint/lint_rtl"]
+"RULE_ORDER"
+[42]
+"RULEGROUP"
+["morelint"]
+-1 "SDC2SGDC_INFO" 2
+"RULEGROUP"
+["Design Read"]
+"BUILTIN"
+"1"
+-1 "SDC_Mapping01" 2
+"RULEGROUP"
+["Design Read"]
+"BUILTIN"
+"1"
