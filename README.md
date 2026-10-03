@@ -117,7 +117,7 @@ SIM/                  Top-level SystemVerilog testbench and file list
 System_Lint/          SpyGlass lint + CDC/RDC: authored constraints, waivers, reports
 std_cells/            TSMC CL013G RVT timing libraries and db files (not tracked)
 Work/                 Scratch (not tracked)
-Final_System_Report.pdf   Full 20-page design and simulation report (see below)
+Final_System_Report.pdf   Full 24-page design and simulation report (see below)
 ```
 
 ### Full design report
@@ -127,6 +127,9 @@ architecture, the multi-clock design (CDC/RDC, clock gating, pipelining) with me
 module reference, the full simulation and coverage analysis, and a backend summary. The sections
 below summarise the same results for reading on GitHub; the PDF adds the captured waveform
 figures, the SYS_CTRL state diagram, the coverage analysis and the command walkthroughs.
+
+In the report, figures 9–25 (the per-command walkthrough captures) are laid out **one per
+row**, each with its own caption and a short description, rather than two abreast.
 
 Each RTL block has a matching testbench under its `Sim/` subdirectory.
 
@@ -185,7 +188,11 @@ UART host: it frames bytes onto `RX_IN` with the parity setting from `REG2`, dec
 frames on `TX_OUT`, and compares them against expected values. Each of the three prescale settings
 (32 / 16 / 8) is exercised in full, with a `PASS`/`FAIL` line per check and a summary at the end.
 
-**Result: `PASSED: 225   FAILED: 0` — `ALL TESTS PASSED`.**
+**Result: `PASSED: 239   FAILED: 0` — `ALL TESTS PASSED`.**
+
+The run is a per-prescale sweep (75 checks × 3 prescales = 225) plus a **FIFO-full
+back-pressure phase (14 checks)**, added to exercise the `SYS_CTRL` stall path that the original
+testbench never reached.
 
 Per-prescale breakdown (75 checks each, × 3 prescales = 225):
 
@@ -200,6 +207,36 @@ Per-prescale breakdown (75 checks each, × 3 prescales = 225):
 | ALU without operands (`DD`): 5 operations × 2 bytes | 10 |
 | Mixed `CC`/`DD` re-check, end-of-sweep TX idle | 5 |
 | **Total per prescale** | **75** |
+
+### FIFO-full back-pressure
+
+At the default TX divider (`REG3 = 32`) the transmitter drains faster than the UART can fill it —
+95.5 µs to send one byte against 104.2 µs to produce one FIFO entry — so the 8-entry FIFO never
+fills and the `SYS_CTRL` stall path is unreachable. Raising `REG3` to 128 inverts the ratio, so
+the FIFO fills and the stall is genuinely exercised. Six ALU results (12 response bytes) are
+queued into 8 entries.
+
+| Quantity | Value |
+|---|---|
+| Stall actually reached | yes — `FIFO_FULL` asserted |
+| `REF_CLK` cycles with FIFO FULL | **20 772** (previously 0) |
+| Commands queued under back-pressure | 6 ALU (`0xDD`), 12 response bytes |
+| Response bytes checked | 12 of 12 correct, in order |
+
+```
+================ FIFO-full back-pressure ================
+Slowing TX (REG3 = 128) so the FIFO fills faster than it drains.
+[26224639000] PASS  BP back-pressure : FIFO went FULL (20772 REF_CLK cycles; was 0)
+[26224639000] PASS  BP DD ADD  A=0x7a B=0x0c LSB : 0x86
+[26224639000] PASS  BP DD ADD  A=0x7a B=0x0c MSB : 0x00
+[26441653000] PASS  BP DD SUB  A=0x7a B=0x0c LSB : 0x6e
+[30964223000] PASS  BP: TX idle after drain : no unexpected TX traffic
+```
+
+> **Limitation.** This closes the back-pressure coverage gap, but it does **not** clear the ALU
+> high-byte question. The operands used here (`A = 0x7A`, `B = 0x0C`) produce results whose true
+> high byte is `0x00` for every function issued, so a stall that zeroed the high byte would be
+> indistinguishable from a pass. Directed vectors with a non-zero high byte are still to be added.
 
 The three configurations confirm both clock arithmetic and the register file:
 
@@ -220,31 +257,33 @@ Representative checks from each prescale sweep:
 [2804499000] PASS  RF writes: no response : no unexpected TX traffic
 [3116999000] PASS  RD RF[0x04] : 0x85
 [4575333000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
-[18950334000] PASS  CC ADD  A=0xff B=0xff LSB : 0x01
 [19054500000] PASS  CC ADD  A=0xff B=0xff MSB : 0xfe
-[20834014000] PASS  DD ADD  A=0x7a B=0x0c LSB : 0x86
 [23863528000] PASS  end of sweep: TX idle : no unexpected TX traffic
 
+================ FIFO-full back-pressure ================
+Slowing TX (REG3 = 128) so the FIFO fills faster than it drains.
+[26224639000] PASS  BP back-pressure : FIFO went FULL (20772 REF_CLK cycles; was 0)
+[26224639000] PASS  BP DD ADD  A=0x7a B=0x0c LSB : 0x86
+[26441653000] PASS  BP DD SUB  A=0x7a B=0x0c LSB : 0x6e
+[30964223000] PASS  BP: TX idle after drain : no unexpected TX traffic
+
 ================ Prescale = 16  (PAR_EN=1 PAR_TYP=0) ================
-[24523848000] PASS  RX_CLK period 542.5 ns (Prescale 16 -> UART_CLK/2)
-[24853167000] PASS  RD REG2 (UART cfg) : 0x41
-[28403514000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
-[44662195000] PASS  DD ADD  A=0x6a B=0x0c LSB : 0x76
-[47691709000] PASS  end of sweep: TX idle : no unexpected TX traffic
+[31624559000] PASS  RX_CLK period 542.5 ns (Prescale 16 -> UART_CLK/2)
+[31953878000] PASS  RD REG2 (UART cfg) : 0x41
+[35504225000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
+[54792421000] PASS  end of sweep: TX idle : no unexpected TX traffic
 
 ================ Prescale = 8  (PAR_EN=1 PAR_TYP=0) =================
-[48352572000] PASS  RX_CLK period 1085.1 ns (Prescale 8 -> UART_CLK/4)
-[48681348000] PASS  RD REG2 (UART cfg) : 0x21
-[52231695000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
-[68490376000] PASS  DD ADD  A=0x62 B=0x0c LSB : 0x6e
-[71519890000] PASS  end of sweep: TX idle : no unexpected TX traffic
+[55453283000] PASS  RX_CLK period 1085.1 ns (Prescale 8 -> UART_CLK/4)
+[55782059000] PASS  RD REG2 (UART cfg) : 0x21
+[59332406000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
+[78620602000] PASS  end of sweep: TX idle : no unexpected TX traffic
 
 ==================== SUMMARY ====================
-PASSED: 225   FAILED: 0
+PASSED: 239   FAILED: 0
 ALL TESTS PASSED
 =================================================
-** Note: $stop    : System_Top_tb.sv(384)
-   Time: 71519890461 ps  Iteration: 0  Instance: /System_Top_tb
+** Note: $stop    : System_Top_tb.sv(470)
 ```
 
 Measured latencies at 100 MHz `REF_CLK`:

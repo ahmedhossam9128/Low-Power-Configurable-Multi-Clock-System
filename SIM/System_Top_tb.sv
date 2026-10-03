@@ -47,6 +47,23 @@ module System_Top_tb;
     integer   mon_wr = 0, mon_rd = 0;
     reg       mon_en = 0;
 
+    // Actual TX bit time, tracked by the monitor so it stays valid when the
+    // back-pressure test slows TX down (REG3 = 128).
+    //
+    // NOTE: only the monitor's `initial` block may use this in a delay control.
+    // A bare module-level `real` used as '#(mon_bit)' inside an automatic task
+    // crashes QuestaSim (SIGSEGV, "Bad handle or reference"), so the tasks use
+    // the BIT_NS localparam instead.
+    real      mon_bit = BIT_NS;
+
+    // REF_CLK cycles spent with the FIFO FULL (the stall condition). The original
+    // report measured "FIFO_FULL high for 0 cycles" because no test ever filled it.
+    integer   fifo_full_cycles = 0;
+
+    // Stall counter: REF_CLK cycles with the FIFO FULL.
+    always @(posedge REF_CLK)
+        if (DUT.FIFO_FULL) fifo_full_cycles = fifo_full_cycles + 1;
+
     initial begin : monitor
         reg [7:0] d;
         reg       p, s;
@@ -54,21 +71,23 @@ module System_Top_tb;
         wait (mon_en === 1'b1);
         forever begin
             @(negedge TX_OUT);                       // start bit
-            #(BIT_NS/2.0);
-            if (TX_OUT === 1'b0) begin
-                for (i = 0; i < 8; i = i + 1) begin
-                    #(BIT_NS); d[i] = TX_OUT;
+            if (mon_en === 1'b1) begin
+                #(mon_bit/2.0);
+                if (TX_OUT === 1'b0) begin
+                    for (i = 0; i < 8; i = i + 1) begin
+                        #(mon_bit); d[i] = TX_OUT;
+                    end
+                    p = 1'b0;
+                    if (cfg_par_en) begin
+                        #(mon_bit); p = TX_OUT;
+                    end
+                    #(mon_bit); s = TX_OUT;
+                    mon_data[mon_wr]   = d;
+                    mon_par_ok[mon_wr] = !cfg_par_en ||
+                                         (p === (cfg_par_typ ? ~(^d) : (^d)));
+                    mon_stp_ok[mon_wr] = (s === 1'b1);
+                    mon_wr = mon_wr + 1;
                 end
-                p = 1'b0;
-                if (cfg_par_en) begin
-                    #(BIT_NS); p = TX_OUT;
-                end
-                #(BIT_NS); s = TX_OUT;
-                mon_data[mon_wr]   = d;
-                mon_par_ok[mon_wr] = !cfg_par_en ||
-                                     (p === (cfg_par_typ ? ~(^d) : (^d)));
-                mon_stp_ok[mon_wr] = (s === 1'b1);
-                mon_wr = mon_wr + 1;
             end
         end
     end
@@ -98,7 +117,7 @@ module System_Top_tb;
         integer t;
         begin
             t = 0;
-            while (mon_rd >= mon_wr && t < 100) begin
+            while (mon_rd >= mon_wr && t < 400) begin
                 #(BIT_NS); t = t + 1;
             end
             if (mon_rd >= mon_wr) begin
@@ -265,6 +284,92 @@ module System_Top_tb;
         end
     endtask
 
+    // ------------------------------------------------ FIFO-full back-pressure
+    // The FIFO is 8 deep. At the default REG3 = 32 the transmitter drains faster
+    // than the UART can fill (95.5 us out vs 104.2 us in per entry), so the FIFO
+    // never fills and the Sys_Ctrl stall path is unreachable. Slowing TX (raising
+    // REG3) inverts that, so the FIFO fills and Sys_Ctrl must stall in
+    // ALU_Output_frame1/frame2 and RF_Output_Data.
+    //
+    // This checks two things:
+    //   1. the stall is actually reached (FIFO FULL asserted), which the original
+    //      report recorded as "FIFO_FULL high for 0 cycles";
+    //   2. every queued byte still comes back correct and in order, which is what
+    //      a stall could break -- Sys_Ctrl keeps CLK_EN high but drops ALU_EN while
+    //      waiting, so the ALU is flushed on every stalled cycle.
+    task automatic bp_test();
+        integer        k, t, full_before;
+        reg [3:0]      fl [0:5];
+        reg [15:0]     exp;
+        reg [8*28-1:0] l;
+        begin
+            $display("");
+            $display("================ FIFO-full back-pressure ================");
+            $display("Slowing TX (REG3 = 128) so the FIFO fills faster than it drains.");
+
+            // 0. start from a drained FIFO and an empty monitor queue
+            t = 0;
+            while (((DUT.FIFO_EMPTY !== 1'b1) || (mon_rd != mon_wr)) && (t < 300)) begin
+                #(BIT_NS); t = t + 1;
+            end
+            if ((DUT.FIFO_EMPTY !== 1'b1) || (mon_rd != mon_wr)) begin
+                $display("[%0t] FAIL  BP: not drained before test (EMPTY=%b mon_rd=%0d mon_wr=%0d)",
+                         $time, DUT.FIFO_EMPTY, mon_rd, mon_wr);
+                fail_cnt = fail_cnt + 1;
+            end
+
+            full_before = fifo_full_cycles;
+
+            // 1. slow the transmitter: TX_CLK = UART_CLK / REG3
+            rf_write(8'h03, 8'd128);
+            mon_bit = (2.0 * UART_HALF) * 128.0;
+            #(BIT_NS * 8);
+
+            // 2. operands for 0xDD (no-operand ALU) come from REG0 / REG1
+            rf_write(8'h00, 8'h7A);
+            rf_write(8'h01, 8'h0C);
+            #(BIT_NS * 8);
+
+            // 3. queue 6 ALU results = 12 bytes into an 8-deep FIFO
+            fl[0] = F_ADD; fl[1] = F_SUB; fl[2] = F_AND;
+            fl[3] = F_OR;  fl[4] = F_XOR; fl[5] = F_SHL;
+            for (k = 0; k < 6; k = k + 1) begin
+                send_byte(ALU_NOP_CMD);
+                send_byte({4'h0, fl[k]});
+            end
+
+            // 4. the FIFO must actually have gone FULL
+            #(BIT_NS * 4);
+            if (fifo_full_cycles > full_before) begin
+                $display("[%0t] PASS  BP back-pressure : FIFO went FULL (%0d REF_CLK cycles; was %0d)",
+                         $time, fifo_full_cycles - full_before, full_before);
+                pass_cnt = pass_cnt + 1;
+            end
+            else begin
+                $display("[%0t] FAIL  BP back-pressure : FIFO never went FULL (%0d cycles) - stall not reached",
+                         $time, fifo_full_cycles);
+                fail_cnt = fail_cnt + 1;
+            end
+
+            // 5. every queued byte must come back, in order
+            for (k = 0; k < 6; k = k + 1) begin
+                exp = alu_model(8'h7A, 8'h0C, fl[k]);
+                $sformat(l, "BP DD %0s A=0x7a B=0x0c LSB", fname(fl[k]));
+                expect_byte(exp[7:0], l);
+                $sformat(l, "BP DD %0s A=0x7a B=0x0c MSB", fname(fl[k]));
+                expect_byte(exp[15:8], l);
+            end
+
+            // 6. the 12 expect_byte calls above each waited for their byte, so TX
+            //    has drained; this is just margin before restoring REG3 = 32.
+            #(BIT_NS * 20);
+            rf_write(8'h03, 8'd32);
+            mon_bit = BIT_NS;
+            #(BIT_NS * 8);
+            check_no_extra("BP: TX idle after drain");
+        end
+    endtask
+
     // ------------------------------------------------------------ one sweep
     task automatic run_prescale(input integer pres);
         integer k, v;
@@ -353,6 +458,7 @@ module System_Top_tb;
         #(BIT_NS * 2);
 
         run_prescale(32);
+        bp_test();
         run_prescale(16);
         run_prescale(8);
 
