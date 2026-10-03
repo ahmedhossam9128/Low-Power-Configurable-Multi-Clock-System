@@ -18,11 +18,11 @@ System_Lint/spyglass-1/**
 # Kept as CDC/RDC sign-off evidence.
 !System_Lint/spyglass-1/consolidated_reports/**
 
-# Generated SpyGlass project state at the System_Lint root.
-System_Lint/.project_status
-System_Lint/.project_snapshot
+# Generated SpyGlass project state (root and nested project dirs).
+System_Lint/**/.project_status
+System_Lint/**/.project_snapshot
 System_Lint/*.log
-System_Lint/.fuse_hidden*
+System_Lint/**/.fuse_hidden*
 
 # formality work files
 Formality/post-syn/FM_WORK*
