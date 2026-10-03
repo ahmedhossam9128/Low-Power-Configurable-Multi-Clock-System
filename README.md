@@ -96,7 +96,7 @@ Post-synthesis power distribution (`ss_1p08v_125c`, low-effort vectorless estima
 ## Repository layout
 
 ```
-RTL/                  Design source (44 Verilog/SystemVerilog files)
+RTL/                  Design source (41 Verilog/SystemVerilog files)
   System_Top/         Top level + pre-DFT variant
   Sys_Ctrl/           Command decode, register-file and ALU control
   UART/               UART_RX (7 blocks), UART_TX (4 blocks), UART_TOP
@@ -264,12 +264,11 @@ Known coverage gaps, and the design issues identified by that review, are listed
 
 ## Review notes
 
-Points carried forward from the design review. The first is a real RTL trap worth knowing before
-you build anything:
+Points carried forward from the design review.
 
 | # | Observation | Action |
 |---|---|---|
-| 1 | The repository contains **both `.v` and `.sv` versions of `UART_RX_FSM` and `UART_TX_FSM`, declaring the same module names**. The `.v` RX FSM is older and corrupts the next frame whenever the parity bit is 0. | **Compile only the `.sv` FSMs.** `system.lst` already lists the `.sv` files, so this holds as long as that list is used — adding the two `.v` files to a compile would silently select the broken module. |
+| 1 | ~~The repository contained both `.v` and `.sv` versions of `UART_RX_FSM` and `UART_TX_FSM`, declaring the same module names; the older `.v` RX FSM corrupts the next frame whenever the parity bit is 0.~~ | **Resolved.** The stale `.v` FSMs have been deleted; only the `.sv` versions remain, which is what every `system.lst` already compiled. |
 | 2 | `REG2`/`REG3` cross into the UART domain without a synchronizer; `RX_IN` has no separate 2-FF stage. | Declare the config registers quasi-static in constraints (done in `System_Lint/system.sgdc`) and keep them static during a frame; consider a 2-FF stage on `RX_IN` at one `RX_CLK` of latency. |
 | 3 | Coverage gaps: ALU functions `NAND` (0x6), `NOR` (0x7), `XNOR` (0x9) and `A<B` (0xC) are not issued in `+QUICK` mode; unknown command bytes, FIFO-full stalls and parity/stop-bit error frames are untested. | Add directed tests for these bins. |
 | 4 | `ALU_CLK` must not lead `REF_CLK` after clock-tree synthesis (the high result byte is sampled on the flush edge). | Balance the gated clock. |
