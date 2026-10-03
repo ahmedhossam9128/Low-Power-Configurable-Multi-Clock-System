@@ -1,0 +1,4 @@
+waive -msg {Port coverage for top design unit 'System_Top' is: '1' (25.00 %) port(s) not fully constrained}  -rule {  {Setup_port01}  }  -comment {Created by ICer on 27-Sep-2026 21:42:43 async RST covered with RST_Synchronizers partially constrained async RST covered in RST synchronizers }  -exact 
+
+# waive -msg {Port coverage for top design unit 'System_Top' is: '1' (25.00 %) port(s) not fully constrained}  -rule {  {Setup_port01}  }  -comment {Created by ICer on 27-Sep-2026 21:42:43 async RST covered with RST_Synchronizers}  -exact 
+waive -msg {Abstracted sgdc file for input ports of block 'System_Top' is generated}  -rule {  {Setup_port01}  }  -comment {Created by ICer on 27-Sep-2026 21:43:43}  -exact 
