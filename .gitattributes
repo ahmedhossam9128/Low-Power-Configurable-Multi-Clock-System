@@ -1,0 +1,9 @@
+# Treat flow artifacts as binary so diffs don't try to render them as text.
+*.ddc   binary
+*.sdf   binary
+*.db    binary
+*.lib   binary
+*.vcd   binary
+*.fsdb  binary
+*.shm   binary
+*.wlf   binary
