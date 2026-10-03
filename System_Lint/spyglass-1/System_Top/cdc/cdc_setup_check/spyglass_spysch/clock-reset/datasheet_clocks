@@ -1,3 +1,0 @@
-SCHEMA@@CName@@CTag@@CMode@@CFrequency@@CDomain@@DCrossings@@RegPEdge@@LatchPEdge@@LibCellPEdge@@BBPEdge@@RegNEdge@@LatchNEdge@@LibCellNEdge@@BBNEdge@@CSource
-VALUE@@System_Top.REF_CLK@@REF_Clock@@sys-clock@@100@@d0@@0@@277@@0@@0@@0@@0@@0@@0@@0@@SDC/SGDC
-VALUE@@System_Top.UART_CLK@@UART_Clock@@sys-clock@@3.6864@@d1@@0@@72@@0@@0@@0@@0@@0@@0@@0@@SDC/SGDC

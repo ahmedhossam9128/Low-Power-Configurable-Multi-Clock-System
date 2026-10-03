@@ -1,24 +1,4 @@
 `timescale 1ns/1ps
-// =============================================================================
-//  System_Top testbench  (spec: Final_System.pdf)
-//
-//  Master (this TB) <--RX_IN/TX_OUT--> System_Top
-//
-//  Clocks : REF_CLK 100 MHz, UART_CLK 3.6864 MHz
-//  Baud   : 115200 (= UART_CLK/32).  TX div ratio (REG3) = 32 and
-//           RX div * Prescale = 32 for Prescale 32/16/8, so baud is constant.
-//
-//  Flow per Prescale in {32,16,8}:
-//    1. configuration: RegFile write REG3 (0x3) then REG2 (0x2)
-//    2. read REG2/REG3 back
-//    3. RegFile write / read commands (addresses 0x4..0xF)
-//    4. ALU operation WITH operands (0xCC) - several functions
-//    5. ALU operation with NO operand (0xDD) - uses REG0/REG1
-//    6. check nothing unexpected is transmitted
-//
-//  Plusargs:  +PAR_EN=<0|1> +PAR_TYP=<0|1> (target parity config, default 1/0)
-//             +QUICK (1 vector per ALU function)   +DUMP (write VCD)
-// =============================================================================
 module System_Top_tb;
 
     // ------------------------------------------------------------------ clocks

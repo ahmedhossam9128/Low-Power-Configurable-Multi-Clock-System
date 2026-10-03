@@ -1,0 +1,51 @@
+System_RTL.rar
+Work/
+System_Lint/
+std_cells/
+# formality work files
+Formality/post-syn/FM_WORK*
+Formality/post-syn/formality*_svf
+Formality/post-syn/fm_shell_command*.lck
+Formality/post-syn/fm_shell_command*.log
+Formality/post-syn/formality*.log
+Formality/post-syn/formality*.lck
+Formality/post-dft/FM_WORK*
+Formality/post-dft/formality*_svf
+Formality/post-dft/fm_shell_command*.lck
+Formality/post-dft/fm_shell_command*.log
+Formality/post-dft/formality*.log
+Formality/post-dft/formality*.lck
+Formality/post-PnR/FM_WORK*
+Formality/post-PnR/formality*_svf
+Formality/post-PnR/fm_shell_command*.lck
+Formality/post-PnR/fm_shell_command*.log
+Formality/post-PnR/formality*.log
+Formality/post-PnR/formality*.lck
+
+# dft work files
+
+DFT/alib-52
+DFT/work/
+DFT/command.log
+DFT/default.svf
+
+# syn work files
+
+Synthesis/alib-52
+Synthesis/command.log
+Synthesis/default.svf
+Synthesis/filenames_117365_D20260930.log
+Synthesis/filenames.log
+
+# Sim work files
+
+**/wlft*
+**/*.ps
+**/*.cr.mti
+**/*.mti
+**/*.mpf
+**/*.wlf
+
+# rar files
+**/*.rar
+
