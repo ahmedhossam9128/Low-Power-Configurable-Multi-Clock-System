@@ -117,7 +117,7 @@ SIM/                  Top-level SystemVerilog testbench and file list
 System_Lint/          SpyGlass lint + CDC/RDC: authored constraints, waivers, reports
 std_cells/            TSMC CL013G RVT timing libraries and db files (not tracked)
 Work/                 Scratch (not tracked)
-Final_System_Report.pdf   Full 24-page design and simulation report (see below)
+Final_System_Report.pdf   Full 25-page design and simulation report (see below)
 ```
 
 ### Full design report
@@ -129,7 +129,7 @@ below summarise the same results for reading on GitHub; the PDF adds the capture
 figures, the SYS_CTRL state diagram, the coverage analysis and the command walkthroughs.
 
 In the report, figures 9–25 (the per-command walkthrough captures) are laid out **one per
-row**, each with its own caption and a short description, rather than two abreast.
+row**, widened and centred on the page, each with its own centred caption and short description, rather than two abreast.
 
 Each RTL block has a matching testbench under its `Sim/` subdirectory.
 
