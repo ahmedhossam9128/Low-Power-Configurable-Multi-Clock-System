@@ -117,7 +117,16 @@ SIM/                  Top-level SystemVerilog testbench and file list
 System_Lint/          SpyGlass lint + CDC/RDC: authored constraints, waivers, reports
 std_cells/            TSMC CL013G RVT timing libraries and db files (not tracked)
 Work/                 Scratch (not tracked)
+Final_System_Report.pdf   Full 20-page design and simulation report (see below)
 ```
+
+### Full design report
+
+`Final_System_Report.pdf` is the complete write-up: specifications and command set, system
+architecture, the multi-clock design (CDC/RDC, clock gating, pipelining) with measured numbers,
+module reference, the full simulation and coverage analysis, and a backend summary. The sections
+below summarise the same results for reading on GitHub; the PDF adds the captured waveform
+figures, the SYS_CTRL state diagram, the coverage analysis and the command walkthroughs.
 
 Each RTL block has a matching testbench under its `Sim/` subdirectory.
 
@@ -139,10 +148,12 @@ Each stage is driven by a tcl script plus a `run_*.sh` wrapper:
 | Formality (post-syn) | `Formality/post-syn/syn_fm_script.tcl` | `run_syn_fm.tcl` |
 | Formality (post-dft) | `Formality/post-dft/dft_fm_script.tcl` | `run_dft_fm.tcl` |
 | Formality (post-PnR) | `Formality/post-PnR/pnr_fm_script.tcl` | `run_pnr_fm.tcl` |
-| Simulation | `SIM/files.f` + `SIM/run.do` | ModelSim/QuestaSim |
+| Simulation | `SIM/run.do` | ModelSim/QuestaSim |
 
-The RTL file list is centralised in `SIM/files.f` and consumed by the synthesis/DFT scripts via
-`Synthesis/system.lst` and `DFT/system.lst`, which reference `../RTL/...` paths.
+The RTL file list is centralised in one `system.lst` per tool working directory, each using paths
+relative to that directory (`../RTL/...`, or `../../RTL/...` from the Formality directories):
+`SIM/system.lst` (also drives simulation), `Synthesis/system.lst`, `DFT/system.lst`,
+`Formality/post-syn/system.lst`, `Formality/post-dft/system.lst`.
 
 > The `.tcl` scripts contain absolute library paths from the original environment and will need
 > `search_path` updated before re-running.
@@ -167,6 +178,102 @@ declared in `System_Lint/system.sgdc` (quasi-static config registers, `reset_syn
 `.awl` files under `System_Lint/spyglass-1/System_Top/`. Consolidated reports are kept in
 `System_Lint/spyglass-1/consolidated_reports/`.
 
+## Simulation verification
+
+System-level functional verification is carried out by `SIM/System_Top_tb.sv`, which acts as the
+UART host: it frames bytes onto `RX_IN` with the parity setting from `REG2`, decodes the response
+frames on `TX_OUT`, and compares them against expected values. Each of the three prescale settings
+(32 / 16 / 8) is exercised in full, with a `PASS`/`FAIL` line per check and a summary at the end.
+
+**Result: `PASSED: 225   FAILED: 0` — `ALL TESTS PASSED`.**
+
+Per-prescale breakdown (75 checks each, × 3 prescales = 225):
+
+| Check | Count |
+|---|---|
+| `RX_CLK` and `TX_CLK` period (divider outputs) | 2 |
+| Read-back of `REG2` / `REG3` (configuration actually applied) | 2 |
+| Register writes produce no response (no unexpected TX traffic) | 1 |
+| Register read-back at `0x04`, `0x07`, `0x0B`, `0x0F` | 4 |
+| ALU with operands (`CC`): 25 operations × 2 response bytes | 50 |
+| `REG0`/`REG1` preload produces no response | 1 |
+| ALU without operands (`DD`): 5 operations × 2 bytes | 10 |
+| Mixed `CC`/`DD` re-check, end-of-sweep TX idle | 5 |
+| **Total per prescale** | **75** |
+
+The three configurations confirm both clock arithmetic and the register file:
+
+| Prescale | `REG2` read-back | `RX_CLK` period | `TX_CLK` period |
+|---|---|---|---|
+| 32 | `0x81` | 271.3 ns (`UART_CLK` ÷ 1) | 8680.6 ns (1 bit @ 115 200 baud) |
+| 16 | `0x41` | 542.5 ns (÷ 2) | 8680.6 ns |
+| 8 | `0x21` | 1085.1 ns (÷ 4) | 8680.6 ns |
+
+Representative checks from each prescale sweep:
+
+```
+================ Prescale = 32  (PAR_EN=1 PAR_TYP=0) ================
+[703805000]  PASS  RX_CLK period 271.3 ns (Prescale 32 -> UART_CLK/1)
+[712485000]  PASS  TX_CLK period 8680.6 ns (= 1 bit @ 115200 baud)
+[1024985000] PASS  RD REG2 (UART cfg) : 0x81
+[1337485000] PASS  RD REG3 (div ratio) : 0x20
+[2804499000] PASS  RF writes: no response : no unexpected TX traffic
+[3116999000] PASS  RD RF[0x04] : 0x85
+[4575333000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
+[18950334000] PASS  CC ADD  A=0xff B=0xff LSB : 0x01
+[19054500000] PASS  CC ADD  A=0xff B=0xff MSB : 0xfe
+[20834014000] PASS  DD ADD  A=0x7a B=0x0c LSB : 0x86
+[23863528000] PASS  end of sweep: TX idle : no unexpected TX traffic
+
+================ Prescale = 16  (PAR_EN=1 PAR_TYP=0) ================
+[24523848000] PASS  RX_CLK period 542.5 ns (Prescale 16 -> UART_CLK/2)
+[24853167000] PASS  RD REG2 (UART cfg) : 0x41
+[28403514000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
+[44662195000] PASS  DD ADD  A=0x6a B=0x0c LSB : 0x76
+[47691709000] PASS  end of sweep: TX idle : no unexpected TX traffic
+
+================ Prescale = 8  (PAR_EN=1 PAR_TYP=0) =================
+[48352572000] PASS  RX_CLK period 1085.1 ns (Prescale 8 -> UART_CLK/4)
+[48681348000] PASS  RD REG2 (UART cfg) : 0x21
+[52231695000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
+[68490376000] PASS  DD ADD  A=0x62 B=0x0c LSB : 0x6e
+[71519890000] PASS  end of sweep: TX idle : no unexpected TX traffic
+
+==================== SUMMARY ====================
+PASSED: 225   FAILED: 0
+ALL TESTS PASSED
+=================================================
+** Note: $stop    : System_Top_tb.sv(384)
+   Time: 71519890461 ps  Iteration: 0  Instance: /System_Top_tb
+```
+
+Measured latencies at 100 MHz `REF_CLK`:
+
+| Quantity | Value |
+|---|---|
+| `RX_D_VALID` → synchronized pulse | 21–28 ns (2–3 cycles, phase dependent) |
+| Register write: `RX_D_VALID` (data byte) → `WrEn` | 36 ns |
+| Register read: address byte → `RdEn` / `Rd_D_Valid` / `FIFO_WR_INC` | 31 / 41 / 61 ns |
+| ALU (`DD`): function byte → `ALU_EN` / `FIFO_WR_INC` | 38 / 68 ns |
+| `ALU_CLK` edges per command vs `REF_CLK` edges in the same 677 µs | 3 vs 67 709 (0.0044 %) |
+| FIFO write → `EMPTY` de-asserts in TX domain | 17.0 µs (2 `TX_CLK` cycles) |
+| Reset release `RST` → REF / UART domain | 15 ns / 478 ns |
+
+Known coverage gaps, and the design issues identified by that review, are listed in
+[Review notes](#review-notes).
+
+## Review notes
+
+Points carried forward from the design review. The first is a real RTL trap worth knowing before
+you build anything:
+
+| # | Observation | Action |
+|---|---|---|
+| 1 | The repository contains **both `.v` and `.sv` versions of `UART_RX_FSM` and `UART_TX_FSM`, declaring the same module names**. The `.v` RX FSM is older and corrupts the next frame whenever the parity bit is 0. | **Compile only the `.sv` FSMs.** `system.lst` already lists the `.sv` files, so this holds as long as that list is used — adding the two `.v` files to a compile would silently select the broken module. |
+| 2 | `REG2`/`REG3` cross into the UART domain without a synchronizer; `RX_IN` has no separate 2-FF stage. | Declare the config registers quasi-static in constraints (done in `System_Lint/system.sgdc`) and keep them static during a frame; consider a 2-FF stage on `RX_IN` at one `RX_CLK` of latency. |
+| 3 | Coverage gaps: ALU functions `NAND` (0x6), `NOR` (0x7), `XNOR` (0x9) and `A<B` (0xC) are not issued in `+QUICK` mode; unknown command bytes, FIFO-full stalls and parity/stop-bit error frames are untested. | Add directed tests for these bins. |
+| 4 | `ALU_CLK` must not lead `REF_CLK` after clock-tree synthesis (the high result byte is sampled on the flush edge). | Balance the gated clock. |
+
 ## Getting started
 
 Re-running a stage requires the Synopsys tool suite (DC / DFT Compiler / Formality / SpyGlass) and
@@ -174,13 +281,15 @@ the TSMC CL013G libraries. The `std_cells/` library files are **not** tracked in
 so you must point `target_library`/`link_library` (in `Synthesis/syn_script.tcl` and
 `DFT/dft_script.tcl`) at your own local copies.
 
-Simulation is the only stage runnable without the synthesis tools:
+Simulation is the only stage runnable without the synthesis tools. `run.do` compiles the RTL from
+`system.lst`, then the testbench, then runs to completion:
 
 ```sh
 cd SIM
-vlog -f files.f
 vsim -do run.do
 ```
+
+The testbench accepts `+QUICK` (one vector per ALU function), `+PAR_EN=<0|1>` and `+PAR_TYP=<0|1>`.
 
 ## Contributing notes
 
