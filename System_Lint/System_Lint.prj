@@ -10,7 +10,7 @@
 
 ##Data Import Section
 
-read_file -type sourcelist ../SIM/system.lst
+read_file -type sourcelist ../SIM/files.f
 read_file -type sgdc system.sgdc
 read_file -type gateslib ../std_cells/scmetro_tsmc_cl013g_rvt_tt_1p2v_25c.lib
 
