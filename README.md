@@ -189,3 +189,16 @@ vsim -do run.do
 - `System_Lint/spyglass-1/consolidated_reports/` and the `.awl` waivers are deliberately tracked
   as sign-off evidence even though they sit inside the ignored SpyGlass tree.
 - Please do not commit waveform dumps or standard-cell libraries.
+
+## License
+
+Licensed under the Apache License, Version 2.0 — see [LICENSE](LICENSE).
+
+**Third-party materials are not covered.** This license applies to the original design source and
+flow scripts in this repository. The scripts reference Synopsys and TSMC CL013G RVT library
+artifacts (`scmetro_tsmc_cl013g_rvt_*.lib` / `.db`), which are the property of their respective
+vendors and are subject to separate license terms. Those files are deliberately **not** tracked
+here, and nothing in the Apache-2.0 grant extends to them.
+
+Tool output retained as evidence (synthesis/DFT/Formality reports and the SpyGlass consolidated
+reports) is provided for verification purposes only.
