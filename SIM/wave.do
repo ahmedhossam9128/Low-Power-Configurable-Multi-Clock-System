@@ -1,33 +1,11 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
-add wave -noupdate -expand -group Testbench /System_Top_tb/REF_HALF
-add wave -noupdate -expand -group Testbench /System_Top_tb/UART_HALF
-add wave -noupdate -expand -group Testbench /System_Top_tb/BIT_NS
-add wave -noupdate -expand -group Testbench /System_Top_tb/RF_WR_CMD
-add wave -noupdate -expand -group Testbench /System_Top_tb/RF_RD_CMD
-add wave -noupdate -expand -group Testbench /System_Top_tb/ALU_OP_CMD
-add wave -noupdate -expand -group Testbench /System_Top_tb/ALU_NOP_CMD
-add wave -noupdate -expand -group Testbench /System_Top_tb/F_ADD
-add wave -noupdate -expand -group Testbench /System_Top_tb/F_SUB
-add wave -noupdate -expand -group Testbench /System_Top_tb/F_MUL
-add wave -noupdate -expand -group Testbench /System_Top_tb/F_DIV
-add wave -noupdate -expand -group Testbench /System_Top_tb/F_AND
-add wave -noupdate -expand -group Testbench /System_Top_tb/F_OR
-add wave -noupdate -expand -group Testbench /System_Top_tb/F_XOR
-add wave -noupdate -expand -group Testbench /System_Top_tb/F_EQ
-add wave -noupdate -expand -group Testbench /System_Top_tb/F_GT
-add wave -noupdate -expand -group Testbench /System_Top_tb/F_SHR
-add wave -noupdate -expand -group Testbench /System_Top_tb/F_SHL
-add wave -noupdate -expand -group Testbench /System_Top_tb/GAP_BITS
-add wave -noupdate -expand -group Testbench /System_Top_tb/REF_CLK
-add wave -noupdate -expand -group Testbench /System_Top_tb/UART_CLK
 add wave -noupdate -expand -group Testbench /System_Top_tb/RST
 add wave -noupdate -expand -group Testbench /System_Top_tb/RX_IN
 add wave -noupdate -expand -group Testbench /System_Top_tb/TX_OUT
 add wave -noupdate -expand -group Testbench /System_Top_tb/RX_D_VALID
 add wave -noupdate -expand -group Testbench /System_Top_tb/TGT_PAR_EN
 add wave -noupdate -expand -group Testbench /System_Top_tb/TGT_PAR_TYP
-add wave -noupdate -expand -group Testbench /System_Top_tb/quick
 add wave -noupdate -expand -group Testbench /System_Top_tb/cfg_par_en
 add wave -noupdate -expand -group Testbench /System_Top_tb/cfg_par_typ
 add wave -noupdate -expand -group Testbench /System_Top_tb/pass_cnt
@@ -215,7 +193,7 @@ add wave -noupdate -expand -group UART -expand -group RX /System_Top_tb/DUT/u_UA
 add wave -noupdate -expand -group UART -expand -group RX /System_Top_tb/DUT/u_UART/RX_P_DATA
 add wave -noupdate -expand -group UART /System_Top_tb/DUT/u_UART/RX_DATA_VALID
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {70626764856 ps} 0}
+WaveRestoreCursors {{Cursor 1} {7949551176 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
@@ -231,4 +209,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {70490668061 ps} {71574060061 ps}
+WaveRestoreZoom {7558176777 ps} {8641568777 ps}
