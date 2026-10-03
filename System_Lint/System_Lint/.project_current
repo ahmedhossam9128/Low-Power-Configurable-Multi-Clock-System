@@ -1,13 +1,3 @@
-#!SPYGLASS_PROJECT_FILE
-#!VERSION 3.0
-#  -------------------------------------------------------------------
-#  This is a software generated project file. Manual edits to this file could be lost during the next save operation
-#  Copyright Synopsys Inc.
-#  Last Updated By: SpyGlass SpyGlass_vL-2016.06
-#  Last Updated On Mon Sep 28 01:59:21 2026
-#
-#  -------------------------------------------------------------------
-
 ##Data Import Section
 
 read_file -type sourcelist ../SIM/system.lst
@@ -24,7 +14,7 @@ set_option report_incr_messages yes
 set_option sdc2sgdc yes
 set_option enableSV yes
 set_option top System_Top
-set_option active_methodology $SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff
+set_option active_methodology /home/synopsys/SpyGlass-L2016.06/SPYGLASS_HOME/GuideWare/latest/block/rtl_handoff
 
 
 ##Goal Setup Section

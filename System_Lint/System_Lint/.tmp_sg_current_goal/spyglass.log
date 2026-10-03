@@ -1,4 +1,4 @@
-SpyGlass run started at 12:30:32 am on Oct 04 2026 
+SpyGlass run started at 12:58:20 am on Oct 04 2026 
 
 SpyGlass Predictive Analyzer(R) - Version SpyGlass_vL-2016.06
 Last compiled on May 20 2016
@@ -11,7 +11,3 @@ Loading Policy: spyglass (Version: SpyGlass_vL-2016.06) from path: /home/synopsy
 Loading Shared library libspyglassrules-Linux4.spyso from /home/synopsys/SpyGlass-L2016.06/SPYGLASS_HOME/lib/libspyglassrules-Linux4.spyso 
 Loading Shared library libsdcInitRules-Linux4.spyso from /home/synopsys/SpyGlass-L2016.06/SPYGLASS_HOME/lib/libsdcInitRules-Linux4.spyso 
 Loading Shared library librmerules-Linux4.spyso from /home/synopsys/SpyGlass-L2016.06/SPYGLASS_HOME/lib/librmerules-Linux4.spyso 
-Loading perl file for 'clock-reset' policy from path: /home/synopsys/SpyGlass-L2016.06/SPYGLASS_HOME/policies/clock/clock-reset-policy.pl
-Version of Policy 'clock-reset': SpyGlass_vL-2016.06
-Loading Shared library libclock-reset-Linux4.spyso from /home/synopsys/SpyGlass-L2016.06/SPYGLASS_HOME/policies/clock/libclock-reset-Linux4.spyso 
-Loading Shared library libPwrRules-Linux4.spyso from /home/synopsys/SpyGlass-L2016.06/SPYGLASS_HOME/policies/lowpower/libPwrRules-Linux4.spyso 
