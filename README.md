@@ -259,20 +259,6 @@ Measured latencies at 100 MHz `REF_CLK`:
 | FIFO write → `EMPTY` de-asserts in TX domain | 17.0 µs (2 `TX_CLK` cycles) |
 | Reset release `RST` → REF / UART domain | 15 ns / 478 ns |
 
-Known coverage gaps, and the design issues identified by that review, are listed in
-[Review notes](#review-notes).
-
-## Review notes
-
-Points carried forward from the design review.
-
-| # | Observation | Action |
-|---|---|---|
-| 1 | ~~The repository contained both `.v` and `.sv` versions of `UART_RX_FSM` and `UART_TX_FSM`, declaring the same module names; the older `.v` RX FSM corrupts the next frame whenever the parity bit is 0.~~ | **Resolved.** The stale `.v` FSMs have been deleted; only the `.sv` versions remain, which is what every `system.lst` already compiled. |
-| 2 | `REG2`/`REG3` cross into the UART domain without a synchronizer; `RX_IN` has no separate 2-FF stage. | Declare the config registers quasi-static in constraints (done in `System_Lint/system.sgdc`) and keep them static during a frame; consider a 2-FF stage on `RX_IN` at one `RX_CLK` of latency. |
-| 3 | Coverage gaps: ALU functions `NAND` (0x6), `NOR` (0x7), `XNOR` (0x9) and `A<B` (0xC) are not issued in `+QUICK` mode; unknown command bytes, FIFO-full stalls and parity/stop-bit error frames are untested. | Add directed tests for these bins. |
-| 4 | `ALU_CLK` must not lead `REF_CLK` after clock-tree synthesis (the high result byte is sampled on the flush edge). | Balance the gated clock. |
-
 ## Getting started
 
 Re-running a stage requires the Synopsys tool suite (DC / DFT Compiler / Formality / SpyGlass) and
