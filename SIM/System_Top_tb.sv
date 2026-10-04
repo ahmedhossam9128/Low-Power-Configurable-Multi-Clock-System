@@ -26,8 +26,9 @@ module System_Top_tb;
 
     // ALU function codes (taken from ALU.v)
     localparam [3:0] F_ADD = 4'd0,  F_SUB = 4'd1,  F_MUL = 4'd2,  F_DIV = 4'd3,
-                     F_AND = 4'd4,  F_OR  = 4'd5,  F_XOR = 4'd8,
-                     F_EQ  = 4'd10, F_GT  = 4'd11, F_SHR = 4'd13, F_SHL = 4'd14;
+                     F_AND = 4'd4,  F_OR  = 4'd5,  F_NAND = 4'd6, F_NOR = 4'd7, 
+                     F_XOR = 4'd8,  F_XNOR = 4'd9, F_EQ  = 4'd10, F_GT  = 4'd11,
+                     F_LT = 4'd12,  F_SHR = 4'd13, F_SHL = 4'd14;
 
     // ------------------------------------------------------- runtime settings
     integer TGT_PAR_EN  = 1;
@@ -113,33 +114,45 @@ module System_Top_tb;
     endtask
 
     // ---------------------------------------------------------- response check
-    task automatic expect_byte(input [7:0] exp, input [8*28-1:0] label);
+    // All string pieces are `string` type and every value is copied into a plain
+    // local before use, so $display never has to format a packed vector or a
+    // function call inside its own argument list.
+    task automatic expect_byte(input [7:0] exp, input string tag,
+                               input [7:0] pa, input [7:0] pb, input [3:0] pf,
+                               input bit msb);
         integer t;
+        string  nm, half;
         begin
+            nm   = fname(pf);
+            half = msb ? "MSB" : "LSB";
             t = 0;
             while (mon_rd >= mon_wr && t < 400) begin
                 #(BIT_NS); t = t + 1;
             end
             if (mon_rd >= mon_wr) begin
-                $display("[%0t] FAIL  %0s : no response (expected 0x%h)", $time, label, exp);
+                $display("[%0t] FAIL  %s %s A=0x%h B=0x%h %s : no response (expected 0x%h)",
+                         $time, tag, nm, pa, pb, half, exp);
                 fail_cnt = fail_cnt + 1;
             end
             else begin
                 if (mon_data[mon_rd] !== exp) begin
-                    $display("[%0t] FAIL  %0s : got 0x%h expected 0x%h", $time, label,
-                             mon_data[mon_rd], exp);
+                    $display("[%0t] FAIL  %s %s A=0x%h B=0x%h %s : got 0x%h expected 0x%h",
+                             $time, tag, nm, pa, pb, half, mon_data[mon_rd], exp);
                     fail_cnt = fail_cnt + 1;
                 end
                 else if (!mon_par_ok[mon_rd]) begin
-                    $display("[%0t] FAIL  %0s : data 0x%h ok but TX parity bit wrong", $time, label, exp);
+                    $display("[%0t] FAIL  %s %s A=0x%h B=0x%h %s : data 0x%h ok but TX parity bit wrong",
+                             $time, tag, nm, pa, pb, half, exp);
                     fail_cnt = fail_cnt + 1;
                 end
                 else if (!mon_stp_ok[mon_rd]) begin
-                    $display("[%0t] FAIL  %0s : data 0x%h ok but TX stop bit wrong", $time, label, exp);
+                    $display("[%0t] FAIL  %s %s A=0x%h B=0x%h %s : data 0x%h ok but TX stop bit wrong",
+                             $time, tag, nm, pa, pb, half, exp);
                     fail_cnt = fail_cnt + 1;
                 end
                 else begin
-                    $display("[%0t] PASS  %0s : 0x%h", $time, label, exp);
+                    $display("[%0t] PASS  %s %s A=0x%h B=0x%h %s : 0x%h",
+                             $time, tag, nm, pa, pb, half, exp);
                     pass_cnt = pass_cnt + 1;
                 end
                 mon_rd = mon_rd + 1;
@@ -148,7 +161,7 @@ module System_Top_tb;
     endtask
 
     // nothing should be pending on TX_OUT
-    task automatic check_no_extra(input [8*28-1:0] label);
+    task automatic check_no_extra(input string label);
         begin
             #(BIT_NS * 25);
             if (mon_rd !== mon_wr) begin
@@ -170,28 +183,37 @@ module System_Top_tb;
         begin
             A16 = {8'h00, a};  B16 = {8'h00, b};
             case (f)
-                F_ADD: alu_model = A16 + B16;
-                F_SUB: alu_model = A16 - B16;
-                F_MUL: alu_model = A16 * B16;
-                F_DIV: alu_model = (b == 0) ? 16'h0000 : (A16 / B16);
-                F_AND: alu_model = A16 & B16;
-                F_OR : alu_model = A16 | B16;
-                F_XOR: alu_model = A16 ^ B16;
-                F_EQ : alu_model = (a == b) ? 16'd1 : 16'd0;
-                F_GT : alu_model = (a >  b) ? 16'd2 : 16'd0;
-                F_SHR: alu_model = A16 >> 1;
-                F_SHL: alu_model = A16 << 1;
-                default: alu_model = 16'h0000;
+                F_ADD : alu_model = A16 + B16;
+                F_SUB : alu_model = A16 - B16;
+                F_MUL : alu_model = A16 * B16;
+                F_DIV : alu_model = (b == 0) ? 16'h0000 : (A16 / B16);
+                F_AND : alu_model = A16 & B16;
+                F_OR  : alu_model = A16 | B16;
+                F_NAND: alu_model = ~(A16 & B16);
+                F_NOR : alu_model = ~(A16 | B16); 
+                F_XOR : alu_model = A16 ^ B16;
+                F_XNOR: alu_model = ~(A16 ^ B16);
+                F_EQ  : alu_model = (a == b) ? 16'd1 : 16'd0;
+                F_GT  : alu_model = (a >  b) ? 16'd2 : 16'd0;
+                F_LT  : alu_model = (a <  b) ? 16'd3 : 16'd0;
+                F_SHR : alu_model = A16 >> 1;
+                F_SHL : alu_model = A16 << 1;
+                default:alu_model = 16'h0000;
             endcase
         end
     endfunction
 
-    function automatic [8*4-1:0] fname(input [3:0] f);
+    // Returns a real `string` (NUL-terminated, well-defined %s) rather than a
+    // packed bit vector. Formatting a packed vector with %0s relies on the tool
+    // walking raw bytes, which is what produced the stale "ADD" names.
+    function automatic string fname(input [3:0] f);
         case (f)
-            F_ADD: fname = "ADD "; F_SUB: fname = "SUB "; F_MUL: fname = "MUL ";
-            F_DIV: fname = "DIV "; F_AND: fname = "AND "; F_OR : fname = "OR  ";
-            F_XOR: fname = "XOR "; F_EQ : fname = "EQ  "; F_GT : fname = "GT  ";
-            F_SHR: fname = "SHR "; F_SHL: fname = "SHL "; default: fname = "??? ";
+            F_ADD : fname = "ADD";  F_SUB : fname = "SUB";  F_MUL : fname = "MUL";
+            F_DIV : fname = "DIV";  F_AND : fname = "AND";  F_OR  : fname = "OR";
+            F_NAND: fname = "NAND"; F_NOR : fname = "NOR";  F_XOR : fname = "XOR";
+            F_XNOR: fname = "XNOR"; F_EQ  : fname = "EQ";   F_GT  : fname = "GT";
+            F_LT  : fname = "LT";   F_SHR : fname = "SHR";  F_SHL : fname = "SHL";
+            default: fname = "?";
         endcase
     endfunction
 
@@ -204,41 +226,35 @@ module System_Top_tb;
         end
     endtask
 
-    task automatic rf_read_check(input [7:0] addr, input [7:0] exp, input [8*28-1:0] label);
+    task automatic rf_read_check(input [7:0] addr, input [7:0] exp);
         begin
             send_byte(RF_RD_CMD);
             send_byte(addr);
-            expect_byte(exp, label);
+            expect_byte(exp, "RD", addr, 8'h00, 4'h0, 1'b0);
         end
     endtask
 
     task automatic alu_with_operands(input [7:0] a, input [7:0] b, input [3:0] f);
         reg [15:0] exp;
-        reg [8*28-1:0] lbl;
         begin
             exp = alu_model(a, b, f);
             send_byte(ALU_OP_CMD);
             send_byte(a);
             send_byte(b);
             send_byte({4'h0, f});
-            $sformat(lbl, "CC %0s A=0x%h B=0x%h LSB", fname(f), a, b);
-            expect_byte(exp[7:0], lbl);
-            $sformat(lbl, "CC %0s A=0x%h B=0x%h MSB", fname(f), a, b);
-            expect_byte(exp[15:8], lbl);
+            expect_byte(exp[7:0],  "CC", a, b, f, 1'b0);
+            expect_byte(exp[15:8], "CC", a, b, f, 1'b1);
         end
     endtask
 
     task automatic alu_no_operand(input [7:0] a, input [7:0] b, input [3:0] f);
         reg [15:0] exp;
-        reg [8*28-1:0] lbl;
         begin
             exp = alu_model(a, b, f);          // operands already in REG0/REG1
             send_byte(ALU_NOP_CMD);
             send_byte({4'h0, f});
-            $sformat(lbl, "DD %0s A=0x%h B=0x%h LSB", fname(f), a, b);
-            expect_byte(exp[7:0], lbl);
-            $sformat(lbl, "DD %0s A=0x%h B=0x%h MSB", fname(f), a, b);
-            expect_byte(exp[15:8], lbl);
+            expect_byte(exp[7:0],  "DD", a, b, f, 1'b0);
+            expect_byte(exp[15:8], "DD", a, b, f, 1'b1);
         end
     endtask
 
@@ -301,7 +317,6 @@ module System_Top_tb;
         integer        k, t, full_before;
         reg [3:0]      fl [0:5];
         reg [15:0]     exp;
-        reg [8*28-1:0] l;
         begin
             $display("");
             $display("================ FIFO-full back-pressure ================");
@@ -354,10 +369,8 @@ module System_Top_tb;
             // 5. every queued byte must come back, in order
             for (k = 0; k < 6; k = k + 1) begin
                 exp = alu_model(8'h7A, 8'h0C, fl[k]);
-                $sformat(l, "BP DD %0s A=0x7a B=0x0c LSB", fname(fl[k]));
-                expect_byte(exp[7:0], l);
-                $sformat(l, "BP DD %0s A=0x7a B=0x0c MSB", fname(fl[k]));
-                expect_byte(exp[15:8], l);
+                expect_byte(exp[7:0],  "BP", 8'h7A, 8'h0C, fl[k], 1'b0);
+                expect_byte(exp[15:8], "BP", 8'h7A, 8'h0C, fl[k], 1'b1);
             end
 
             // 6. the 12 expect_byte calls above each waited for their byte, so TX
@@ -375,14 +388,13 @@ module System_Top_tb;
         integer k, v;
         reg [7:0] a, b;
         reg [7:0] cfg;
-        reg [3:0] flist [0:10];
+        reg [3:0] flist [0:14];
         reg [7:0] rf_addr [0:3];
         reg [7:0] rf_data [0:3];
-        reg [8*28-1:0] lbl;
         begin
-            flist[0]=F_ADD; flist[1]=F_SUB; flist[2]=F_MUL; flist[3]=F_DIV;
-            flist[4]=F_AND; flist[5]=F_OR;  flist[6]=F_XOR; flist[7]=F_EQ;
-            flist[8]=F_GT;  flist[9]=F_SHR; flist[10]=F_SHL;
+            flist[0] =F_ADD; flist[1] = F_SUB ; flist[2] = F_MUL; flist[3] =F_DIV; flist[4] =F_AND;
+            flist[5] =F_OR ; flist[6] = F_NAND; flist[7] = F_NOR; flist[8] =F_XOR; flist[9] =F_XNOR; 
+            flist[10]=F_EQ ; flist[11]= F_GT  ; flist[12]= F_LT ; flist[13]=F_SHR; flist[14]=F_SHL;
 
             $display("\n================ Prescale = %0d  (PAR_EN=%0d PAR_TYP=%0d) ================",
                      pres, TGT_PAR_EN, TGT_PAR_TYP);
@@ -391,8 +403,8 @@ module System_Top_tb;
             configure(pres, TGT_PAR_EN, TGT_PAR_TYP);
             check_clocks(pres);
             cfg = {pres[5:0], TGT_PAR_TYP[0], TGT_PAR_EN[0]};
-            rf_read_check(8'h02, cfg,  "RD REG2 (UART cfg)");
-            rf_read_check(8'h03, 8'd32, "RD REG3 (div ratio)");
+            rf_read_check(8'h02, cfg);
+            rf_read_check(8'h03, 8'd32);
 
             // 3. register file write / read (addresses 0x4 .. 0xF)
             rf_addr[0]=8'h04; rf_addr[1]=8'h07; rf_addr[2]=8'h0B; rf_addr[3]=8'h0F;
@@ -401,12 +413,11 @@ module System_Top_tb;
             for (k = 0; k < 4; k = k + 1) rf_write(rf_addr[k], rf_data[k]);
             check_no_extra("RF writes: no response");
             for (k = 0; k < 4; k = k + 1) begin
-                $sformat(lbl, "RD RF[0x%h]", rf_addr[k]);
-                rf_read_check(rf_addr[k], rf_data[k], lbl);
+                rf_read_check(rf_addr[k], rf_data[k]);
             end
 
             // 4. ALU with operands (0xCC)
-            for (k = 0; k < 11; k = k + 1) begin
+            for (k = 0; k < 15; k = k + 1) begin
                 // fixed vector (b != 0, a > b so SUB / DIV are unambiguous)
                 a = 8'd200 - k;  b = 8'd7 + k;
                 alu_with_operands(a, b, flist[k]);

@@ -31,14 +31,14 @@ Five clocks across two asynchronous domains. `REF_Clock` drives the ALU path; `U
 declared asynchronous in the SDC (`set_clock_groups -asynchronous`) and are crossed only through
 synchronizers.
 
-| Clock | Period (ns) | Source | Type |
+| Clock | Frequency | Source | Type |
 |---|---|---|---|
-| `REF_Clock` | 10.00 | `REF_CLK` port | primary |
-| `ALU_Clock` | 10.00 | `u_CLK_GATE/GATED_CLK` | generated (divide_by 1, gated) |
-| `UART_Clock` | 271.27 | `UART_CLK` port | primary |
-| `RX_Clock` | 271.27 | `u_RX_CLK_DIV/o_div_clk` | generated (divide_by 1) |
-| `TX_Clock` | 8680.56 | `u_TX_CLK_DIV/o_div_clk` | generated (divide_by 32) |
-| `scan_clk` | 100.00 | `scan_clk` port | test only |
+| `REF_Clock` | 100 MHz | `REF_CLK` port | primary |
+| `ALU_Clock` | 100 MHz| `u_CLK_GATE/GATED_CLK` | generated (divide_by 1, gated) |
+| `UART_Clock` | 3.6864 MHz | `UART_CLK` port | primary |
+| `RX_Clock` | 3.6864 MHz| `u_RX_CLK_DIV/o_div_clk` | generated (divide_by 1) |
+| `TX_Clock` | 115.2 KHz | `u_TX_CLK_DIV/o_div_clk` | generated (divide_by 32) |
+| `scan_clk` | 10 MHz | `scan_clk` port | test only |
 
 `TX_CLK_DIV_RATIO` is runtime-configurable (default 32) through the configuration register;
 `RX_CLK_DIV_RATIO` (3-bit) selects a divisor on `RX_CLK_DIV_MUX`, which allows the RX sampling
@@ -158,7 +158,7 @@ relative to that directory (`../RTL/...`, or `../../RTL/...` from the Formality 
 `SIM/system.lst` (also drives simulation), `Synthesis/system.lst`, `DFT/system.lst`,
 `Formality/post-syn/system.lst`, `Formality/post-dft/system.lst`.
 
-> The `.tcl` scripts contain absolute library paths from the original environment and will need
+> The `.tcl` scripts contain absolute library paths for the std cells from the original environment and will need
 > `search_path` updated before re-running.
 
 ### Results
@@ -188,13 +188,13 @@ UART host: it frames bytes onto `RX_IN` with the parity setting from `REG2`, dec
 frames on `TX_OUT`, and compares them against expected values. Each of the three prescale settings
 (32 / 16 / 8) is exercised in full, with a `PASS`/`FAIL` line per check and a summary at the end.
 
-**Result: `PASSED: 239   FAILED: 0` — `ALL TESTS PASSED`.**
+**Result: `PASSED: 287   FAILED: 0` — `ALL TESTS PASSED`.**
 
-The run is a per-prescale sweep (75 checks × 3 prescales = 225) plus a **FIFO-full
-back-pressure phase (14 checks)**, added to exercise the `SYS_CTRL` stall path that the original
+The run is a per-prescale sweep (77 checks × 3 prescales = 231) plus a **FIFO-full
+back-pressure phase (56 checks)**, added to exercise the `SYS_CTRL` stall path that the original
 testbench never reached.
 
-Per-prescale breakdown (75 checks each, × 3 prescales = 225):
+Per-prescale breakdown (77 checks each, × 3 prescales = 231):
 
 | Check | Count |
 |---|---|
@@ -202,11 +202,11 @@ Per-prescale breakdown (75 checks each, × 3 prescales = 225):
 | Read-back of `REG2` / `REG3` (configuration actually applied) | 2 |
 | Register writes produce no response (no unexpected TX traffic) | 1 |
 | Register read-back at `0x04`, `0x07`, `0x0B`, `0x0F` | 4 |
-| ALU with operands (`CC`): 25 operations × 2 response bytes | 50 |
+| ALU with operands (`CC`): 15 functions × 2 vectors × 2 bytes | 60 |
 | `REG0`/`REG1` preload produces no response | 1 |
 | ALU without operands (`DD`): 5 operations × 2 bytes | 10 |
 | Mixed `CC`/`DD` re-check, end-of-sweep TX idle | 5 |
-| **Total per prescale** | **75** |
+| **Total per prescale** | **77** |
 
 ### FIFO-full back-pressure
 
@@ -226,18 +226,9 @@ queued into 8 entries.
 ```
 ================ FIFO-full back-pressure ================
 Slowing TX (REG3 = 128) so the FIFO fills faster than it drains.
-[26224639000] PASS  BP back-pressure : FIFO went FULL (20772 REF_CLK cycles; was 0)
-[26224639000] PASS  BP DD ADD  A=0x7a B=0x0c LSB : 0x86
-[26224639000] PASS  BP DD ADD  A=0x7a B=0x0c MSB : 0x00
-[26441653000] PASS  BP DD SUB  A=0x7a B=0x0c LSB : 0x6e
-[30964223000] PASS  BP: TX idle after drain : no unexpected TX traffic
+[31224640000] PASS  BP back-pressure : FIFO went FULL (20772 REF_CLK cycles; was 0)
+[35964223000] PASS  BP: TX idle after drain : no unexpected TX traffic
 ```
-
-> **Limitation.** This closes the back-pressure coverage gap, but it does **not** clear the ALU
-> high-byte question. The operands used here (`A = 0x7A`, `B = 0x0C`) produce results whose true
-> high byte is `0x00` for every function issued, so a stall that zeroed the high byte would be
-> indistinguishable from a pass. Directed vectors with a non-zero high byte are still to be added.
-
 The three configurations confirm both clock arithmetic and the register file:
 
 | Prescale | `REG2` read-back | `RX_CLK` period | `TX_CLK` period |
@@ -249,54 +240,46 @@ The three configurations confirm both clock arithmetic and the register file:
 Representative checks from each prescale sweep:
 
 ```
-================ Prescale = 32  (PAR_EN=1 PAR_TYP=0) ================
-[703805000]  PASS  RX_CLK period 271.3 ns (Prescale 32 -> UART_CLK/1)
-[712485000]  PASS  TX_CLK period 8680.6 ns (= 1 bit @ 115200 baud)
-[1024985000] PASS  RD REG2 (UART cfg) : 0x81
-[1337485000] PASS  RD REG3 (div ratio) : 0x20
-[2804499000] PASS  RF writes: no response : no unexpected TX traffic
-[3116999000] PASS  RD RF[0x04] : 0x85
-[4575333000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
-[19054500000] PASS  CC ADD  A=0xff B=0xff MSB : 0xfe
-[23863528000] PASS  end of sweep: TX idle : no unexpected TX traffic
+[14575333000] PASS  CC XOR A=0xc0 B=0x0f LSB : 0xcf
+[15825333000] PASS  CC XNOR A=0xbf B=0x10 LSB : 0x50
+[15929500000] PASS  CC XNOR A=0xbf B=0x10 MSB : 0xff
+[22804500000] PASS  CC SHL A=0xe8 B=0xdf MSB : 0x01
+[23325334000] PASS  CC EQ A=0x37 B=0x37 LSB : 0x01
+[28863528000] PASS  end of sweep: TX idle : no unexpected TX traffic
 
 ================ FIFO-full back-pressure ================
 Slowing TX (REG3 = 128) so the FIFO fills faster than it drains.
-[26224639000] PASS  BP back-pressure : FIFO went FULL (20772 REF_CLK cycles; was 0)
-[26224639000] PASS  BP DD ADD  A=0x7a B=0x0c LSB : 0x86
-[26441653000] PASS  BP DD SUB  A=0x7a B=0x0c LSB : 0x6e
-[30964223000] PASS  BP: TX idle after drain : no unexpected TX traffic
+[31224640000] PASS  BP back-pressure : FIFO went FULL (20772 REF_CLK cycles; was 0)
+[35964223000] PASS  BP: TX idle after drain : no unexpected TX traffic
 
 ================ Prescale = 16  (PAR_EN=1 PAR_TYP=0) ================
-[31624559000] PASS  RX_CLK period 542.5 ns (Prescale 16 -> UART_CLK/2)
-[31953878000] PASS  RD REG2 (UART cfg) : 0x41
-[35504225000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
-[54792421000] PASS  end of sweep: TX idle : no unexpected TX traffic
+[36624571000] PASS  RX_CLK period 542.5 ns (Prescale 16 -> UART_CLK/2)
+[36641389000] PASS  TX_CLK period 8680.6 ns (= 1 bit @ 115200 baud)
+[64792433000] PASS  end of sweep: TX idle : no unexpected TX traffic
 
 ================ Prescale = 8  (PAR_EN=1 PAR_TYP=0) =================
-[55453283000] PASS  RX_CLK period 1085.1 ns (Prescale 8 -> UART_CLK/4)
-[55782059000] PASS  RD REG2 (UART cfg) : 0x21
-[59332406000] PASS  CC ADD  A=0xc8 B=0x07 LSB : 0xcf
-[78620602000] PASS  end of sweep: TX idle : no unexpected TX traffic
+[65453306000] PASS  RX_CLK period 1085.1 ns (Prescale 8 -> UART_CLK/4)
+[93620625000] PASS  end of sweep: TX idle : no unexpected TX traffic
 
 ==================== SUMMARY ====================
-PASSED: 239   FAILED: 0
+PASSED: 287   FAILED: 0
 ALL TESTS PASSED
 =================================================
-** Note: $stop    : System_Top_tb.sv(470)
 ```
 
-Measured latencies at 100 MHz `REF_CLK`:
+REF_CLK-cycle counts observed in behavioural simulation:
 
 | Quantity | Value |
 |---|---|
-| `RX_D_VALID` → synchronized pulse | 21–28 ns (2–3 cycles, phase dependent) |
 | Register write: `RX_D_VALID` (data byte) → `WrEn` | 36 ns |
 | Register read: address byte → `RdEn` / `Rd_D_Valid` / `FIFO_WR_INC` | 31 / 41 / 61 ns |
 | ALU (`DD`): function byte → `ALU_EN` / `FIFO_WR_INC` | 38 / 68 ns |
-| `ALU_CLK` edges per command vs `REF_CLK` edges in the same 677 µs | 3 vs 67 709 (0.0044 %) |
 | FIFO write → `EMPTY` de-asserts in TX domain | 17.0 µs (2 `TX_CLK` cycles) |
-| Reset release `RST` → REF / UART domain | 15 ns / 478 ns |
+| `EMPTY` de-assert → start bit on `TX_OUT` | 8.7 µs (1 `TX_CLK` cycle) |
+
+These show the logic path a command takes. They are **not** timing margins — behavioural
+simulation uses ideal clocks, so setup/hold, CDC/RDC safety and clock-tree skew must be
+established with STA and gate-level simulation, which are out of scope here.
 
 ## Getting started
 
@@ -319,6 +302,8 @@ The testbench accepts `+QUICK` (one vector per ALU function), `+PAR_EN=<0|1>` an
 
 - Generated tool output is ignored by `.gitignore` (`FM_WORK*`, `*_svf`, `Work/`, `*.vcd`,
   `*.wlf`, `spyglass-1/`), which is why the repo carries only source, constraints and reports.
+- CDC/RDC is checked statically with SpyGlass (`System_Lint/`), not by simulation. Behavioural
+  simulation uses ideal clocks, so it cannot verify timing or metastability margins.
 - `System_Lint/spyglass-1/consolidated_reports/` and the `.awl` waivers are deliberately tracked
   as sign-off evidence even though they sit inside the ignored SpyGlass tree.
 - Please do not commit waveform dumps or standard-cell libraries.

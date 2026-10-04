@@ -4,18 +4,12 @@ add wave -noupdate -expand -group Testbench /System_Top_tb/RST
 add wave -noupdate -expand -group Testbench /System_Top_tb/RX_IN
 add wave -noupdate -expand -group Testbench /System_Top_tb/TX_OUT
 add wave -noupdate -expand -group Testbench /System_Top_tb/RX_D_VALID
-add wave -noupdate -expand -group Testbench /System_Top_tb/TGT_PAR_EN
-add wave -noupdate -expand -group Testbench /System_Top_tb/TGT_PAR_TYP
+add wave -noupdate -expand -group Testbench -radix decimal /System_Top_tb/TGT_PAR_EN
+add wave -noupdate -expand -group Testbench -radix decimal /System_Top_tb/TGT_PAR_TYP
 add wave -noupdate -expand -group Testbench /System_Top_tb/cfg_par_en
 add wave -noupdate -expand -group Testbench /System_Top_tb/cfg_par_typ
-add wave -noupdate -expand -group Testbench /System_Top_tb/pass_cnt
-add wave -noupdate -expand -group Testbench /System_Top_tb/fail_cnt
-add wave -noupdate -expand -group Testbench /System_Top_tb/mon_data
-add wave -noupdate -expand -group Testbench /System_Top_tb/mon_par_ok
-add wave -noupdate -expand -group Testbench /System_Top_tb/mon_stp_ok
-add wave -noupdate -expand -group Testbench /System_Top_tb/mon_wr
-add wave -noupdate -expand -group Testbench /System_Top_tb/mon_rd
-add wave -noupdate -expand -group Testbench /System_Top_tb/mon_en
+add wave -noupdate -expand -group Testbench -radix decimal /System_Top_tb/pass_cnt
+add wave -noupdate -expand -group Testbench -radix decimal /System_Top_tb/fail_cnt
 add wave -noupdate -group System_Top /System_Top_tb/DUT/DATA_WIDTH
 add wave -noupdate -group System_Top /System_Top_tb/DUT/RF_DEPTH
 add wave -noupdate -group System_Top /System_Top_tb/DUT/FIFO_DEPTH
@@ -69,26 +63,26 @@ add wave -noupdate -expand -group ALU /System_Top_tb/DUT/u_ALU/ALU_OUT
 add wave -noupdate -expand -group ALU /System_Top_tb/DUT/u_ALU/OUT_VALID
 add wave -noupdate -expand -group ALU /System_Top_tb/DUT/u_ALU/Comb_OUT
 add wave -noupdate -expand -group ALU /System_Top_tb/DUT/u_ALU/OUT_VALID_Comb
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/DATA_WIDTH
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/DEPTH
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/W_CLK
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/R_CLK
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/W_RST
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/R_RST
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/W_INC
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/R_INC
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/WR_DATA
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/RD_DATA
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/EMPTY
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/FULL
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/w_ptr
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/r_ptr
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/sync_w_ptr
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/sync_r_ptr
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/grey_w_ptr
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/grey_r_ptr
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/r_addr
-add wave -noupdate -group FIFO /System_Top_tb/DUT/u_FIFO/w_addr
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/DATA_WIDTH
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/DEPTH
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/W_CLK
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/R_CLK
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/W_RST
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/R_RST
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/W_INC
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/R_INC
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/WR_DATA
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/RD_DATA
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/EMPTY
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/FULL
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/w_ptr
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/r_ptr
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/sync_w_ptr
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/sync_r_ptr
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/grey_w_ptr
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/grey_r_ptr
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/r_addr
+add wave -noupdate -expand -group FIFO /System_Top_tb/DUT/u_FIFO/w_addr
 add wave -noupdate -group BUS_SYNC /System_Top_tb/DUT/u_BUS_SYNC/DATA_WIDTH
 add wave -noupdate -group BUS_SYNC /System_Top_tb/DUT/u_BUS_SYNC/Sync_Legnth
 add wave -noupdate -group BUS_SYNC /System_Top_tb/DUT/u_BUS_SYNC/Unsync_bus
@@ -193,7 +187,7 @@ add wave -noupdate -expand -group UART -expand -group RX /System_Top_tb/DUT/u_UA
 add wave -noupdate -expand -group UART -expand -group RX /System_Top_tb/DUT/u_UART/RX_P_DATA
 add wave -noupdate -expand -group UART /System_Top_tb/DUT/u_UART/RX_DATA_VALID
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {7949551176 ps} 0}
+WaveRestoreCursors {{Cursor 1} {3950385380 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
@@ -209,4 +203,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {7558176777 ps} {8641568777 ps}
+WaveRestoreZoom {3441943739 ps} {4525335739 ps}
