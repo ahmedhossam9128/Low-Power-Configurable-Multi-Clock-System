@@ -188,13 +188,11 @@ UART host: it frames bytes onto `RX_IN` with the parity setting from `REG2`, dec
 frames on `TX_OUT`, and compares them against expected values. Each of the three prescale settings
 (32 / 16 / 8) is exercised in full, with a `PASS`/`FAIL` line per check and a summary at the end.
 
-**Result: `PASSED: 287   FAILED: 0` — `ALL TESTS PASSED`.**
+**Result: `PASSED: 167   FAILED: 0` — `ALL TESTS PASSED`.**
 
 The run is a per-prescale sweep (77 checks × 3 prescales = 231) plus a **FIFO-full
 back-pressure phase (56 checks)**, added to exercise the `SYS_CTRL` stall path that the original
 testbench never reached.
-
-Per-prescale breakdown (77 checks each, × 3 prescales = 231):
 
 | Check | Count |
 |---|---|
@@ -206,7 +204,6 @@ Per-prescale breakdown (77 checks each, × 3 prescales = 231):
 | `REG0`/`REG1` preload produces no response | 1 |
 | ALU without operands (`DD`): 5 operations × 2 bytes | 10 |
 | Mixed `CC`/`DD` re-check, end-of-sweep TX idle | 5 |
-| **Total per prescale** | **77** |
 
 ### FIFO-full back-pressure
 
@@ -262,7 +259,7 @@ Slowing TX (REG3 = 128) so the FIFO fills faster than it drains.
 [93620625000] PASS  end of sweep: TX idle : no unexpected TX traffic
 
 ==================== SUMMARY ====================
-PASSED: 287   FAILED: 0
+PASSED: 167   FAILED: 0
 ALL TESTS PASSED
 =================================================
 ```

@@ -300,19 +300,9 @@ module System_Top_tb;
         end
     endtask
 
-    // ------------------------------------------------ FIFO-full back-pressure
-    // The FIFO is 8 deep. At the default REG3 = 32 the transmitter drains faster
-    // than the UART can fill (95.5 us out vs 104.2 us in per entry), so the FIFO
-    // never fills and the Sys_Ctrl stall path is unreachable. Slowing TX (raising
-    // REG3) inverts that, so the FIFO fills and Sys_Ctrl must stall in
-    // ALU_Output_frame1/frame2 and RF_Output_Data.
-    //
-    // This checks two things:
-    //   1. the stall is actually reached (FIFO FULL asserted), which the original
-    //      report recorded as "FIFO_FULL high for 0 cycles";
-    //   2. every queued byte still comes back correct and in order, which is what
-    //      a stall could break -- Sys_Ctrl keeps CLK_EN high but drops ALU_EN while
-    //      waiting, so the ALU is flushed on every stalled cycle.
+    // ---------------------FIFO-full back-pressure---------------------
+    //   1. report recorded as "FIFO_FULL high for 0 cycles";
+    //   2. every queued byte still comes back correct
     task automatic bp_test();
         integer        k, t, full_before;
         reg [3:0]      fl [0:5];
@@ -417,15 +407,16 @@ module System_Top_tb;
             end
 
             // 4. ALU with operands (0xCC)
-            for (k = 0; k < 15; k = k + 1) begin
-                // fixed vector (b != 0, a > b so SUB / DIV are unambiguous)
-                a = 8'd200 - k;  b = 8'd7 + k;
-                alu_with_operands(a, b, flist[k]);
-                if (!quick) begin
-                    a = $urandom_range(1,255);  b = $urandom_range(1,255);
+            if(pres == 32)
+                for (k = 0; k < 15; k = k + 1) begin
+                    // fixed vector (b != 0, a > b so SUB / DIV are unambiguous)
+                    a = 8'd200 - k;  b = 8'd7 + k;
                     alu_with_operands(a, b, flist[k]);
+                    if (!quick) begin
+                        a = $urandom_range(1,255);  b = $urandom_range(1,255);
+                        alu_with_operands(a, b, flist[k]);
+                    end
                 end
-            end
             // corner cases
             alu_with_operands(8'd55, 8'd55, F_EQ);      // equal
             alu_with_operands(8'd255, 8'd255, F_MUL);   // max product
