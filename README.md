@@ -185,13 +185,16 @@ declared in `System_Lint/system.sgdc` (quasi-static config registers, `reset_syn
 
 System-level functional verification is carried out by `SIM/System_Top_tb.sv`, which acts as the
 UART host: it frames bytes onto `RX_IN` with the parity setting from `REG2`, decodes the response
-frames on `TX_OUT`, and compares them against expected values. Each of the three prescale settings
-(32 / 16 / 8) is exercised in full, with a `PASS`/`FAIL` line per check and a summary at the end.
+frames on `TX_OUT`, and compares them against expected values, printing a `PASS`/`FAIL` line per
+check and a summary at the end. All three prescale settings (32 / 16 / 8) are exercised. The full
+15-function ALU sweep runs once, at prescale 32: the ALU decode is identical at every prescale, so
+repeating it per setting would add runtime without adding coverage. Prescale 16 and 8 run the
+configuration, register-file and corner checks instead.
 
 **Result: `PASSED: 167   FAILED: 0` — `ALL TESTS PASSED`.**
 
-The run is a per-prescale sweep (77 checks × 3 prescales = 231) plus a **FIFO-full
-back-pressure phase (56 checks)**, added to exercise the `SYS_CTRL` stall path that the original
+The run is **167 checks**: 91 at prescale 32, 31 at prescale 16, 31 at prescale 8, plus a
+**FIFO-full back-pressure phase of 14 checks** that exercises the `SYS_CTRL` stall path the original
 testbench never reached.
 
 | Check | Count |
@@ -204,6 +207,12 @@ testbench never reached.
 | `REG0`/`REG1` preload produces no response | 1 |
 | ALU without operands (`DD`): 5 operations × 2 bytes | 10 |
 | Mixed `CC`/`DD` re-check, end-of-sweep TX idle | 5 |
+| **Total at prescale 32** | **91** |
+| **Total at prescale 16 and 8** (configuration, register file and corners; the `CC` sweep is
+prescale-32 only) | **31** each |
+
+`DD` (no-operand ALU) and the corner cases run at every prescale; only the 15-function `CC` sweep is
+restricted to prescale 32.
 
 ### FIFO-full back-pressure
 
