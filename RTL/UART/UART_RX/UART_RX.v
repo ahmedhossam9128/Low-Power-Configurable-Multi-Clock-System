@@ -6,6 +6,8 @@ module UART_RX (
     input  wire       PAR_EN,
     input  wire       PAR_TYP,
     output wire [7:0] P_DATA,
+    output wire       par_err,
+    output wire       stp_err,
     output wire       data_valid
 );
 
@@ -22,9 +24,6 @@ module UART_RX (
     wire       dat_samp_en;
     wire       deser_en;
     
-    // Error / Status Flags to FSM
-    wire       par_err;
-    wire       stp_err;
     wire       start_glitch;
 
     // 1. Oversampling Data Sampler Module

@@ -1,7 +1,7 @@
 
 current_design System_Top
 
-sdc_data -file ./System.sdc
+sdc_data -file ./../DFT/sdc/System_Top.sdc
 
 ####################################################################################
                   #### Section 1 : Clock Definition ####

@@ -111,7 +111,7 @@ set_clock_groups -asynchronous -group [get_clocks {REF_Clock ALU_Clock}]     \
                                       -group [get_clocks scan_clk]
 
 set_dont_touch_network [get_clocks {REF_Clock UART_Clock ALU_Clock RX_Clock TX_Clock scan_clk}]
-set_dont_touch_network [add_to_collection [get_ports {RST scan_rst}] [get_pins {u_REF_RST_Sync/sync_RST u_UART_RST_Sync/sync_RST}]]
+set_dont_touch_network [add_to_collection [get_ports {RST_N scan_rst}] [get_pins {u_REF_RST_Sync/sync_RST u_UART_RST_Sync/sync_RST}]]
 
 
 ####################################################################################
@@ -127,11 +127,11 @@ set scan_in_delay  [expr 0.2*$SCAN_CLK_PER]
 set scan_out_delay [expr 0.2*$SCAN_CLK_PER]
 
 #Constrain Input Paths
-set IN_Ports [list RX_IN]
+set IN_Ports [list UART_RX_IN]
 set_input_delay $in_delay -clock UART_Clock [get_ports $IN_Ports]
 
 #Constrain Output Paths
-set OUT_Ports [list TX_OUT]
+set OUT_Ports [list UART_TX_O framing_error parity_error]
 set_output_delay $out_delay -clock UART_Clock [get_ports $OUT_Ports]
 
 #Constrain Scan Input Paths

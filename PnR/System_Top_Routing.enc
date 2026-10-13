@@ -1,0 +1,8 @@
+################################################
+#                                              #
+# Silicon Perspective, A Cadence Company       #
+# FirstEncounter Design Restore script         #
+#    for design session: /home/ahesham/Projects/System_pnr/PnR/System_Top_Routing.enc                     
+#                                              #
+################################################
+restoreDesign /home/ahesham/Projects/System_pnr/PnR/System_Top_Routing.enc.dat System_Top

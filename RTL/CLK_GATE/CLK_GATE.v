@@ -4,6 +4,8 @@ input CLK,
 output wire GATED_CLK
 );
 
+// RTL design
+/*
    //internal connections
    reg     Latch_Out ;
 
@@ -18,11 +20,13 @@ output wire GATED_CLK
 
    // ANDING
    assign  GATED_CLK = CLK && Latch_Out ;
-/*
+*/
+
+// STD_CELL OF Integrated CLK GATE (ICG)
   TLATNCAX8M u_CLK_GATE (
     .E(CLK_EN),
     .CK(CLK),
     .ECK(GATED_CLK)
   );
-*/
+
 endmodule

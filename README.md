@@ -18,11 +18,17 @@ low-power and configurability features.
 | Parameters | `DATA_WIDTH = 8`, `RF_DEPTH = 16`, `FIFO_DEPTH = 8` |
 | Technology | TSMC CL013G RVT, 130 nm (`scmetro_tsmc_cl013g_rvt_*`) |
 | Voltage corners | SS 1.08 V / 125 °C, TT 1.2 V / 25 °C, FF 1.32 V / −40 °C |
-| Cell area | 22,405.5 µm² (pre-DFT) · 23,929.4 µm² (post-DFT) |
-| Cells | 1,895 pre-DFT (1,485 comb + 373 seq) · 1,870 post-DFT |
-| Ports | 732 pre-DFT · 854 post-DFT (scan added) |
-| Internal power | 0.425 mW @ 1.08 V |
-| Scan chains | 4 |
+| Cell area | 19,734.4 µm² (pre-DFT) · 22,006.6 µm² (post-DFT) |
+| Die / Core dimensions | 240.47 µm × 160.47 µm die · 228.32 µm × 148.32 µm core · 70.66% core utilization |
+| Cells | 1,828 pre-DFT (1,431 comb + 366 seq) · 1,800 post-DFT (346 scan + 12 shift-reg + 1 ICG) |
+| Ports | 552 pre-DFT · 680 post-DFT (scan test ports added) |
+| Sign-off Power | **0.846 mW (845.9 µW)** @ 1.08 V, 125 °C (PrimeTime PX time-based with GLS VCD + DSPF RC) |
+| Cell Leakage Power | **16.59 µW** (matches Cadence Encounter post-route 16.62 µW to within 0.2%) |
+| Test Coverage | **99.61% stuck-at coverage** (15,505 detected faults across 4 scan chains) |
+| Post-Route Slack | Setup WNS = **+0.364 ns**, Hold WNS = **+0.074 ns**, 0 DRVs |
+| Physical Verification | **0 DRC, 0 LVS, 0 Antenna, 0 Density violations** (Cadence First Encounter) |
+| Formal Equivalence | **100% SUCCEEDED** (Formality: post-syn 361 pts, post-DFT 362 pts, post-PnR 362 pts) |
+| Gate-Level Simulation | **61/61 PASSED** (QuestaSim with SDF-max annotation, 0 timing check violations) |
 
 ## Clock architecture
 
@@ -69,29 +75,26 @@ Reset is asynchronous-asserted and synchronized per domain by `u_REF_RST_Sync` a
 
 Two mechanisms account for the "low-power" and "configurable" aspects:
 
-- **Clock gating** — `CLK_GATE` holds `ALU_Clock` off while the ALU is idle. Reported gating-cell
-  cost is 22.36 µm² (0.1% of area) and 5.42 µW.
+- **Clock gating** — `CLK_GATE` holds `ALU_Clock` off while the ALU is idle.
 - **Multi-rate clocking** — the TX divider runs 32× slower than the UART clock, and the RX
   divider is runtime-selectable.
 
-Post-synthesis power distribution (`ss_1p08v_125c`, low-effort vectorless estimation):
+### PrimeTime PX Sign-Off Power Breakdown (Time-Based VCD + DSPF Parasitics)
 
-| Block | Total power | Share |
-|---|---|---|
-| `u_RegFile` | 0.212 mW | 47.0% |
-| `u_FIFO` (incl. `u_fifo_mem`) | 0.118 mW | 26.1% |
-| `u_SysCtrl` | 4.84e-2 mW | 10.7% |
-| `u_ALU` | 3.03e-2 mW | 6.7% |
-| `u_BUS_SYNC` | 1.75e-2 mW | 3.9% |
-| `u_REF_RST_Sync` | 1.25e-2 mW | 2.8% |
-| `u_CLK_GATE` | 5.42e-3 mW | 1.2% |
-| `u_UART` | 3.55e-3 mW | 0.8% |
-| **`System_Top`** | **0.450 mW** | 100% |
+Sign-off power analysis was performed in Synopsys PrimeTime PX in time-based mode driven by
+switching activity extracted from gate-level simulation across the full 19.49 ms run with extracted
+post-route DSPF RC parasitics (`System_Top.spf`: 2,086 nets, 39,020 capacitances, 36,934 resistances)
+at SS 1.08 V, 125 °C:
 
-> Note: power was estimated at `-analysis_effort low` with no switching-activity annotation
-> (`PWR-414`/`PWR-415` warnings in `power.rpt`), so these are relative indicators rather than
-> sign-off-quality absolute numbers. Leakage is reported in pW and is dominated by the register
-> file and FIFO memory.
+| Power Group | Internal Power | Switching Power | Leakage Power | Total Power | Share |
+|---|---|---|---|---|---|
+| `clock_network` | 572.60 µW | 255.90 µW | 2.85 µW | **831.30 µW** | 98.27% |
+| `register` | 0.33 µW | 0.13 µW | 6.12 µW | **6.58 µW** | 0.78% |
+| `combinational` | 0.19 µW | 0.22 µW | 7.62 µW | **8.04 µW** | 0.95% |
+| **Total System Power** | **573.10 µW (67.75%)** | **256.20 µW (30.29%)** | **16.59 µW (1.96%)** | **845.90 µW** | **100.00%** |
+
+- **Peak Instantaneous Power:** 0.1846 W at $t = 269.37\,\mu\text{s}$ (during initial reset release and simultaneous clock-edge switching).
+- **Leakage Correlation:** PrimeTime PX reported **16.59 µW** cell leakage, correlating to within **0.2%** of Cadence Encounter's post-route estimate (**16.62 µW**).
 
 ## Repository layout
 
@@ -111,69 +114,87 @@ RTL/                  Design source (41 Verilog/SystemVerilog files)
   ALU/                8-bit ALU with add/sub/mul/div
   Scan_Mux/           2x1 scan mux
 Synthesis/            Design Compiler: constraints, netlist, SDF, SDC, reports
-DFT/                  DFT Compiler: scan insertion, post-DFT netlist and reports
-Formality/            Equivalence checking: post-syn, post-dft, post-PnR
+DFT/                  DFT Compiler: scan insertion, post-DFT netlist, scan DEF, and reports
+PnR/                  Cadence SoC Encounter: floorplanning, CTS, routing, timing & sign-off exports
+  export/             Post-route netlists (.v, _pg.v), delays (.sdf), parasitics (.spf), layout (.gds)
+  timingReports/      Multi-corner setup/hold timing slack reports (preCTS, postCTS, postRoute, signOff)
+  clock_report/       Clock tree synthesis reports and skew analysis
+Formality/            Equivalence checking: post-syn, post-dft, post-PnR scripts and verification reports
 SIM/                  Top-level SystemVerilog testbench and file list
-System_Lint/          SpyGlass lint + CDC/RDC: authored constraints, waivers, reports
-std_cells/            TSMC CL013G RVT timing libraries and db files (not tracked)
-Work/                 Scratch (not tracked)
-Final_System_Report.pdf   Full 25-page design and simulation report (see below)
+GLS/                  Gate-Level Simulation (QuestaSim) and Sign-Off Power (PrimeTime PX)
+  PT/                 PrimeTime PX time-based power scripts, logs, and System_PW.rpt
+System_Lint/          SpyGlass lint + CDC/RDC: authored constraints, waivers, consolidated reports
+Final_System_Report.pdf   Full 24-page comprehensive ASIC design and sign-off report
 ```
 
 ### Full design report
 
 `Final_System_Report.pdf` is the complete write-up: specifications and command set, system
-architecture, the multi-clock design (CDC/RDC, clock gating, pipelining) with measured numbers,
-module reference, the full simulation and coverage analysis, and a backend summary. The sections
-below summarise the same results for reading on GitHub; the PDF adds the captured waveform
-figures, the SYS_CTRL state diagram, the coverage analysis and the command walkthroughs.
-
-In the report, figures 9–25 (the per-command walkthrough captures) are laid out **one per
-row**, widened and centred on the page, each with its own centred caption and short description, rather than two abreast.
-
-Each RTL block has a matching testbench under its `Sim/` subdirectory.
+architecture, multi-clock design (CDC/RDC, clock gating, pipelining), synthesis optimization,
+scan insertion & ATPG coverage, 3-stage formal equivalence, physical design (floorplanning, CTS,
+NanoRoute, physical verification), gate-level simulation with SDF-max delays, and sign-off
+dynamic power analysis with PrimeTime PX.
 
 ## Implementation flow
 
 ```
-RTL ──► Synthesis ──► DFT (scan insertion) ──► Formality
-         (DC)          (DFT Compiler)            (equivalence)
-           │                   │
-           └───── SpyGlass lint / CDC / RDC ─────┘
+RTL ──► Synthesis ──► DFT (scan insertion) ──► PnR (Encounter) ──► Formality (post-syn / post-dft / post-PnR)
+         (DC)          (DFT Compiler)           (NanoRoute)        │
+           │                   │                      │             ▼
+           └───── SpyGlass lint / CDC / RDC ──────────┴─────► GLS (QuestaSim SDF-max)
+                                                                    │
+                                                                    ▼
+                                                             PrimeTime PX (Power)
 ```
 
 Each stage is driven by a tcl script plus a `run_*.sh` wrapper:
 
-| Stage | Script | Run |
-|---|---|---|
-| Synthesis | `Synthesis/syn_script.tcl` | `Synthesis/run_syn.sh` |
-| DFT | `DFT/dft_script.tcl` | `DFT/run_dft.sh` |
-| Formality (post-syn) | `Formality/post-syn/syn_fm_script.tcl` | `run_syn_fm.tcl` |
-| Formality (post-dft) | `Formality/post-dft/dft_fm_script.tcl` | `run_dft_fm.tcl` |
-| Formality (post-PnR) | `Formality/post-PnR/pnr_fm_script.tcl` | `run_pnr_fm.tcl` |
-| Simulation | `SIM/run.do` | ModelSim/QuestaSim |
+| Stage | Tool | Script | Output / Deliverables |
+|---|---|---|---|
+| Synthesis | Design Compiler | `Synthesis/syn_script.tcl` | Gate-level netlist, SDC, SDF, timing/area/power reports |
+| DFT | DFT Compiler | `DFT/dft_script.tcl` | Scan-inserted netlist, scan DEF, test SDC, ATPG report |
+| Formality (post-syn) | Formality | `Formality/post-syn/syn_fm_script.tcl` | 361 compare points verified (SUCCEEDED) |
+| Formality (post-dft) | Formality | `Formality/post-dft/dft_fm_script.tcl` | 362 compare points verified (SUCCEEDED) |
+| Formality (post-PnR) | Formality | `Formality/post-PnR/pnr_fm_script.tcl` | 362 compare points verified (SUCCEEDED) |
+| Place & Route (PnR) | SoC Encounter | `PnR/encounter.cmd` | Layout GDSII, post-route netlist, SPEF/DSPF, SDF, DRC/LVS |
+| Simulation (RTL) | QuestaSim | `SIM/run.do` | Functional verification (167 checks passed) |
+| Simulation (GLS) | QuestaSim | `GLS/run.do` | Gate-level verification with SDF-max delays (61 checks passed) |
+| Sign-Off Power | PrimeTime PX | `GLS/PT/PT.tcl` | Time-based power analysis using GLS VCD + DSPF parasitics |
 
 The RTL file list is centralised in one `system.lst` per tool working directory, each using paths
 relative to that directory (`../RTL/...`, or `../../RTL/...` from the Formality directories):
 `SIM/system.lst` (also drives simulation), `Synthesis/system.lst`, `DFT/system.lst`,
-`Formality/post-syn/system.lst`, `Formality/post-dft/system.lst`.
+`Formality/post-syn/system.lst`, `Formality/post-dft/system.lst`, `Formality/post-PnR/system.lst`.
 
-> The `.tcl` scripts contain absolute library paths for the std cells from the original environment and will need
-> `search_path` updated before re-running.
+### Results Summary
 
-### Results
+**Timing** — all path groups MET across every stage of the design flow:
+- *Pre-DFT Synthesis:* Worst Setup Slack = **+0.02 ns** (`ALU_Clock`), Worst Hold Slack = **+0.34 ns**.
+- *Post-Route PnR:* Worst Setup Slack = **+0.364 ns**, Worst Hold Slack = **+0.074 ns**, **0 DRVs** (Max Cap: 0, Max Transition: 0, Max Fanout: 0).
+- *Clock Tree Synthesis (CTS):* `REF_CLK` skew = **109.3 ps** (45% margin against 200 ps target), Max Edge Delay = 1.84 ns.
 
-**Timing** — all path groups MET. Worst setup slack 0.00 ns (scan path), worst hold 0.33 ns.
+**Equivalence check** — verified with Synopsys Formality across all three transformations:
+- Post-Synthesis: `Verification SUCCEEDED`, **361 passing compare points, 0 failing, 0 aborted, 0 unverified**.
+- Post-DFT: `Verification SUCCEEDED`, **362 passing compare points, 0 failing, 0 aborted, 0 unverified**.
+- Post-PnR: `Verification SUCCEEDED`, **362 passing compare points, 0 failing, 0 aborted, 0 unverified**.
 
-**Equivalence check** — post-synthesis Formality: `Verification SUCCEEDED`, **361 passing compare
-points, 0 failing, 0 aborted, 0 unverified** (358 DFF, 1 LAT, 2 port). Verified with
-`synopsys_auto_setup` mode enabled.
+**DFT Scan Insertion** — 4 balanced scan chains inserted; test pins multiplexed with functional clocks and reset:
+- Stuck-at test coverage: **99.61%** (15,505 detected faults out of 15,604; only 1 undetected fault).
+- Area overhead: +11.51% total cell area (19,734 µm² → 22,007 µm²).
 
-**DFT** — 4 scan chains inserted; `System_Top` ports increase 732 → 854. Post-DFT area 23,929.4 µm²
-(+6.8% over pre-DFT). `test_mode` selects `scan_clk`/`scan_rst` over the functional clocks and
-reset through `MUX_2x1` scan muxes (`u_ref_clk_mux`, `u_alu_clk_mux`, `u_uart_clk_mux`,
-`u_tx_clk_mux`, `u_rx_clk_mux`, `u_rst_mux`, …), with `SI[3:0]`/`SE`/`SO[3:0]` as the scan
-interface.
+**Physical Design & Verification (PnR)** — Cadence SoC Encounter 130 nm 7-metal layer flow:
+- Core utilization: **70.66%** on 52 standard cell rows.
+- Routing: 6 metal layers (NanoRoute) with concurrent via/wire optimization.
+- Physical Verification: **0 DRC violations**, **0 LVS connectivity errors** (0 opens, 0 shorts), **0 Antenna violations**, **0 Metal Density violations** (20%--80% density window satisfied across all layers 1--7).
+
+**Gate-Level Simulation (GLS)** — QuestaSim with full back-annotated physical delays (`System_Top.sdf` max corner):
+- **61/61 functional checks PASSED with zero failures**.
+- **0 timing check violations** (setup, hold, recovery, removal, pulse-width) observed throughout 19.49 ms of simulation.
+
+**Sign-Off Power Analysis (PrimeTime PX)** — Time-based dynamic analysis driven by GLS VCD switching activity and extracted DSPF parasitics:
+- Total Time-Averaged Power: **0.846 mW (845.9 µW)**.
+- Distribution: Cell Internal Power = **67.75% (573.1 µW)**, Net Switching Power = **30.29% (256.2 µW)**, Cell Leakage Power = **1.96% (16.59 µW)**.
+- Gated power optimization: Active clock gating holds `ALU_Clock` quiet during idle UART communication, confining high-frequency toggling to active execution cycles.
 
 **SpyGlass CDC/RDC** — run on `System_Top` against the `rtl_handoff` methodology. Constraints are
 declared in `System_Lint/system.sgdc` (quasi-static config registers, `reset_synchronizer`,
@@ -284,8 +305,8 @@ REF_CLK-cycle counts observed in behavioural simulation:
 | `EMPTY` de-assert → start bit on `TX_OUT` | 8.7 µs (1 `TX_CLK` cycle) |
 
 These show the logic path a command takes. They are **not** timing margins — behavioural
-simulation uses ideal clocks, so setup/hold, CDC/RDC safety and clock-tree skew must be
-established with STA and gate-level simulation, which are out of scope here.
+simulation uses ideal clocks. Setup/hold timing, clock-tree skew, and physical margins are
+verified in the dedicated STA, PnR, and Gate-Level Simulation (GLS) stages above.
 
 ## Getting started
 

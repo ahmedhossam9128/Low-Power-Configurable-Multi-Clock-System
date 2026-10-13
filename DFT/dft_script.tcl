@@ -18,11 +18,9 @@ puts "#      #setting Design Libraries          #"
 puts "###########################################"
 
 #Add the path of the libraries to the search_path variable
-lappend search_path /home/ICer/tsmc_fb_cl013g_sc/aci/sc-m/synopsys
-
-set SSLIB "scmetro_tsmc_cl013g_rvt_ss_1p08v_125c.db"
-set TTLIB "scmetro_tsmc_cl013g_rvt_tt_1p2v_25c.db"
-set FFLIB "scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c.db"
+set SSLIB "/home/ICer/tsmc_fb_cl013g_sc/aci/sc-m/synopsys/scmetro_tsmc_cl013g_rvt_ss_1p08v_125c.db"
+set TTLIB "/home/ICer/tsmc_fb_cl013g_sc/aci/sc-m/synopsys/scmetro_tsmc_cl013g_rvt_tt_1p2v_25c.db"
+set FFLIB "/home/ICer/tsmc_fb_cl013g_sc/aci/sc-m/synopsys/scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c.db"
 
 ## Standard Cell libraries 
 set target_library [list $SSLIB $TTLIB $FFLIB]
@@ -84,7 +82,7 @@ puts "########## Mapping & Optimization #############"
 puts "###############################################"
 
 #test_ready compile
-compile -map_effort high -scan
+compile_ultra -no_autoungroup -scan 
 
 ################################################################### 
 # Setting Test Timing Variables
@@ -126,7 +124,7 @@ insert_dft
 
 ######################## Optimize Logic post DFT ############################
 
-compile -scan -incremental
+compile_ultra -no_autoungroup -scan -incremental
 
 ###################### Design Rule Checking post DFT ########################
 
@@ -144,6 +142,7 @@ write_file -format verilog -hierarchy -output netlists/$top_module.ddc
 write_file -format verilog -hierarchy -output netlists/$top_module.v
 write_sdf  sdf/$top_module.sdf
 write_sdc  -nosplit sdc/$top_module.sdc
+write_scan_def -output System_Top_scan.def
 
 ####################### reporting ##########################################
 

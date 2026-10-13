@@ -12,7 +12,7 @@
 ../RTL/RST_Synchronizer/RST_Sync.v
 ../RTL/RX_CLK_DIV_MUX/RX_CLK_DIV_MUX.v
 ../RTL/Sys_Ctrl/Sys_Ctrl.v
-../RTL/System_Top/System_Top_pre_dft.v
+../RTL/System_Top/System_Top.v
 ../RTL/UART/UART_RX/Deserializer.v
 ../RTL/UART/UART_RX/Edge_Bit_Counter.v
 ../RTL/UART/UART_RX/Parity_Checker.v
@@ -27,3 +27,4 @@
 ../RTL/UART/UART_TX/UART_TX_FSM.sv
 ../RTL/UART/UART_TX/UART_TX_TOP.v
 ../RTL/UART/UART_TOP/UART.v
+../RTL/Scan_Mux/MUX_2x1.v

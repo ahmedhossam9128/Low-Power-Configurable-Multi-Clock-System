@@ -9,18 +9,24 @@ std_cells/
 # project files live at the System_Lint root and must stay tracked, which is
 # why this is NOT the blanket `System_Lint/` pattern it used to be.
 System_Lint/spyglass-1/**
-# Re-include directories, so git will descend into the tree below.
-# A `!` rule cannot re-include a file while its parent directory is excluded,
-# so this line is required before the file patterns that follow.
 !System_Lint/spyglass-1/**/
-# Hand-authored sign-off waivers (engineering rationale in the comments).
 !**/spyglass-1_waiver_file.awl
-# Kept as CDC/RDC sign-off evidence.
 !System_Lint/spyglass-1/consolidated_reports/**
+
+System_Lint/System_Lint/**
+!System_Lint/System_Lint/**/
+!**/System_Lint_waiver_file.awl
+!System_Lint/System_Lint/consolidated_reports/**
 
 # Generated SpyGlass project state (root and nested project dirs).
 System_Lint/**/.project_status
 System_Lint/**/.project_snapshot
+System_Lint/**/.CurrentSessionRunSummaryFiles
+System_Lint/**/Run_Summary/
+System_Lint/**/html_reports/
+System_Lint/**/spyglass_cache/
+System_Lint/**/.tmp_*
+System_Lint/**/WORK/
 System_Lint/*.log
 System_Lint/**/.fuse_hidden*
 
@@ -45,14 +51,12 @@ Formality/post-PnR/formality*.log
 Formality/post-PnR/formality*.lck
 
 # dft work files
-
 DFT/alib-52
 DFT/work/
 DFT/command.log
 DFT/default.svf
 
 # syn work files
-
 Synthesis/alib-52
 Synthesis/command.log
 Synthesis/default.svf
@@ -60,7 +64,6 @@ Synthesis/filenames_117365_D20260930.log
 Synthesis/filenames.log
 
 # Sim work files
-
 **/wlft*
 **/*.ps
 **/*.cr.mti
@@ -75,5 +78,22 @@ Synthesis/filenames.log
 **/*.fsdb
 **/*.shm
 
-# rar files
+# PnR work and database dumps
+PnR/.*
+PnR/*.enc.dat/
+PnR/*.rcdb.d/
+PnR/td_RCDB_*
+PnR/encounter.log
+PnR/*.old
+PnR/*~
+PnR/qx_excluded.nets
+PnR/System_Top.rguide
+
+# GLS work and command logs
+GLS/work/
+GLS/PT/pt_shell_command.log
+
+# Editor backups and archives
+*~
 **/*.rar
+

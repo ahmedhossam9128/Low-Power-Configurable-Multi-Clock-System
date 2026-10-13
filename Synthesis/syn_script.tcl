@@ -18,11 +18,10 @@ puts "#      #setting Design Libraries          #"
 puts "###########################################"
 
 #Add the path of the libraries to the search_path variable
-lappend search_path /home/ICer/tsmc_fb_cl013g_sc/aci/sc-m/synopsys
 
-set SSLIB "scmetro_tsmc_cl013g_rvt_ss_1p08v_125c.db"
-set TTLIB "scmetro_tsmc_cl013g_rvt_tt_1p2v_25c.db"
-set FFLIB "scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c.db"
+set SSLIB "/home/ICer/tsmc_fb_cl013g_sc/aci/sc-m/synopsys/scmetro_tsmc_cl013g_rvt_ss_1p08v_125c.db"
+set TTLIB "/home/ICer/tsmc_fb_cl013g_sc/aci/sc-m/synopsys/scmetro_tsmc_cl013g_rvt_tt_1p2v_25c.db"
+set FFLIB "/home/ICer/tsmc_fb_cl013g_sc/aci/sc-m/synopsys/scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c.db"
 
 ## Standard Cell libraries 
 set target_library [list $SSLIB $TTLIB $FFLIB]
@@ -76,7 +75,7 @@ puts "###############################################"
 puts "########## Mapping & Optimization #############"
 puts "###############################################"
 
-compile -map_effort high
+compile_ultra -no_autoungroup
 
 #############################################################################
 # Write out files

@@ -17,6 +17,8 @@ module UART (
     // RX Interface (Serial In -> Parallel Data Out)
     input  wire       RX_IN,
     output wire [7:0] RX_P_DATA,
+    output wire       parity_error,
+    output wire       framing_error,
     output wire       RX_DATA_VALID
 );
 
@@ -41,6 +43,8 @@ module UART (
         .PAR_EN     (PAR_EN),
         .PAR_TYP    (PAR_TYP),
         .P_DATA     (RX_P_DATA),
+        .par_err    (parity_error),
+        .stp_err    (framing_error),
         .data_valid (RX_DATA_VALID)
     );
 

@@ -1,0 +1,94 @@
+*----------------------------------------------------------------------------------------
+*	First Encounter 08.10-p004_1 (32bit) 11/04/2008 14:34 (Linux 2.6)
+*	
+*
+* 	Date & Time:	2026-Oct-09 01:13:10 (2026-Oct-08 23:13:10 GMT)
+*
+*----------------------------------------------------------------------------------------
+*
+*	Design: System_Top
+*
+*	Liberty Libraries used: 
+*	        ../std_cells/libs/scmetro_tsmc_cl013g_rvt_ss_1p08v_125c.lib
+*
+*	Power Domain used: 
+*		Rail:        VDD 	Voltage:       1.08 
+*
+*	DEF Files used: 
+*	        ../DFT/System_Top_scan.def
+*
+*       User-Defined Activity : N.A.
+*
+*       Activity File: N.A.
+*
+*       Hierarchical Global Activity: N.A.
+*
+*       Global Activity: N.A.
+*
+*       Sequential Element Activity: N.A.
+*
+*       Clock Gates Enable Activity: N.A.
+*
+*       Primary Input Activity: 0.200000
+*
+*	Power Units = 1mW
+*
+*	Time Units = 1e-09 secs 
+*
+*       report_power -outfile report/power.rpt
+*
+-----------------------------------------------------------------------------------------
+
+
+Total Power 
+-----------------------------------------------------------------------------------------
+Total Internal Power:       1.059      68.08%
+Total Switching Power:     0.4799      30.85%
+Total Leakage Power:      0.01662      1.068%
+Total Power:                1.556 
+-----------------------------------------------------------------------------------------
+
+
+Group                           Internal   Switching     Leakage       Total  Percentage 
+                                Power      Power         Power         Power  (%)        
+-----------------------------------------------------------------------------------------
+Sequential                        0.7299     0.04523    0.006587      0.7817       50.24 
+Macro                                  0           0           0           0           0 
+IO                                     0           0           0           0           0 
+Combinational                     0.3294      0.4347     0.01003      0.7742       49.76 
+-----------------------------------------------------------------------------------------
+Total                              1.059      0.4799     0.01662       1.556         100 
+-----------------------------------------------------------------------------------------
+
+
+Rail                  Voltage   Internal   Switching     Leakage       Total  Percentage 
+                                Power      Power         Power         Power  (%)        
+-----------------------------------------------------------------------------------------
+VDD                      1.08      1.059      0.4799     0.01662       1.556         100 
+
+
+Clock                           Internal   Switching     Leakage       Total  Percentage 
+                                Power      Power         Power         Power  (%)        
+-----------------------------------------------------------------------------------------
+ALU_Clock                         0.0228     0.02416   0.0001578     0.04712       3.029 
+RX_Clock                        0.000993    0.001154   0.0002056    0.002353      0.1512 
+TX_Clock                       4.543e-05   3.706e-05   0.0002539   0.0003363     0.02162 
+scan_clk                          0.4114      0.5439    0.004258      0.9596       61.67 
+UART_Clock                       0.00485    0.002262   0.0008001    0.007912      0.5085 
+REF_Clock                         0.2158       0.267    0.001374      0.4842       31.12 
+-----------------------------------------------------------------------------------------
+Total                             0.6559      0.8385     0.00705       1.501        96.5 
+-----------------------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------------------
+*	Power Distribution Summary: 
+* 		Highest Average Power:          ALU_CLK_M__L2_I0 (CLKINVX32M): 	   0.01645 
+* 		Highest Leakage Power:          REF_CLK_M__L2_I1 (BUFX32M): 	 7.186e-05 
+* 		Total Cap: 	2.49529e-11 F
+* 		Total instances in design:  2021
+* 		Total instances in design with no power:     2
+*          Total instances in design with no activty:     2
+* 		Total Fillers and Decap:     0
+-----------------------------------------------------------------------------------------
+

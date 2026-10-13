@@ -1,11 +1,13 @@
-module System_Top #(parameter DATA_WIDTH = 8 , RF_DEPTH = 16 ,FIFO_DEPTH = 8)
+module System_Top #(parameter DATA_WIDTH = 8 , RF_DEPTH = 16 ,FIFO_DEPTH = 8 , NUM_OF_CHAINS = 4)
 (
-    input REF_CLK, UART_CLK, RST,
-    input RX_IN,
-    input SI[3:0], SE, test_mode, scan_clk, scan_rst,
-    output wire SO[3:0],
-    output wire TX_OUT,
-    output wire RX_D_VALID
+    input REF_CLK, UART_CLK, RST_N,
+    input UART_RX_IN,
+    input SE, test_mode, scan_clk, scan_rst,
+    input [NUM_OF_CHAINS - 1 : 0] SI,
+    output wire [NUM_OF_CHAINS - 1 : 0] SO,
+    output wire UART_TX_O,
+    output wire framing_error,
+    output wire parity_error
 );
 
     localparam RF_ADDR_WIDTH = $clog2(RF_DEPTH);
@@ -44,6 +46,8 @@ module System_Top #(parameter DATA_WIDTH = 8 , RF_DEPTH = 16 ,FIFO_DEPTH = 8)
     wire [DATA_WIDTH - 1 : 0] Sync_RX_P_DATA , RX_P_DATA;
     wire Sync_RX_D_VALID;
     wire TX_BUSY;
+    wire RX_D_VALID;
+
 
     // ASYNC_FIFO
     wire FIFO_FULL,FIFO_WR_INC;
@@ -94,7 +98,7 @@ module System_Top #(parameter DATA_WIDTH = 8 , RF_DEPTH = 16 ,FIFO_DEPTH = 8)
 
     MUX_2x1 u_rst_mux 
     (
-        .IN0(RST),
+        .IN0(RST_N),
         .IN1(scan_rst),
         .SEL(test_mode),
         .OUT(RST_M)
@@ -279,10 +283,12 @@ module System_Top #(parameter DATA_WIDTH = 8 , RF_DEPTH = 16 ,FIFO_DEPTH = 8)
         .PAR_TYP      (CONFIG[1]),
         .TX_P_DATA    (FIFO_RD_DATA),
         .TX_DATA_VALID(~FIFO_EMPTY),
-        .TX_OUT       (TX_OUT),
+        .TX_OUT       (UART_TX_O),
         .TX_BUSY      (TX_BUSY),
-        .RX_IN        (RX_IN),
+        .RX_IN        (UART_RX_IN),
         .RX_P_DATA    (RX_P_DATA),
+        .parity_error (parity_error),
+        .framing_error(framing_error),
         .RX_DATA_VALID(RX_D_VALID)
     );
 

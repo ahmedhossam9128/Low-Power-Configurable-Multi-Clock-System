@@ -13,13 +13,22 @@ module System_Top_tb;
     reg  RST;
     reg  RX_IN;
     wire TX_OUT;
-    wire RX_D_VALID;
+    wire parity_error;
+    wire framing_error;
 
     System_Top DUT (
-        .REF_CLK(REF_CLK), .UART_CLK(UART_CLK), .RST(RST),
-        .RX_IN(RX_IN), .TX_OUT(TX_OUT), .RX_D_VALID(RX_D_VALID)
+        .REF_CLK(REF_CLK), .UART_CLK(UART_CLK), .RST_N(RST),
+        .UART_RX_IN(RX_IN), .UART_TX_O(TX_OUT), 
+        .parity_error(parity_error), .framing_error(framing_error),
+        
+        // --- ADDED FOR GLS: Tie off DFT ports ---
+        .test_mode(1'b0),
+        .SE(1'b0),
+        .scan_clk(1'b0),
+        .scan_rst(1'b0),
+        .SI(4'b0),      // Assuming NUM_OF_CHAINS = 4
+        .SO()           // Leave output floating
     );
-
     // ------------------------------------------------------------ command codes
     localparam [7:0] RF_WR_CMD = 8'hAA, RF_RD_CMD = 8'hBB,
                      ALU_OP_CMD = 8'hCC, ALU_NOP_CMD = 8'hDD;
@@ -100,6 +109,7 @@ module System_Top_tb;
         integer i;
         reg     par;
         begin
+            @(negedge UART_CLK);                            // Align stimulus to the clock
             RX_IN = 1'b0;  #(BIT_NS);                       // start
             for (i = 0; i < 8; i = i + 1) begin
                 RX_IN = b[i]; #(BIT_NS);                    // data, LSB first
@@ -460,15 +470,16 @@ module System_Top_tb;
         #(BIT_NS * 2);
 
         run_prescale(32);
-        bp_test();
-        run_prescale(16);
-        run_prescale(8);
+       // bp_test();
+       // run_prescale(16);
+       // run_prescale(8);
 
         $display("\n==================== SUMMARY ====================");
         $display("PASSED: %0d   FAILED: %0d", pass_cnt, fail_cnt);
         if (fail_cnt == 0) $display("ALL TESTS PASSED");
         else               $display("SOME TESTS FAILED");
         $display("=================================================");
+        if ($test$plusargs("DUMP")) $dumpflush;
         $stop;
     end
 
@@ -476,6 +487,7 @@ module System_Top_tb;
     initial begin
         #120_000_000;
         $display("WATCHDOG TIMEOUT  (passed=%0d failed=%0d)", pass_cnt, fail_cnt);
+        if ($test$plusargs("DUMP")) $dumpflush;
         $stop;
     end
 

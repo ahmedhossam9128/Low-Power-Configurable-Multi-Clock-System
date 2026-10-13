@@ -6,7 +6,7 @@ Report : timing
         -max_paths 1
 Design : System_Top
 Version: O-2018.06-SP1
-Date   : Wed Sep 30 10:00:01 2026
+Date   : Tue Oct 13 01:38:38 2026
 ****************************************
 
 Operating Conditions: scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c   Library: scmetro_tsmc_cl013g_rvt_ff_1p32v_m40c
@@ -23,57 +23,57 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock REF_Clock (rise edge)                             0.00       0.00
   clock network delay (ideal)                             0.00       0.00
-  u_SysCtrl/ALU_EN_reg/CK (DFFRQX2M)                      0.00       0.00 r
-  u_SysCtrl/ALU_EN_reg/Q (DFFRQX2M)                       0.49       0.49 f
-  u_SysCtrl/ALU_EN (Sys_Ctrl_DATA_WIDTH8)                 0.00       0.49 f
-  u_ALU/Enable (ALU_WIDTH8)                               0.00       0.49 f
-  u_ALU/OUT_VALID_reg/D (DFFRQX2M)                        0.00       0.49 f
-  data arrival time                                                  0.49
+  u_SysCtrl/ALU_EN_reg/CK (DFFRQX1M)                      0.00       0.00 r
+  u_SysCtrl/ALU_EN_reg/Q (DFFRQX1M)                       0.55       0.55 f
+  u_SysCtrl/ALU_EN (Sys_Ctrl_DATA_WIDTH8)                 0.00       0.55 f
+  u_ALU/Enable (ALU_WIDTH8)                               0.00       0.55 f
+  u_ALU/OUT_VALID_reg/D (DFFRQX1M)                        0.00       0.55 f
+  data arrival time                                                  0.55
 
   clock ALU_Clock (rise edge)                             0.00       0.00
   clock network delay (ideal)                             0.00       0.00
-  u_ALU/OUT_VALID_reg/CK (DFFRQX2M)                       0.00       0.00 r
-  library hold time                                      -0.03      -0.03
-  data required time                                                -0.03
+  u_ALU/OUT_VALID_reg/CK (DFFRQX1M)                       0.00       0.00 r
+  library hold time                                      -0.02      -0.02
+  data required time                                                -0.02
   --------------------------------------------------------------------------
-  data required time                                                -0.03
-  data arrival time                                                 -0.49
+  data required time                                                -0.02
+  data arrival time                                                 -0.55
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.53
+  slack (MET)                                                        0.58
 
 
   Startpoint: u_SysCtrl/CLK_EN_reg
               (rising edge-triggered flip-flop clocked by REF_Clock)
-  Endpoint: u_CLK_GATE/Latch_Out_reg
-            (negative level-sensitive latch clocked by REF_Clock)
+  Endpoint: u_CLK_GATE/u_CLK_GATE
+            (gating element for clock REF_Clock)
   Path Group: REF_Clock
   Path Type: min
 
   Point                                                   Incr       Path
   --------------------------------------------------------------------------
-  clock REF_Clock (rise edge)                            10.00      10.00
-  clock network delay (ideal)                             0.00      10.00
-  u_SysCtrl/CLK_EN_reg/CK (DFFRQX2M)                      0.00      10.00 r
-  u_SysCtrl/CLK_EN_reg/Q (DFFRQX2M)                       0.37      10.37 r
-  u_SysCtrl/CLK_EN (Sys_Ctrl_DATA_WIDTH8)                 0.00      10.37 r
-  u_CLK_GATE/CLK_EN (CLK_GATE)                            0.00      10.37 r
-  u_CLK_GATE/Latch_Out_reg/D (TLATNX2M)                   0.00      10.37 r
-  data arrival time                                                 10.37
+  clock REF_Clock (rise edge)                             0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  u_SysCtrl/CLK_EN_reg/CK (DFFRQX1M)                      0.00       0.00 r
+  u_SysCtrl/CLK_EN_reg/Q (DFFRQX1M)                       0.52       0.52 f
+  u_SysCtrl/CLK_EN (Sys_Ctrl_DATA_WIDTH8)                 0.00       0.52 f
+  u_CLK_GATE/CLK_EN (CLK_GATE)                            0.00       0.52 f
+  u_CLK_GATE/u_CLK_GATE/E (TLATNCAX8M)                    0.00       0.52 f
+  data arrival time                                                  0.52
 
-  clock REF_Clock (rise edge)                            10.00      10.00
-  clock network delay (ideal)                             0.00      10.00
-  clock uncertainty                                       0.10      10.10
-  u_CLK_GATE/Latch_Out_reg/GN (TLATNX2M)                  0.00      10.10 r
-  library hold time                                      -0.06      10.04
-  data required time                                                10.04
+  clock REF_Clock (rise edge)                             0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  clock uncertainty                                       0.10       0.10
+  u_CLK_GATE/u_CLK_GATE/CK (TLATNCAX8M)                   0.00       0.10 r
+  clock gating hold time                                  0.07       0.17
+  data required time                                                 0.17
   --------------------------------------------------------------------------
-  data required time                                                10.04
-  data arrival time                                                -10.37
+  data required time                                                 0.17
+  data arrival time                                                 -0.52
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.33
+  slack (MET)                                                        0.34
 
 
-  Startpoint: u_UART/u_UART_RX/u_Stop_Checker/stp_err_reg
+  Startpoint: u_UART/u_UART_RX/u_Parity_Checker/par_err_reg
               (rising edge-triggered flip-flop clocked by RX_Clock)
   Endpoint: u_UART/u_UART_RX/u_UART_RX_FSM/DATA_VALID_reg
             (rising edge-triggered flip-flop clocked by RX_Clock)
@@ -84,30 +84,30 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock RX_Clock (rise edge)                              0.00       0.00
   clock network delay (ideal)                             0.00       0.00
-  u_UART/u_UART_RX/u_Stop_Checker/stp_err_reg/CK (DFFRQX2M)
+  u_UART/u_UART_RX/u_Parity_Checker/par_err_reg/CK (DFFRQX1M)
                                                           0.00       0.00 r
-  u_UART/u_UART_RX/u_Stop_Checker/stp_err_reg/Q (DFFRQX2M)
-                                                          0.37       0.37 r
-  u_UART/u_UART_RX/u_Stop_Checker/stp_err (Stop_Checker)
-                                                          0.00       0.37 r
-  u_UART/u_UART_RX/u_UART_RX_FSM/stp_err (UART_RX_FSM)
-                                                          0.00       0.37 r
-  u_UART/u_UART_RX/u_UART_RX_FSM/U28/Y (NOR4X1M)          0.06       0.43 f
-  u_UART/u_UART_RX/u_UART_RX_FSM/DATA_VALID_reg/D (DFFRQX2M)
-                                                          0.00       0.43 f
-  data arrival time                                                  0.43
+  u_UART/u_UART_RX/u_Parity_Checker/par_err_reg/Q (DFFRQX1M)
+                                                          0.42       0.42 r
+  u_UART/u_UART_RX/u_Parity_Checker/par_err (Parity_Checker)
+                                                          0.00       0.42 r
+  u_UART/u_UART_RX/u_UART_RX_FSM/par_err (UART_RX_FSM)
+                                                          0.00       0.42 r
+  u_UART/u_UART_RX/u_UART_RX_FSM/U22/Y (NOR4XLM)          0.07       0.49 f
+  u_UART/u_UART_RX/u_UART_RX_FSM/DATA_VALID_reg/D (DFFRQX1M)
+                                                          0.00       0.49 f
+  data arrival time                                                  0.49
 
   clock RX_Clock (rise edge)                              0.00       0.00
   clock network delay (ideal)                             0.00       0.00
-  u_UART/u_UART_RX/u_UART_RX_FSM/DATA_VALID_reg/CK (DFFRQX2M)
+  u_UART/u_UART_RX/u_UART_RX_FSM/DATA_VALID_reg/CK (DFFRQX1M)
                                                           0.00       0.00 r
-  library hold time                                      -0.02      -0.02
-  data required time                                                -0.02
+  library hold time                                      -0.01      -0.01
+  data required time                                                -0.01
   --------------------------------------------------------------------------
-  data required time                                                -0.02
-  data arrival time                                                 -0.43
+  data required time                                                -0.01
+  data arrival time                                                 -0.49
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.45
+  slack (MET)                                                        0.50
 
 
   Startpoint: u_pulse_gen/Signal_reg_reg
@@ -121,22 +121,22 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock TX_Clock (rise edge)                              0.00       0.00
   clock network delay (ideal)                             0.00       0.00
-  u_pulse_gen/Signal_reg_reg/CK (DFFRQX2M)                0.00       0.00 r
-  u_pulse_gen/Signal_reg_reg/Q (DFFRQX2M)                 0.36       0.36 r
-  u_pulse_gen/U3/Y (NOR2BX2M)                             0.04       0.40 f
-  u_pulse_gen/enable_pulse_reg/D (DFFRQX2M)               0.00       0.40 f
-  data arrival time                                                  0.40
+  u_pulse_gen/Signal_reg_reg/CK (DFFRQX1M)                0.00       0.00 r
+  u_pulse_gen/Signal_reg_reg/Q (DFFRQX1M)                 0.40       0.40 r
+  u_pulse_gen/U3/Y (NOR2BXLM)                             0.06       0.46 f
+  u_pulse_gen/enable_pulse_reg/D (DFFRQX1M)               0.00       0.46 f
+  data arrival time                                                  0.46
 
   clock TX_Clock (rise edge)                              0.00       0.00
   clock network delay (ideal)                             0.00       0.00
-  u_pulse_gen/enable_pulse_reg/CK (DFFRQX2M)              0.00       0.00 r
-  library hold time                                      -0.02      -0.02
-  data required time                                                -0.02
+  u_pulse_gen/enable_pulse_reg/CK (DFFRQX1M)              0.00       0.00 r
+  library hold time                                      -0.01      -0.01
+  data required time                                                -0.01
   --------------------------------------------------------------------------
-  data required time                                                -0.02
-  data arrival time                                                 -0.40
+  data required time                                                -0.01
+  data arrival time                                                 -0.46
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.43
+  slack (MET)                                                        0.47
 
 
   Startpoint: u_UART_RST_Sync/sync_reg_reg[1]/CK
@@ -151,22 +151,22 @@ Wire Load Model Mode: top
   clock UART_Clock (rise edge)                            0.00       0.00
   clock network delay (ideal)                             0.00       0.00
   input external delay                                    0.00       0.00 r
-  u_UART_RST_Sync/sync_reg_reg[1]/CK (DFFRQX2M)           0.00       0.00 r
-  u_UART_RST_Sync/sync_reg_reg[1]/Q (DFFRQX2M)            0.46       0.46 f
-  u_UART_RST_Sync/sync_reg_reg[0]/D (DFFRQX2M)            0.00       0.46 f
-  data arrival time                                                  0.46
+  u_UART_RST_Sync/sync_reg_reg[1]/CK (DFFRQX1M)           0.00       0.00 r
+  u_UART_RST_Sync/sync_reg_reg[1]/Q (DFFRQX1M)            0.43       0.43 r
+  u_UART_RST_Sync/sync_reg_reg[0]/D (DFFRHQX8M)           0.00       0.43 r
+  data arrival time                                                  0.43
 
   clock UART_Clock (rise edge)                            0.00       0.00
   clock network delay (ideal)                             0.00       0.00
   clock uncertainty                                       0.10       0.10
-  u_UART_RST_Sync/sync_reg_reg[0]/CK (DFFRQX2M)           0.00       0.10 r
-  library hold time                                      -0.02       0.08
-  data required time                                                 0.08
+  u_UART_RST_Sync/sync_reg_reg[0]/CK (DFFRHQX8M)          0.00       0.10 r
+  library hold time                                      -0.03       0.07
+  data required time                                                 0.07
   --------------------------------------------------------------------------
-  data required time                                                 0.08
-  data arrival time                                                 -0.46
+  data required time                                                 0.07
+  data arrival time                                                 -0.43
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.38
+  slack (MET)                                                        0.36
 
 
 1

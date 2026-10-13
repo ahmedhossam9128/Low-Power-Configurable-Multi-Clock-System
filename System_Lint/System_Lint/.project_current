@@ -53,3 +53,7 @@ current_goal rdc/rdc_verify_struct -top System_Top
 read_file -type awl ./spyglass-1/System_Top/rdc/rdc_verify_struct/spyglass-1_waiver_file.awl
 set_goal_option default_waiver_file ./spyglass-1/System_Top/rdc/rdc_verify_struct/spyglass-1_waiver_file.awl
 
+
+current_goal lint/lint_rtl -top System_Top
+set_goal_option addrules { UndrivenNUnloaded-ML }
+

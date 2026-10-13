@@ -1,0 +1,16 @@
+Information: Derived library resistance unit is 1.000000 Kohm (Time unit is 1 ns, and Capacitance unit is 1.000000 pF). (DES-028)
+
+****************************************
+Report : read_parasitics /mnt/hgfs/Shared_Folder/System/PnR/export/System_Top.spf
+Design : System_Top
+Version: O-2018.06-SP1
+Date   : Tue Oct 13 07:44:07 2026
+****************************************
+
+        0 error(s)
+        Format is DSPF
+        Annotated nets                   :         2086
+        Annotated capacitances           :        39020
+        Annotated resistances            :        36934
+        Reduced coupling capacitances    :            0
+

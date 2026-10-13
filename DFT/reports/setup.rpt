@@ -6,13 +6,13 @@ Report : timing
         -max_paths 1
 Design : System_Top
 Version: O-2018.06-SP1
-Date   : Wed Sep 30 10:07:46 2026
+Date   : Fri Oct  9 00:54:51 2026
 ****************************************
 
 Operating Conditions: scmetro_tsmc_cl013g_rvt_ss_1p08v_125c   Library: scmetro_tsmc_cl013g_rvt_ss_1p08v_125c
 Wire Load Model Mode: top
 
-  Startpoint: u_UART/u_UART_RX/u_UART_RX_FSM/DATA_VALID_reg
+  Startpoint: u_UART/u_UART_RX/u_Parity_Checker/par_err_reg
               (rising edge-triggered flip-flop clocked by scan_clk)
   Endpoint: SO[0] (output port clocked by scan_clk)
   Path Group: scan_clk
@@ -22,17 +22,18 @@ Wire Load Model Mode: top
   --------------------------------------------------------------------------
   clock scan_clk (rise edge)                             50.00      50.00
   clock network delay (ideal)                             0.00      50.00
-  u_UART/u_UART_RX/u_UART_RX_FSM/DATA_VALID_reg/CK (SDFFRHQX1M)
+  u_UART/u_UART_RX/u_Parity_Checker/par_err_reg/CK (SDFFRHQX1M)
                                                           0.00      50.00 r
-  u_UART/u_UART_RX/u_UART_RX_FSM/DATA_VALID_reg/Q (SDFFRHQX1M)
-                                                          0.31      50.31 r
-  u_UART/u_UART_RX/u_UART_RX_FSM/DATA_VALID (UART_RX_FSM_test_1)
-                                                          0.00      50.31 r
-  u_UART/u_UART_RX/data_valid (UART_RX_test_1)            0.00      50.31 r
-  u_UART/RX_DATA_VALID (UART_test_1)                      0.00      50.31 r
-  U10/Y (BUFX2M)                                          0.62      50.93 r
-  SO[0] (out)                                             0.00      50.93 r
-  data arrival time                                                 50.93
+  u_UART/u_UART_RX/u_Parity_Checker/par_err_reg/Q (SDFFRHQX1M)
+                                                          0.27      50.27 f
+  u_UART/u_UART_RX/u_Parity_Checker/U17/Y (INVXLM)        0.23      50.50 r
+  u_UART/u_UART_RX/u_Parity_Checker/par_err_BAR (Parity_Checker_test_1)
+                                                          0.00      50.50 r
+  u_UART/u_UART_RX/par_err_BAR (UART_RX_test_1)           0.00      50.50 r
+  u_UART/parity_error_BAR (UART_test_1)                   0.00      50.50 r
+  U14/Y (CLKINVX2M)                                       0.68      51.18 f
+  SO[0] (out)                                             0.00      51.18 f
+  data arrival time                                                 51.18
 
   clock scan_clk (rise edge)                            150.00     150.00
   clock network delay (ideal)                             0.00     150.00
@@ -41,9 +42,9 @@ Wire Load Model Mode: top
   data required time                                               129.80
   --------------------------------------------------------------------------
   data required time                                               129.80
-  data arrival time                                                -50.93
+  data arrival time                                                -51.18
   --------------------------------------------------------------------------
-  slack (MET)                                                       78.87
+  slack (MET)                                                       78.62
 
 
 1

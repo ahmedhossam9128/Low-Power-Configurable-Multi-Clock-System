@@ -4,7 +4,7 @@ Report         : passing_points
 Reference      : Ref:/WORK/System_Top
 Implementation : Imp:/WORK/System_Top
 Version        : L-2016.03-SP1
-Date           : Wed Sep 30 04:14:12 2026
+Date           : Thu Oct  8 21:54:10 2026
 **************************************************
 
 361 Passing compare points:
@@ -942,143 +942,143 @@ Date           : Wed Sep 30 04:14:12 2026
   Ref  DFF        Ref:/WORK/System_Top/u_TX_CLK_DIV/DIVIDED_CLK_reg
   Impl DFF        Imp:/WORK/System_Top/u_TX_CLK_DIV/DIVIDED_CLK_reg
 
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Deserializer/P_DATA_reg[0]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Deserializer/P_DATA_reg[0]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Deserializer/P_DATA_reg[1]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Deserializer/P_DATA_reg[1]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Deserializer/P_DATA_reg[2]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Deserializer/P_DATA_reg[2]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Deserializer/P_DATA_reg[3]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Deserializer/P_DATA_reg[3]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Deserializer/P_DATA_reg[4]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Deserializer/P_DATA_reg[4]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Deserializer/P_DATA_reg[5]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Deserializer/P_DATA_reg[5]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Deserializer/P_DATA_reg[6]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Deserializer/P_DATA_reg[6]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Deserializer/P_DATA_reg[7]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Deserializer/P_DATA_reg[7]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Edge_Bit_Counter/Bit_Count_reg[0]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Edge_Bit_Counter/Bit_Count_reg[0]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Edge_Bit_Counter/Bit_Count_reg[1]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Edge_Bit_Counter/Bit_Count_reg[1]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Edge_Bit_Counter/Bit_Count_reg[2]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Edge_Bit_Counter/Bit_Count_reg[2]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Edge_Bit_Counter/Bit_Count_reg[3]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Edge_Bit_Counter/Bit_Count_reg[3]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[0]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[0]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[1]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[1]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[2]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[2]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[3]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[3]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[4]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[4]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Parity_Checker/par_bit_reg
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Parity_Checker/par_bit_reg
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Parity_Checker/par_err_reg
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Parity_Checker/par_err_reg
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Sampler/first_sample_reg
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Sampler/first_sample_reg
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Sampler/second_sample_reg
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Sampler/second_sample_reg
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Sampler/third_sample_reg
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Sampler/third_sample_reg
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Start_Checker/start_glitch_reg
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Start_Checker/start_glitch_reg
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_Stop_Checker/stp_err_reg
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_Stop_Checker/stp_err_reg
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_UART_RX_FSM/Cur_S_reg[0]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_UART_RX_FSM/Cur_S_reg[0]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_UART_RX_FSM/Cur_S_reg[1]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_UART_RX_FSM/Cur_S_reg[1]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_UART_RX_FSM/Cur_S_reg[2]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_UART_RX_FSM/Cur_S_reg[2]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_RX/u_UART_RX_FSM/DATA_VALID_reg
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_RX/u_UART_RX_FSM/DATA_VALID_reg
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_TX_TOP/U0_serializer/Counter_reg[0]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_TX_TOP/U0_serializer/Counter_reg[0]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_TX_TOP/U0_serializer/Counter_reg[1]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_TX_TOP/U0_serializer/Counter_reg[1]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_TX_TOP/U0_serializer/Counter_reg[2]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_TX_TOP/U0_serializer/Counter_reg[2]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/Cur_S_reg[0]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/Cur_S_reg[0]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/Cur_S_reg[1]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/Cur_S_reg[1]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/Cur_S_reg[2]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/Cur_S_reg[2]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/PAR_EN_Registered_reg
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/PAR_EN_Registered_reg
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/PAR_TYP_Registered_reg
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/PAR_TYP_Registered_reg
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/P_DATA_Registered_reg[0]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/P_DATA_Registered_reg[0]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/P_DATA_Registered_reg[1]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/P_DATA_Registered_reg[1]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/P_DATA_Registered_reg[2]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/P_DATA_Registered_reg[2]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/P_DATA_Registered_reg[3]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/P_DATA_Registered_reg[3]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/P_DATA_Registered_reg[4]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/P_DATA_Registered_reg[4]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/P_DATA_Registered_reg[5]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/P_DATA_Registered_reg[5]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/P_DATA_Registered_reg[6]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/P_DATA_Registered_reg[6]
+
+  Ref  DFF        Ref:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/P_DATA_Registered_reg[7]
+  Impl DFF        Imp:/WORK/System_Top/u_UART/u_UART_TX_TOP/U2_FSM/P_DATA_Registered_reg[7]
+
   Ref  DFF        Ref:/WORK/System_Top/u_UART_RST_Sync/sync_reg_reg[0]
   Impl DFF        Imp:/WORK/System_Top/u_UART_RST_Sync/sync_reg_reg[0]
 
   Ref  DFF        Ref:/WORK/System_Top/u_UART_RST_Sync/sync_reg_reg[1]
   Impl DFF        Imp:/WORK/System_Top/u_UART_RST_Sync/sync_reg_reg[1]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Deserializer/P_DATA_reg[0]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Deserializer/P_DATA_reg[0]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Deserializer/P_DATA_reg[1]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Deserializer/P_DATA_reg[1]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Deserializer/P_DATA_reg[2]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Deserializer/P_DATA_reg[2]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Deserializer/P_DATA_reg[3]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Deserializer/P_DATA_reg[3]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Deserializer/P_DATA_reg[4]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Deserializer/P_DATA_reg[4]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Deserializer/P_DATA_reg[5]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Deserializer/P_DATA_reg[5]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Deserializer/P_DATA_reg[6]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Deserializer/P_DATA_reg[6]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Deserializer/P_DATA_reg[7]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Deserializer/P_DATA_reg[7]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Edge_Bit_Counter/Bit_Count_reg[0]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Edge_Bit_Counter/Bit_Count_reg[0]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Edge_Bit_Counter/Bit_Count_reg[1]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Edge_Bit_Counter/Bit_Count_reg[1]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Edge_Bit_Counter/Bit_Count_reg[2]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Edge_Bit_Counter/Bit_Count_reg[2]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Edge_Bit_Counter/Bit_Count_reg[3]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Edge_Bit_Counter/Bit_Count_reg[3]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[0]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[0]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[1]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[1]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[2]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[2]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[3]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[3]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[4]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Edge_Bit_Counter/Edge_Count_reg[4]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Parity_Checker/par_bit_reg
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Parity_Checker/par_bit_reg
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Parity_Checker/par_err_reg
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Parity_Checker/par_err_reg
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Sampler/first_sample_reg
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Sampler/first_sample_reg
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Sampler/second_sample_reg
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Sampler/second_sample_reg
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Sampler/third_sample_reg
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Sampler/third_sample_reg
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Start_Checker/start_glitch_reg
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Start_Checker/start_glitch_reg
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_Stop_Checker/stp_err_reg
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_Stop_Checker/stp_err_reg
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_UART_RX_FSM/Cur_S_reg[0]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_UART_RX_FSM/Cur_S_reg[0]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_UART_RX_FSM/Cur_S_reg[1]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_UART_RX_FSM/Cur_S_reg[1]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_UART_RX_FSM/Cur_S_reg[2]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_UART_RX_FSM/Cur_S_reg[2]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_RX/u_UART_RX_FSM/DATA_VALID_reg
-  Impl DFF        Imp:/WORK/System_Top/u_UART_RX/u_UART_RX_FSM/DATA_VALID_reg
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_TX/U0_serializer/Counter_reg[0]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_TX/U0_serializer/Counter_reg[0]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_TX/U0_serializer/Counter_reg[1]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_TX/U0_serializer/Counter_reg[1]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_TX/U0_serializer/Counter_reg[2]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_TX/U0_serializer/Counter_reg[2]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_TX/U2_FSM/Cur_S_reg[0]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_TX/U2_FSM/Cur_S_reg[0]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_TX/U2_FSM/Cur_S_reg[1]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_TX/U2_FSM/Cur_S_reg[1]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_TX/U2_FSM/Cur_S_reg[2]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_TX/U2_FSM/Cur_S_reg[2]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_TX/U2_FSM/PAR_EN_Registered_reg
-  Impl DFF        Imp:/WORK/System_Top/u_UART_TX/U2_FSM/PAR_EN_Registered_reg
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_TX/U2_FSM/PAR_TYP_Registered_reg
-  Impl DFF        Imp:/WORK/System_Top/u_UART_TX/U2_FSM/PAR_TYP_Registered_reg
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_TX/U2_FSM/P_DATA_Registered_reg[0]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_TX/U2_FSM/P_DATA_Registered_reg[0]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_TX/U2_FSM/P_DATA_Registered_reg[1]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_TX/U2_FSM/P_DATA_Registered_reg[1]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_TX/U2_FSM/P_DATA_Registered_reg[2]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_TX/U2_FSM/P_DATA_Registered_reg[2]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_TX/U2_FSM/P_DATA_Registered_reg[3]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_TX/U2_FSM/P_DATA_Registered_reg[3]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_TX/U2_FSM/P_DATA_Registered_reg[4]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_TX/U2_FSM/P_DATA_Registered_reg[4]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_TX/U2_FSM/P_DATA_Registered_reg[5]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_TX/U2_FSM/P_DATA_Registered_reg[5]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_TX/U2_FSM/P_DATA_Registered_reg[6]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_TX/U2_FSM/P_DATA_Registered_reg[6]
-
-  Ref  DFF        Ref:/WORK/System_Top/u_UART_TX/U2_FSM/P_DATA_Registered_reg[7]
-  Impl DFF        Imp:/WORK/System_Top/u_UART_TX/U2_FSM/P_DATA_Registered_reg[7]
 
   Ref  DFF        Ref:/WORK/System_Top/u_pulse_gen/Signal_reg_reg
   Impl DFF        Imp:/WORK/System_Top/u_pulse_gen/Signal_reg_reg
