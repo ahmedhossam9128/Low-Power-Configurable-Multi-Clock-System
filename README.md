@@ -19,7 +19,7 @@ low-power and configurability features.
 | Technology | TSMC CL013G RVT, 130 nm (`scmetro_tsmc_cl013g_rvt_*`) |
 | Voltage corners | SS 1.08 V / 125 °C, TT 1.2 V / 25 °C, FF 1.32 V / −40 °C |
 | Cell area | 19,734.4 µm² (pre-DFT) · 22,006.6 µm² (post-DFT) |
-| Die / Core dimensions | 240.47 µm × 160.47 µm die · 228.32 µm × 148.32 µm core · 70.66% core utilization |
+| Die / Core dimensions | 240.47 µm × 160.47 µm die · 228.32 µm × 148.32 µm core · 75.44% active cell utilization (100% post-fillers) |
 | Cells | 1,828 pre-DFT (1,431 comb + 366 seq) · 1,800 post-DFT (346 scan + 12 shift-reg + 1 ICG) |
 | Ports | 552 pre-DFT · 680 post-DFT (scan test ports added) |
 | Sign-off Power | **0.846 mW (845.9 µW)** @ 1.08 V, 125 °C (PrimeTime PX time-based with GLS VCD + DSPF RC) |
@@ -183,7 +183,7 @@ relative to that directory (`../RTL/...`, or `../../RTL/...` from the Formality 
 - Area overhead: +11.51% total cell area (19,734 µm² → 22,007 µm²).
 
 **Physical Design & Verification (PnR)** — Cadence SoC Encounter 130 nm 7-metal layer flow:
-- Core utilization: **70.66%** on 52 standard cell rows.
+- Core utilization: **69.89%** pre-CTS → **75.27%** post-CTS → **75.44%** post-route (active cells), reaching **100%** continuous row density after physical filler cell insertion (2,045 filler cells across 52 standard cell rows).
 - Routing: 6 metal layers (NanoRoute) with concurrent via/wire optimization.
 - Physical Verification: **0 DRC violations**, **0 LVS connectivity errors** (0 opens, 0 shorts), **0 Antenna violations**, **0 Metal Density violations** (20%--80% density window satisfied across all layers 1--7).
 
