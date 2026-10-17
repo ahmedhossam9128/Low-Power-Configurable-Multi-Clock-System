@@ -124,7 +124,7 @@ SIM/                  Top-level SystemVerilog testbench and file list
 GLS/                  Gate-Level Simulation (QuestaSim) and Sign-Off Power (PrimeTime PX)
   PT/                 PrimeTime PX time-based power scripts, logs, and System_PW.rpt
 System_Lint/          SpyGlass lint + CDC/RDC: authored constraints, waivers, consolidated reports
-Final_System_Report.pdf   Full 24-page comprehensive ASIC design and sign-off report
+Final_System_Report.pdf   Full 23-page comprehensive ASIC design and sign-off report
 ```
 
 ### Full design report
